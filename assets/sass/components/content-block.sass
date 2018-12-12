@@ -1,0 +1,33 @@
+////
+/// Content Block
+////
+$content-block-size: 36 !default
+$content-block-line-height: 40 !default
+$content-block-colour: $text !default
+
+.content-block
+    display: block
+    margin-bottom: 1em
+    color: $content-block-colour
+    
+    img
+        display: block
+        margin-bottom: rem(70)
+        
+    p
+        margin-bottom: rem(30)
+        
+    p,
+    .link-label
+        font-weight: $weight-medium
+        font-size: rem($content-block-size)
+        line-height: em($content-block-line-height, $content-block-size)
+        
+    .link-label
+        font-weight: $weight-normal
+        text-decoration: underline
+        
+a.content-block
+    &:hover
+        .link-label
+            text-decoration: none
