@@ -10,14 +10,14 @@
             class="columns">
             <div
               class="column is-half is-offset-1 homepage-introduction">
-              <h1>Welcome to Salted, <br>we’re a brand agency <br>for the digital world.</h1><p><strong>We love big badass business ideas. <br>We’re curious and creative.<br>Asking. Thinking. Brainstorming.<br>New ideas. Fresh solutions.<br>Crafting. Coding. Creating.<br>Walking the talk.<br>Designing the difference.</strong></p>
+              <div v-html="$store.state.homepage.pageData.Content" />
             </div>
           </div>
         </div>
       </div>
       <div
-        class="background-text"
-        style="color: #63EEEA">
+        v-bind="{ style: 'color: #' + $store.state.homepage.pageData.TitleColour.Colour }"
+        class="background-text">
         hallo
       </div>
     </section>
@@ -44,11 +44,65 @@
 </template>
 
 <script>
+// import gql from 'graphql-tag'
+import getHomePage from '~/apollo/queries/homepage.js'
+
 export default {
   head() {
     return {
       title: 'Salted Herring Design'
     }
+  },
+  // async asyncData(context) {
+  //   context.app
+  //     .$axios({
+  //       url: '/graphql/',
+  //       method: 'post',
+  //       data: {
+  //         query: getHomePage
+  //       }
+  //     })
+  //     .then(result => {
+  //       let returnVal = result.data.data.readHomePage
+  //
+  //       if (returnVal.length === 1) {
+  //         // store.commit('homepage/updatePageData', returnVal[0])
+  //         return {
+  //           content: returnVal[0].Content
+  //         }
+  //       }
+  //     })
+  //   // console.log('context', context.app)
+  // },
+  async fetch({ store, params }) {
+    await store.app
+      .$axios({
+        url: '/graphql/',
+        method: 'post',
+        data: {
+          query: getHomePage
+        }
+      })
+      .then(result => {
+        let returnVal = result.data.data.readHomePage
+
+        if (returnVal.length === 1) {
+          // alert('yes')
+          store.commit('homepage/updatePageData', returnVal[0])
+        }
+      })
+    // console.log('loaded', store.app.$axios)
+    // console.log('context', this.$apollo)
+    // this.$apollo.query({ HomePage }).then(({ data }) => {
+    //   console.log(data)
+    // })
+    // let { data } = await axios.get(`https://my-api/posts/${params.id}`)
+    // return { title: data.title }
+    // return await this.$axios
+    //   .$get('http://localhost:8145/graphql', { params: getHomePage })
+    //   .then(res => {
+    //     console.log(res)
+    //   })
   }
 }
 </script>
