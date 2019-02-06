@@ -28,9 +28,8 @@
           <a
             v-for="(link, index) in links"
             :key="index"
-            :href="link.href"
-            :class="{ 'is-active' : link.isActive }"
-            v-text="link.name"
+            :href="link.Link"
+            v-text="link.MenuTitle"
           />
         </div>
       </div>
@@ -41,12 +40,10 @@
 <script>
 module.exports = {
   name: 'main-nav',
-  data: () => ({
-    links: [
-      { name: 'about', href: '/about', isActive: true },
-      { name: 'work', href: '/work', isActive: false },
-      { name: 'people', href: '/people', isActive: false }
-    ]
-  })
+  computed: {
+    links() {
+      return this.$store.state.menu.menuItems
+    }
+  }
 }
 </script>

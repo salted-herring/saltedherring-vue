@@ -18,7 +18,7 @@
       <div
         v-bind="{ style: 'color: #' + $store.state.homepage.pageData.TitleColour.Colour }"
         class="background-text">
-        hallo
+        {{ $store.state.homepage.pageData.HeroTitle }}
       </div>
     </section>
 
@@ -46,6 +46,7 @@
 <script>
 // import gql from 'graphql-tag'
 import getHomePage from '~/apollo/queries/homepage.js'
+import getMainMenu from '~/apollo/queries/menu.js'
 
 export default {
   head() {
@@ -53,27 +54,6 @@ export default {
       title: 'Salted Herring Design'
     }
   },
-  // async asyncData(context) {
-  //   context.app
-  //     .$axios({
-  //       url: '/graphql/',
-  //       method: 'post',
-  //       data: {
-  //         query: getHomePage
-  //       }
-  //     })
-  //     .then(result => {
-  //       let returnVal = result.data.data.readHomePage
-  //
-  //       if (returnVal.length === 1) {
-  //         // store.commit('homepage/updatePageData', returnVal[0])
-  //         return {
-  //           content: returnVal[0].Content
-  //         }
-  //       }
-  //     })
-  //   // console.log('context', context.app)
-  // },
   async fetch({ store, params }) {
     await store.app
       .$axios({
@@ -87,22 +67,25 @@ export default {
         let returnVal = result.data.data.readHomePage
 
         if (returnVal.length === 1) {
-          // alert('yes')
           store.commit('homepage/updatePageData', returnVal[0])
         }
       })
-    // console.log('loaded', store.app.$axios)
-    // console.log('context', this.$apollo)
-    // this.$apollo.query({ HomePage }).then(({ data }) => {
-    //   console.log(data)
-    // })
-    // let { data } = await axios.get(`https://my-api/posts/${params.id}`)
-    // return { title: data.title }
-    // return await this.$axios
-    //   .$get('http://localhost:8145/graphql', { params: getHomePage })
-    //   .then(res => {
-    //     console.log(res)
-    //   })
+
+    await store.app
+      .$axios({
+        url: '/graphql/',
+        method: 'post',
+        data: {
+          query: getMainMenu
+        }
+      })
+      .then(result => {
+        let returnVal = result.data.data.readMenu
+
+        if (returnVal.length === 1) {
+          store.commit('menu/updateMenuData', returnVal)
+        }
+      })
   }
 }
 </script>
