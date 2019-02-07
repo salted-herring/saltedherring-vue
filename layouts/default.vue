@@ -1,16 +1,21 @@
 <template>
-  <main aria-role="main">
+  <div class="main-container is-flex flex-direction-column">
     <Menu/>
-    <nuxt/>
-  </main>
+    <main aria-role="main flex-grow-contents">
+      <nuxt/>
+    </main>
+    <Footer/>
+  </div>
 </template>
 
 <script>
 import Menu from '~/components/Menu.vue'
+import Footer from '~/components/Footer.vue'
 
 export default {
   components: {
-    Menu
+    Menu,
+    Footer
   }
 }
 </script>

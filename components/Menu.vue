@@ -4,14 +4,14 @@
     class="navbar is-transparent is-fixed-top">
     <div
       class="navbar-brand">
-      <a
+      <nuxt-link
         class="navbar-item navbar-logo"
-        href="/">
+        to="/">
         <img
           src="~assets/img/logo.svg"
           alt="Salted Herring logo"
           width="120">
-      </a>
+      </nuxt-link>
       <div
         class="navbar-burger burger">
         <span/>
@@ -24,13 +24,14 @@
       <div
         class="navbar-end">
         <div
-          class="navbar-item" >
-          <a
-            v-for="(link, index) in links"
-            :key="index"
-            :href="link.Link"
-            v-text="link.MenuTitle"
-          />
+          v-for="(link, index) in links"
+          :key="index"
+          class="navbar-item">
+          <router-link
+            :to="link.Link"
+            class="navbar-item"
+            active-class="is-active"
+            v-text="link.MenuTitle" />
         </div>
       </div>
     </div>
@@ -38,8 +39,8 @@
 </template>
 
 <script>
-module.exports = {
-  name: 'main-nav',
+export default {
+  name: 'MainNav',
   computed: {
     links() {
       return this.$store.state.menu.menuItems

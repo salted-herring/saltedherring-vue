@@ -47,7 +47,17 @@ export default `query getHomePage {
       Latest {
         edges {
             node {
+                ID
                 Title
+                SummaryText
+                Image
+                Imagex2
+                Link {
+                  ID
+                  Title
+                  OpenInNewWindow
+                  LinkURL
+                }
             }
         }
       }

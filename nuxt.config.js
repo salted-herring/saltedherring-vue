@@ -19,7 +19,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: '~/components/Loading.vue',
 
   /*
   ** Global CSS
@@ -40,6 +40,9 @@ module.exports = {
     // '@nuxtjs/apollo'
     // Doc:https://github.com/nuxt-community/modules/tree/master/packages/bulma
   ],
+  router: {
+    middleware: ['footer', 'menu']
+  },
   /*
   ** Axios module configuration
   */
@@ -48,7 +51,8 @@ module.exports = {
     proxy: true
   },
   proxy: {
-    '/graphql/': 'http://localhost:8145/'
+    '/graphql/': 'http://localhost:8145/',
+    '/assets/': 'http://localhost:8145/'
   },
   // apollo: {
   //   // tokenName: 'yourApolloTokenName', // optional, default: apollo-token

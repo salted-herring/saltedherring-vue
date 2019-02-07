@@ -10,15 +10,15 @@
             class="columns">
             <div
               class="column is-half is-offset-1 homepage-introduction">
-              <div v-html="$store.state.homepage.pageData.Content" />
+              <div v-html="$store.state.homePageData.Content" />
             </div>
           </div>
         </div>
       </div>
       <div
-        v-bind="{ style: 'color: #' + $store.state.homepage.pageData.TitleColour.Colour }"
+        :style="{ color: '#' + $store.state.homePageData.TitleColour.Colour }"
         class="background-text">
-        {{ $store.state.homepage.pageData.HeroTitle }}
+        {{ $store.state.homePageData.HeroTitle }}
       </div>
     </section>
 
@@ -26,15 +26,24 @@
       class="section has-background-light">
       <div class="container">
         <header class="section-heading">
-          <h2 class="title">Latest</h2>
+          <h2
+            class="title"
+            v-html="$store.state.homePageData.LatestSectionTitle" />
         </header>
 
         <div class="latest-content columns">
           <a
-            href="https://9low20nwj1bhfw.preview.forestry.io/work/kokako/"
+            v-for="item in $store.getters.getLatest"
+            :key="item.ID"
+            :href="item.Link.LinkURL"
+            :target="item.OpenInNewWindow ? '_blank' : '_self'"
             class="column is-half content-block">
-
-            <p>We welcome Ayla to the team. She is a breath of fresh creative and colourful air.</p>
+            <img
+              v-if="item.Image"
+              :src="item.Image"
+              srcset=""
+              alt="">
+            <p>{{ item.Title }}. {{ item.SummaryText }}</p>
             <b class="link-label">Learn more</b>
           </a>
         </div>
@@ -46,16 +55,32 @@
 <script>
 // import gql from 'graphql-tag'
 import getHomePage from '~/apollo/queries/homepage.js'
-import getMainMenu from '~/apollo/queries/menu.js'
 
 export default {
   head() {
     return {
-      title: 'Salted Herring Design'
+      title: this.MetaTitle,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.MetaDescription
+        }
+      ]
+    }
+  },
+  computed: {
+    MetaTitle() {
+      return this.$store.state.homePageData.MetaTitle
+    },
+    MetaDescription() {
+      return this.$store.state.homePageData.MetaDescription
     }
   },
   async fetch({ store, params }) {
-    await store.app
+    // console.log(store.app)
+    // store.app.nuxt.$loading.start()
+    return store.app
       .$axios({
         url: '/graphql/',
         method: 'post',
@@ -67,24 +92,9 @@ export default {
         let returnVal = result.data.data.readHomePage
 
         if (returnVal.length === 1) {
-          store.commit('homepage/updatePageData', returnVal[0])
+          store.commit('updateHomePageData', returnVal[0])
         }
-      })
-
-    await store.app
-      .$axios({
-        url: '/graphql/',
-        method: 'post',
-        data: {
-          query: getMainMenu
-        }
-      })
-      .then(result => {
-        let returnVal = result.data.data.readMenu
-
-        if (returnVal.length === 1) {
-          store.commit('menu/updateMenuData', returnVal)
-        }
+        // store.app.nuxt.$loading.stop()
       })
   }
 }
