@@ -1,0 +1,9 @@
+.footer
+  .columns
+    @include until($desktop)
+      margin: 0 rem(30)
+
+  .footer-detail
+    @include mobile
+      flex: 1
+      text-align: center

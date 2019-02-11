@@ -1,0 +1,26 @@
+.awards-programme
+  @include until($desktop)
+    max-width: calc(100% - #{rem(60)})
+    margin-left: auto
+    margin-right: auto
+
+    .columns
+      margin-left: auto
+      margin-right: auto
+      padding-left: rem(30) !important
+      padding-right: rem(30) !important
+      flex-wrap: wrap
+
+  &__link
+    font-weight: $weight-extrabold
+    font-size: rem(24)
+    line-height: 1em
+    text-align: right
+    color: $black
+    text-decoration: underline
+    display: block
+    margin-bottom: rem(100)
+    padding: 0 rem(30)
+
+    &:hover
+      text-decoration: none

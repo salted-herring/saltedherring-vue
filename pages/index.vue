@@ -1,17 +1,10 @@
 <template>
   <div id="home-page">
-    <section
-      class="homepage-header has-background-light section">
-      <div
-        class="container">
-        <div
-          class="content">
-          <div
-            class="columns">
-            <div
-              class="column is-half is-offset-1 homepage-introduction">
-              <div v-html="$store.state.homePageData.Content" />
-            </div>
+    <section class="homepage-header page-header has-background-light section">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-half is-offset-1 introduction cms-content">
+            <div v-html="$store.state.homePageData.Content" />
           </div>
         </div>
       </div>
@@ -37,13 +30,13 @@
             :key="item.ID"
             :href="item.Link.LinkURL"
             :target="item.OpenInNewWindow ? '_blank' : '_self'"
-            class="column is-half content-block">
+            class="column latest-item is-half">
             <img
               v-if="item.Image"
               :src="item.Image"
               srcset=""
               alt="">
-            <p>{{ item.Title }}. {{ item.SummaryText }}</p>
+            <p>{{ item.Title }}<br>{{ item.SummaryText }}</p>
             <b class="link-label">Learn more</b>
           </a>
         </div>
@@ -77,6 +70,11 @@ export default {
       return this.$store.state.homePageData.MetaDescription
     }
   },
+  mounted() {
+    this.$store.commit('menu/setMenu', false)
+    this.$store.commit('menu/setHamburger', true)
+    this.$store.commit('menu/setMenuHidden', false)
+  },
   async fetch({ store, params }) {
     // console.log(store.app)
     // store.app.nuxt.$loading.start()
@@ -92,10 +90,53 @@ export default {
         let returnVal = result.data.data.readHomePage
 
         if (returnVal.length === 1) {
-          store.commit('updateHomePageData', returnVal[0])
+          let data = returnVal[0]
+          let content = data.Content
+
+          let matches = content.match(
+            /href=("|')((?!(https?:){0,1}\/\/))([a-z\/A-Z\?0-9-_\{\}]+)("|')/g
+          )
+
+          for (let i in matches) {
+            let match = matches[i]
+            let oldmatch = match
+            let newmatch = match.replace('href', ':to')
+            // content.replace(oldmatch, newmatch)
+          }
+
+          store.commit('updateHomePageData', data)
         }
-        // store.app.nuxt.$loading.stop()
       })
   }
 }
 </script>
+
+<style lang="sass" scoped>
+  @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/config/colours"
+  @import "~assets/sass/imports/mixins"
+
+  .latest-item
+    color: $black
+
+    &:hover
+      b
+        text-decoration: none
+
+    img
+      margin-bottom: rem(70)
+
+    p
+      font-size: rem(36)
+      line-height: em(40, 36)
+      font-weight: $weight-bold
+      margin-bottom: rem(50)
+      width: 100%
+      max-width: rem(580)
+
+    b
+      font-size: rem(36)
+      line-height: em(40, 36)
+      font-weight: $weight-medium
+      text-decoration: underline
+</style>

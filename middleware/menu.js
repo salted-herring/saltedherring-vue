@@ -12,7 +12,7 @@ export default function({ store, route, redirect }) {
     .then(result => {
       let returnVal = result.data.data.readMenu
 
-      if (returnVal.length === 1) {
+      if (returnVal.length >= 1) {
         store.commit('menu/updateMenuData', returnVal)
       }
     })

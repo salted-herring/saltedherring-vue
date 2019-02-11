@@ -26,17 +26,28 @@
 @import 'imports/modifiers'
 
 
-body
-    position: relative
+html
+  @include until($desktop)
+    font-size: 12px
+  @include desktop-only
+    font-size: 14px
+  @include fullhd
+    font-size: 16px
+  @include until($tablet)
+    font-size: 10px
 
-    &:before
-        position: fixed
-        top: 0
-        left: 0
-        width: 100%
-        height: 100%
-        border: rem(30) solid $black
-        display: block
-        content: ''
-        z-index: 100
-        pointer-events: none
+
+body
+  position: relative
+
+  &:before
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    border: rem(30) solid $black
+    display: block
+    content: ''
+    z-index: 100
+    pointer-events: none

@@ -1,7 +1,7 @@
 <template>
   <nav
     id="main-menu"
-    class="navbar is-transparent is-fixed-top">
+    class="navbar is-flex is-transparent is-fixed-top">
     <div
       class="navbar-brand">
       <nuxt-link
@@ -12,22 +12,20 @@
           alt="Salted Herring logo"
           width="120">
       </nuxt-link>
-      <div
-        class="navbar-burger burger">
-        <span/>
-        <span/>
-        <span/>
-      </div>
+
     </div>
     <div
       class="navbar-menu">
+      <Hamburger />
       <div
-        class="navbar-end">
+        :class="{'is-visible': isMenuVisible}"
+        class="navbar-end"
+        @mousemove="mouseMove">
         <div
-          v-for="(link, index) in links"
-          :key="index"
-          class="navbar-item">
-          <router-link
+          class="navbar-menu-outer">
+          <nuxt-link
+            v-for="(link, index) in links"
+            :key="index"
             :to="link.Link"
             class="navbar-item"
             active-class="is-active"
@@ -39,11 +37,35 @@
 </template>
 
 <script>
+import Hamburger from '~/components/Hamburger.vue'
+
 export default {
   name: 'MainNav',
+  components: {
+    Hamburger
+  },
   computed: {
     links() {
       return this.$store.state.menu.menuItems
+    },
+    isMenuVisible() {
+      return this.$store.state.menu.menuVisible
+    }
+  },
+  methods: {
+    mouseMove(e) {
+      if (
+        e.target.classList.value.match(/navbar-end/g) === null ||
+        this.$store.state.menu.menuHidden
+      ) {
+        return false
+      }
+
+      if (this.$store.state.menu.canHideMenu) {
+        this.$store.commit('menu/setMenu', false)
+        this.$store.commit('menu/setHamburger', true)
+        this.$store.commit('menu/setCanHideMenu', false)
+      }
     }
   }
 }

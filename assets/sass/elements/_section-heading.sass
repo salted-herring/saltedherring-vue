@@ -3,8 +3,15 @@
 ////
 .section-heading
     margin-bottom: rem(40)
-    
+
+    @include until($desktop)
+      padding-left: rem(60)
+      padding-right: rem(60)
+
     .title
         @extend .rotated-italics
         display: inline-block
         transform-origin: left top
+        font-weight: $weight-black
+        font-size: rem(60)
+        line-height: 1em

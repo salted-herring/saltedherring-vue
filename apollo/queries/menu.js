@@ -4,14 +4,5 @@ export default `query getMainMenu {
     Title
     MenuTitle
     Link
-    Children {
-      edges {
-        node {
-          ID
-          Link
-          Title
-        }
-      }
-    }
   }
 }`

@@ -1,14 +1,26 @@
 ////
 /// Home page introduction styles
 ////
-.homepage-introduction
+.introduction
     margin-top: rem(300)
-    
+
+    @include until($desktop)
+      width: 100% !important
+      max-width: 100% !important
+      padding: 0
+
     h1,h2,h3
         + p
             margin-top: rem(60)
     p
-        font-size: rem(30)
+        font-size: rem(36)
         font-weight: $weight-bold
         font-style: normal
-        line-height: em(34, 30)
+        line-height: em(46, 36)
+
+    a
+        color: $black
+        text-decoration: underline
+
+        &:hover
+            text-decoration: none

@@ -1,0 +1,19 @@
+.section
+  position: relative
+  z-index: 1
+  min-height: 86vh
+
+  &--overview
+    padding: rem(180) 0
+
+  @include until($desktop)
+    .columns
+      padding-left: rem(60)
+      padding-right: rem(60)
+      text-align: center
+
+      .column
+        width: 100%
+        max-width: rem(300)
+        margin-left: auto
+        margin-right: auto

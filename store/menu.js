@@ -1,5 +1,9 @@
 export const state = () => ({
-  menuItems: []
+  menuItems: [],
+  hamburgerVisible: true,
+  menuVisible: false,
+  canHideMenu: false,
+  menuHidden: false
 })
 
 export const getters = {
@@ -24,5 +28,17 @@ export const getters = {
 export const mutations = {
   updateMenuData(state, menuItems) {
     state.menuItems = menuItems
+  },
+  setHamburger(state, hamburgerVisible) {
+    state.hamburgerVisible = hamburgerVisible
+  },
+  setMenu(state, menuVisible) {
+    state.menuVisible = menuVisible
+  },
+  setCanHideMenu(state, canHide) {
+    state.canHideMenu = canHide
+  },
+  setMenuHidden(state, hide) {
+    state.menuHidden = hide
   }
 }

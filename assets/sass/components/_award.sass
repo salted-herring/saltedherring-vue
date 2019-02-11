@@ -1,0 +1,55 @@
+.awards
+
+  .award
+    @include until($desktop)
+      text-align: center
+
+    &__image
+      height: rem(300)
+      width: rem(300)
+      max-width: 100%
+      background: $dark
+      border-radius: 50%
+      display: block
+      margin: 0 auto rem(40)
+
+    &__title
+      font-weight: $weight-extrabold
+      font-size: rem(24)
+      margin-bottom: rem(40)
+      display: block
+
+    &__detail
+      font-size: rem(18)
+      line-height: em(24, 18)
+      margin-bottom: rem(8)
+
+      @include until($desktop)
+        display: block !important
+
+    &__details
+      font-weight: $weight-bold
+      flex-grow: 1
+      padding-right: rem(60)
+
+      @include until($desktop)
+        text-align: center
+        padding-right: 0
+
+      a
+        color: $black
+        text-decoration: underline
+
+        &:hover
+          text-decoration: none
+
+      p
+        display: block
+        flex-wrap: wrap
+        white-space: normal
+
+    &__year
+      font-weight: $weight-normal
+      flex-basis: rem(80)
+      flex-shrink: 0
+      flex-grow: 1
