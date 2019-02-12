@@ -1,31 +1,23 @@
 <template>
   <div class="work-page">
-    <section
-      :style="{ 'background-color': '#' + $store.state.workPageData.BackgroundColour.Colour }"
-      class="workpage-header page-header section">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-half introduction cms-content">
-            <span
-              class="page-introduction"
-              v-html="$store.state.workPageData.Introduction" />
-            <nav class="workpage-nav">
-              <nuxt-link
-                v-for="(link, index) in $store.state.projects"
-                :key="index"
-                :to="link.Link"
-                active-class="is-active"
-                v-text="link.MenuTitle" />
-            </nav>
-          </div>
-        </div>
-      </div>
-      <div
-        :style="{ color: '#' + $store.state.workPageData.TitleColour.Colour }"
-        class="background-text">
-        {{ $store.state.workPageData.HeroTitle }}
-      </div>
-    </section>
+    <Header
+      :headerBg="$store.state.workPageData.BackgroundColour.Colour"
+      :introduction="$store.state.workPageData.Introduction"
+      :titleBg="$store.state.workPageData.TitleColour.Colour"
+      :title="$store.state.workPageData.HeroTitle"
+      :pageClass="'workpage-header'">
+      <nav
+        v-for="(link, index) in projects"
+        slot="introductionContent"
+        :key="index"
+        class="workpage-nav">
+        <ProjectLink
+          :link="link.Link"
+          :label="link.MenuTitle"
+          :images="link.HeroImages"
+          :video="link.HeroVideo"/>
+      </nav>
+    </Header>
 
     <section
       v-if="$store.state.awards.show"
@@ -105,8 +97,19 @@
 
 <script>
 import getWorkPage from '~/apollo/queries/workpage'
+import ProjectLink from '~/components/ProjectLink'
+import Header from '~/components/Header'
 
 export default {
+  components: {
+    ProjectLink,
+    Header
+  },
+  computed: {
+    projects() {
+      return this.$store.state.projects
+    }
+  },
   async fetch({ store, params }) {
     // console.log(store.app)
     // store.app.nuxt.$loading.start()
@@ -166,36 +169,9 @@ export default {
 
 
   .workpage-nav
-    margin: rem(180) auto
-
-    a
-      font-weight: $weight-black
-      color: $black
-      position: relative
-      left: 50%
-      transform: translateX(-50%) rotate(-5deg) skew(-5deg)
-      display: inline-block
-      font-size: rem(72)
-      line-height: em(90, 72)
-      text-decoration: none
-
-      @include until($desktop)
-        transform: rotate(-5deg) skew(-5deg)
-        left: 0
-
-      &:after
-          position: absolute
-          left: 0
-          bottom: 1px
-          width: 100%
-          height: rem(5)
-          background: $black
-          content: ''
-          display: block
-          transition: width 0.25s ease
-
-      &:hover
-          &:after
-              width: 0
+    position: relative
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
 
 </style>

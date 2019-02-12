@@ -1,22 +1,16 @@
 <template>
   <div id="home-page">
-    <section class="homepage-header page-header has-background-light section">
-      <div class="container">
-        <div class="columns">
-          <div class="column is-half is-offset-1 introduction cms-content">
-            <div v-html="$store.state.homePageData.Content" />
-          </div>
-        </div>
-      </div>
-      <div
-        :style="{ color: '#' + $store.state.homePageData.TitleColour.Colour }"
-        class="background-text">
-        {{ $store.state.homePageData.HeroTitle }}
-      </div>
-    </section>
+    <Header
+      :titleBg="$store.state.homePageData.TitleColour.Colour"
+      :title="$store.state.homePageData.HeroTitle"
+      :introduction="$store.state.homePageData.Content"
+      :introductionClass="'is-offset-1'"
+      :introductionVariation="'page-introduction--left'"
+      :isCentered="false"
+      :pageClass="'homepage-header'" />
 
     <section
-      class="section has-background-light">
+      class="section has-background-white">
       <div class="container">
         <header class="section-heading">
           <h2
@@ -48,8 +42,12 @@
 <script>
 // import gql from 'graphql-tag'
 import getHomePage from '~/apollo/queries/homepage.js'
+import Header from '~/components/Header'
 
 export default {
+  components: {
+    Header
+  },
   head() {
     return {
       title: this.MetaTitle,
@@ -111,10 +109,15 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
   @import "~assets/sass/config/bulma-variables"
   @import "~assets/sass/config/colours"
   @import "~assets/sass/imports/mixins"
+
+  .homepage-header
+    .page-introduction
+      top: 66.67%
+      transform: translate(-50%, -66.67%)
 
   .latest-item
     color: $black

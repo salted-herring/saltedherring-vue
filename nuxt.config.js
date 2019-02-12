@@ -32,7 +32,9 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: [
+    '~/plugins/vue-preload'
+  ],
 
   /*
   ** Nuxt.js modules
@@ -94,6 +96,13 @@ module.exports = {
   //     }
   //   }
   // },
+  render: {
+    bundleRenderer: {
+      shouldPreload: (file, type) => {
+        return ['script', 'style', 'font', 'image', 'video'].includes(type)
+      }
+    }
+  },
 
   /*
   ** Build configuration

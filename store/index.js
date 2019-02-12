@@ -2,6 +2,7 @@ export const state = () => ({
   homePageData: null,
   workPageData: null,
   projects: null,
+  currentProject: null,
   awards: null,
   clients: null
 })
@@ -43,6 +44,16 @@ export const mutations = {
 
     for (let i in projects) {
       let node = projects[i].node
+      let heroImages = []
+      let edges = node.HeroImages.edges
+
+      for (let j in edges) {
+        let edge = edges[j]
+
+        heroImages.push(edge.node)
+      }
+
+      node.HeroImages = heroImages
 
       if (state.projects === null) {
         state.projects = {}
@@ -127,6 +138,38 @@ export const mutations = {
     if (state.clients === null) {
       state.clients = {}
       state.clients = clients
+    }
+  },
+  updateProject(state, project) {
+    if (project.ID) {
+      if (state.projects === null) {
+        state.projects = {}
+      }
+
+      let heroImages = []
+      let edges = project.HeroImages.edges
+
+      for (let i in edges) {
+        let edge = edges[i]
+
+        heroImages.push(edge.node)
+      }
+
+      project.HeroImages = heroImages
+
+      let relatedProjects = []
+      edges = project.RelatedProjects.edges
+
+      for (let y in edges) {
+        let edge = edges[y]
+
+        relatedProjects.push(edge.node)
+      }
+
+      project.RelatedProjects = relatedProjects
+
+      state.projects[project.ID] = project
+      state.currentProject = project
     }
   }
 }

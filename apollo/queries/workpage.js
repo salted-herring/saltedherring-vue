@@ -103,6 +103,24 @@ export default `query getWorkPage {
           ID
           MenuTitle
           Link
+          HeroVideo {
+            id
+            filename
+            size
+            url
+            width
+            height
+          }
+          HeroImages {
+            edges {
+              node {
+                ID
+                Title
+                URL
+                FitFullScreen
+              }
+            }
+          }
         }
       }
     }
