@@ -7,15 +7,15 @@
       :title="$store.state.workPageData.HeroTitle"
       :pageClass="'workpage-header'">
       <nav
-        v-for="(link, index) in projects"
         slot="introductionContent"
-        :key="index"
         class="workpage-nav">
         <ProjectLink
+          v-for="(link, index) in projects"
+          :key="index"
           :link="link.Link"
           :label="link.MenuTitle"
           :images="link.HeroImages"
-          :video="link.HeroVideo"/>
+          :video="link.HeroVideo">{{ index }} {{ link.MenuTitle }}</ProjectLink>
       </nav>
     </Header>
 
@@ -107,10 +107,15 @@ export default {
   },
   computed: {
     projects() {
+      console.log('updated projects')
       return this.$store.state.projects
     }
   },
   async fetch({ store, params }) {
+    if (store.state.workPageData !== null) {
+      return false
+    }
+
     // console.log(store.app)
     // store.app.nuxt.$loading.start()
     return store.app

@@ -7,6 +7,8 @@ export default `query getProject($urlSegment: String) {
     MetaKeywords
     MetaDescription
     ExtraMeta
+    MenuTitle
+    Link
     OGType
     OGTitle
     OGDescription

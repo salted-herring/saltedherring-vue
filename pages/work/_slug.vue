@@ -70,6 +70,7 @@
 import Header from '~/components/Header'
 import ProjectLink from '~/components/ProjectLink'
 import getProject from '~/apollo/queries/projectpage'
+import readBlocks from '~/apollo/queries/readBlocks'
 
 export default {
   components: {
@@ -120,11 +121,29 @@ export default {
         }
       })
       .then(result => {
-        // console.log(result.data.data.readWorkPage)
-        let returnVal = result.data.data.readProject
+        let projects = result.data.data.readProject
 
-        if (returnVal.length === 1) {
-          store.commit('updateProject', returnVal[0])
+        if (projects.length === 1) {
+          store.app
+            .$axios({
+              url: '/graphql/',
+              method: 'post',
+              data: {
+                query: readBlocks,
+                variables: {
+                  urlSegment: slug
+                }
+              }
+            })
+            .then(result => {
+              // console.log(result.data.data.readWorkPage)
+              let blocks = result.data.data.readContentBlocks
+
+              let project = projects[0]
+              project.Blocks = blocks
+
+              store.commit('updateProject', project)
+            })
         }
       })
   }
