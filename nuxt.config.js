@@ -3,6 +3,11 @@ const pkg = require('./package')
 module.exports = {
   mode: 'universal',
 
+  server: {
+    port: 3333, // default: 3000
+    host: 'localhost', // default: localhost
+  },
+
   /*
   ** Headers of the page
   */
@@ -30,21 +35,21 @@ module.exports = {
   css: ['@/assets/sass/styles.sass'],
 
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    '~/plugins/vue-preload'
-  ],
-
-  /*
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
-    // '@nuxtjs/apollo'
-    // Doc:https://github.com/nuxt-community/modules/tree/master/packages/bulma
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
+
+  /*
+  ** Plugins to load before mounting the App
+  */
+  plugins: [
+    '~/plugins/vue-preload',
+    '~/plugins/logging'
+  ],
+
   router: {
     middleware: ['footer', 'menu']
   },
@@ -56,8 +61,12 @@ module.exports = {
     proxy: true
   },
   proxy: {
-    '/graphql/': 'http://localhost:8145/',
-    '/assets/': 'http://localhost:8145/'
+    '/graphql/': {
+      target: 'http://localhost:8145/'
+    },
+    '/assets/': {
+      target: 'http://localhost:8145/'
+    }
   },
   // apollo: {
   //   // tokenName: 'yourApolloTokenName', // optional, default: apollo-token

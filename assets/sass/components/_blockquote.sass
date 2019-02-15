@@ -1,0 +1,27 @@
+.blockquote
+  @extend .is-3
+  margin-top: auto
+  margin-bottom: auto
+  padding: rem(40)
+
+  &__quote
+    font-weight: $weight-bold
+    font-style: italic
+    font-size: rem(36)
+    line-height: em(46, 36)
+    position: relative
+    margin: 0 !important
+    padding: 0
+
+    + .blockquote__footer
+      margin-top: rem(30)
+
+    &:before
+      content: '\201C'
+
+    &:after
+      content: '\201D'
+
+  &__footer
+    font-size: rem(24)
+    line-height: em(30)

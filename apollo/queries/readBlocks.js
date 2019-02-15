@@ -5,6 +5,7 @@ export default `query readBlocks($urlSegment: String) {
         ... on TextBlock {
           __typename
           ID
+          Alignment
           Title
           SortOrder
           Content
@@ -42,6 +43,7 @@ export default `query readBlocks($urlSegment: String) {
             url
             width
             height
+            type
           }
         }
       }

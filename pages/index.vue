@@ -69,9 +69,9 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit('menu/setMenu', false)
-    this.$store.commit('menu/setHamburger', true)
-    this.$store.commit('menu/setMenuHidden', false)
+    this.$store.commit('menu/setMenu', true)
+    this.$store.commit('menu/setHamburger', false)
+    this.$store.commit('menu/setMenuHidden', true)
   },
   async fetch({ store, params }) {
     // console.log(store.app)
@@ -115,9 +115,13 @@ export default {
   @import "~assets/sass/imports/mixins"
 
   .homepage-header
+    .columns
+      .column
+        position: relative
     .page-introduction
       top: 66.67%
-      transform: translate(-50%, -66.67%)
+      left: 0
+      transform: translateY(-66.67%)
 
   .latest-item
     color: $black

@@ -107,7 +107,6 @@ export default {
   },
   computed: {
     projects() {
-      console.log('updated projects')
       return this.$store.state.projects
     }
   },
@@ -151,14 +150,14 @@ export default {
   },
 
   mounted() {
-    this.$store.commit('menu/setMenu', true)
-    this.$store.commit('menu/setHamburger', false)
-    this.$store.commit('menu/setMenuHidden', true)
+    this.$store.commit('menu/setMenu', false)
+    this.$store.commit('menu/setHamburger', true)
+    this.$store.commit('menu/setMenuHidden', false)
   }
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
   @import '~assets/sass/config/bulma-variables'
   @import '~assets/sass/config/colours'
   @import '~assets/sass/config/fonts'
@@ -172,11 +171,33 @@ export default {
   @import '~bulma/sass/utilities/mixins'
 
 
+  .page-header.workpage-header
+    height: auto
+    min-height: 100vh
+
+    .page-header__main-container
+      min-height: 100vh
+      height: auto
+
+      .column
+        margin-left: auto
+        margin-right: auto
+        height: auto
+
+      .columns
+        min-height: 100vh
+        height: 100%
 
   .workpage-nav
     position: relative
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
+    padding-top: rem(400)
+    margin-bottom: rem(100)
+    // top: 50%
+    // left: 50%
+    white-space: normal
+    transform-origin: top center
+    // transform: translateY(50%)
+    // margin-bottom: 100%
+
 
 </style>

@@ -1,5 +1,7 @@
 <template>
-  <div class="project-page">
+  <div
+    v-if="currentProject !== null"
+    class="project-page">
     <Header
       :titleBg="currentProject.TitleColour.Colour"
       :introductionBg="currentProject.TitleColour.Colour"
@@ -12,14 +14,36 @@
       <div
         slot="background"
         class="hero-section">
-        <div
-          v-for="(image, index) in headerImages"
-          :key="index"
+        <video
+          v-if="headerVideo.video !== null"
+          :src="headerVideo.video"
+          :poster="headerVideo.poster"
+          muted
+          autoplay
+          loop
+          width="100%"
+          class="hero-video" />
+        <Carousel
+          v-else-if="headerImages.length > 1"
+          :nav="false"
+          :autoplay="true"
+          :items="1"
+          :loop="true"
+          :autoplay-timeout="5000"
+          :dots="false"
           class="hero-images">
           <div
+            v-for="(image, index) in headerImages"
+            :key="index"
             :style="{ 'background-image': 'url(' + image.FitFullScreen + ')' }"
             class="hero-images__image" />
-        </div>
+        </Carousel>
+        <div
+          v-for="(image, index) in headerImages"
+          v-else
+          :key="index"
+          :style="{ 'background-image': 'url(' + image.FitFullScreen + ')' }"
+          class="hero-images__image" />
       </div>
     </Header>
     <section class="section project-introduction has-background-light">
@@ -50,6 +74,23 @@
         </div>
       </div>
     </section>
+    <section class="section section--no-padding project-blocks">
+      <template
+        v-for="(block, index) in currentProject.ContentBlocks">
+        <TextBlock
+          v-if="block.__typename === 'TextBlock'"
+          :key="index"
+          :details="block" />
+        <VideoBlock
+          v-if="block.__typename === 'VideoBlock'"
+          :key="index"
+          :details="block" />
+        <ImageBlock
+          v-if="block.__typename === 'ImageBlock'"
+          :key="index"
+          :details="block" />
+      </template>
+    </section>
     <section
       v-if="currentProject.RelatedProjects.length > 0"
       class="section related-projects has-background-robins-egg">
@@ -67,48 +108,74 @@
   </div>
 </template>
 <script>
-import Header from '~/components/Header'
-import ProjectLink from '~/components/ProjectLink'
 import getProject from '~/apollo/queries/projectpage'
 import readBlocks from '~/apollo/queries/readBlocks'
+
+import Header from '~/components/Header'
+import ProjectLink from '~/components/ProjectLink'
+import ImageBlock from '~/components/ImageBlock'
+import TextBlock from '~/components/TextBlock'
+import VideoBlock from '~/components/VideoBlock'
+
+let Carousel = null
+
+if (process.client) {
+  Carousel = require('vue-owl-carousel')
+}
 
 export default {
   components: {
     Header,
-    ProjectLink
+    ImageBlock,
+    ProjectLink,
+    TextBlock,
+    VideoBlock,
+    Carousel
   },
   computed: {
     headerImages() {
       let images = []
-      if (this.$store.state.currentProject !== null) {
-        images = this.$store.state.currentProject.HeroImages
+      if (this.currentProject !== null) {
+        images = this.currentProject.HeroImages
       }
       return images
     },
     headerVideo() {
       let video = null
-      let project = this.$store.state.currentProject
+      let image = null
+      let project = this.currentProject
+
       if (project !== null) {
         if (project.HeroVideo.id !== 0) {
-          video = project.HeroVideo
+          video = project.HeroVideo.url
+          let match = video.match(/(https?:\/\/[^\/]+)(.*)/)
+
+          if (match !== null) {
+            video = match[2]
+          }
+        }
+
+        if (project.HeroImages.length != 0) {
+          image = project.HeroImages[0].FitFullScreen
         }
       }
-      return images
+
+      return {
+        video: video,
+        poster: image
+      }
     },
     hasVideo() {
-      return (
-        this.$store.state.currentProject &&
-        this.$store.state.currentProject.HeroVideo.id !== 0
-      )
+      return this.currentProject && this.currentProject.HeroVideo.id !== 0
     },
     currentProject() {
-      return this.$store.state.currentProject
+      return this.$store.getters.getCurrentProject
     }
   },
   async fetch({ store, params }) {
     let slug = params.slug
-    // console.log(store.app)
-    // store.app.nuxt.$loading.start()
+    let currentProject = null
+
     return store.app
       .$axios({
         url: '/graphql/',
@@ -124,27 +191,26 @@ export default {
         let projects = result.data.data.readProject
 
         if (projects.length === 1) {
-          store.app
-            .$axios({
-              url: '/graphql/',
-              method: 'post',
-              data: {
-                query: readBlocks,
-                variables: {
-                  urlSegment: slug
-                }
-              }
-            })
-            .then(result => {
-              // console.log(result.data.data.readWorkPage)
-              let blocks = result.data.data.readContentBlocks
-
-              let project = projects[0]
-              project.Blocks = blocks
-
-              store.commit('updateProject', project)
-            })
+          currentProject = projects[0]
+          store.commit('updateProject', projects[0])
         }
+
+        return store.app.$axios({
+          url: '/graphql/',
+          method: 'post',
+          data: {
+            query: readBlocks,
+            variables: {
+              urlSegment: slug
+            }
+          }
+        })
+      })
+      .then(result => {
+        store.commit('updateProjectBlocks', {
+          projectId: currentProject.URLSegment,
+          blocks: result.data.data.readContentBlocks.edges
+        })
       })
   }
 }
@@ -165,6 +231,16 @@ export default {
     height: 100vh
     z-index: -1
 
+  .hero-video
+    position: absolute
+    left: 0
+    top: 0
+    // width: 100%
+    height: 100%
+    width: auto
+    min-width: 100%
+    object-fit: cover
+
   .hero-images
     position: absolute
     left: 0
@@ -173,11 +249,17 @@ export default {
     height: 100%
 
     &__image
-      display: block
+      display: none
       width: 100%
       height: 100%
       background-size: cover
-      background-position: center top
+      background-position: left top
+
+      &:first-child
+        display: block
+
+
+    @import '~assets/sass/plugins/owl-carousel'
 
   .project-introduction
     padding-top: rem(150)
@@ -203,6 +285,17 @@ export default {
 
       &:hover
         text-decoration: none
+
+  .project-header
+    .page-header__main-container
+      .page-introduction
+        font-weight: $weight-bold
+        font-size: rem(60)
+        top: rem(200)
+
+    .background-text
+      top: 50%
+      transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg)
 
   .related-projects
     .page-introduction

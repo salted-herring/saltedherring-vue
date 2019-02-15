@@ -30,6 +30,17 @@ export const getters = {
     }
 
     return null
+  },
+  getCurrentProject(state) {
+    if (state.currentProject === null) {
+      return null
+    }
+
+    if (state.currentProject in state.projects) {
+      return state.projects[state.currentProject]
+    }
+
+    return null
   }
 }
 
@@ -168,8 +179,33 @@ export const mutations = {
 
       project.RelatedProjects = relatedProjects
 
-      state.projects[project.ID] = project
-      state.currentProject = project
+      state.projects[project.URLSegment] = project
+      state.currentProject = project.URLSegment
     }
+  },
+  updateProjectBlocks(state, updateOptions) {
+    let project = state.projects[updateOptions.projectId]
+    let blocks = []
+
+    /// Add in the blocks.
+    for (let i in updateOptions.blocks) {
+      let block = updateOptions.blocks[i].node
+
+      if (block.__typename === 'ImageBlock') {
+        let newImages = []
+        let images = block.Images.edges
+
+        for (let i in images) {
+          newImages.push(images[i].node)
+        }
+        block.Images = newImages
+      }
+
+      blocks.push(block)
+    }
+
+    project.ContentBlocks = blocks
+
+    state.projects[updateOptions.projectId] = project
   }
 }

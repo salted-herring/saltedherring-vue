@@ -72,23 +72,29 @@ export default {
 }
 </script>
 <style lang="sass">
+  @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/config/colours"
+  @import "~assets/sass/imports/mixins"
+
   .page-header
     &__main-container
       min-height: 100vh
       height: 100%
 
       .columns
-        height: 100vh
+        min-height: 100vh
         display: block
+        position: relative
 
         .column
-          height: inherit
-          margin: 0 auto
+          min-height: 100vh
+          // margin: 0 auto
+          // position: relative
 
       .page-introduction
         position: absolute
-        top: 25%
+        top: rem(300)
         left: 50%
-        transform: translate(-50%, -25%)
+        transform: translateX(-50%)
 
 </style>

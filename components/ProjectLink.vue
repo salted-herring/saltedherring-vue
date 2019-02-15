@@ -2,7 +2,7 @@
   <nuxt-link
     :to="link"
     class="project-link"
-    v-html="label" />
+    v-html="labelText" />
 </template>
 <script>
 export default {
@@ -23,10 +23,26 @@ export default {
       }
     }
   },
-  created() {
-    // console.log(this.$axios)
-    // console.log(this.createElement)
+  computed: {
+    labelText() {
+      let text = this.label
+      let splitLabel = text.split(/\s/)
+      let outputLabel = ''
 
+      for (let i in splitLabel) {
+        let a = splitLabel[i]
+
+        outputLabel += '<span>' + a + '</span>'
+
+        if (i < splitLabel.length - 1) {
+          outputLabel += '<span>&nbsp;</span>'
+        }
+      }
+
+      return outputLabel
+    }
+  },
+  created() {
     // Preload images
     for (let i in this.images) {
       let image = this.images[i]
@@ -69,22 +85,30 @@ export default {
     font-size: rem(72)
     line-height: em(90, 72)
     text-decoration: none
+    text-align: center
     position: relative
     left: 50%
     transform: translateX(-50%) rotate(-5deg) skew(-5deg)
 
-    &:after
-        position: absolute
-        left: 0
-        bottom: 1px
-        width: 100%
-        height: rem(5)
-        background: $black
-        content: ''
-        display: block
-        transition: width 0.25s ease
+
 
     &:hover
-        &:after
+        span
+          &:after
             width: 0
+
+    span
+      display: inline-block
+      position: relative
+
+      &:after
+          position: absolute
+          left: 0
+          bottom: 1px
+          width: 100%
+          height: rem(5)
+          background: $black
+          content: ''
+          display: block
+          // transition: width 0.25s ease
 </style>
