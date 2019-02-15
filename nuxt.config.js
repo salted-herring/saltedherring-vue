@@ -1,12 +1,8 @@
 const pkg = require('./package')
+require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
-
-  server: {
-    port: 3333, // default: 3000
-    host: 'localhost', // default: localhost
-  },
 
   /*
   ** Headers of the page
@@ -62,10 +58,10 @@ module.exports = {
   },
   proxy: {
     '/graphql/': {
-      target: 'http://localhost:8145/'
+      target: process.env.API_ENDPOINT
     },
     '/assets/': {
-      target: 'http://localhost:8145/'
+      target: process.env.API_ENDPOINT
     }
   },
   // apollo: {
