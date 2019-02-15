@@ -115,8 +115,6 @@ export default {
       return false
     }
 
-    // console.log(store.app)
-    // store.app.nuxt.$loading.start()
     return store.app
       .$axios({
         url: '/graphql/',
@@ -126,24 +124,11 @@ export default {
         }
       })
       .then(result => {
-        // console.log(result.data.data.readWorkPage)
         let returnVal = result.data.data.readWorkPage
 
         if (returnVal.length === 1) {
           let data = returnVal[0]
-          // let content = data.Content
-
-          // let matches = content.match(
-          //   /href=("|')((?!(https?:){0,1}\/\/))([a-z\/A-Z\?0-9-_\{\}]+)("|')/g
-          // )
-          //
-          // for (let i in matches) {
-          //   let match = matches[i]
-          //   let oldmatch = match
-          //   let newmatch = match.replace('href', ':to')
-          //   // content.replace(oldmatch, newmatch)
-          // }
-
+          store.commit('menu/setMenuColour', data.HeroMenuColour)
           store.commit('updateWorkPageData', data)
         }
       })

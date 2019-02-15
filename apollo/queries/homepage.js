@@ -33,6 +33,7 @@ export default `query getHomePage {
           Colour
       }
       HeroTitle
+      HeroMenuColour
       HeroImages {
         edges {
             node {

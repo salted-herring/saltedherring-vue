@@ -90,6 +90,7 @@ export default {
         if (returnVal.length === 1) {
           let data = returnVal[0]
           let content = data.Content
+          store.commit('menu/setMenuColour', data.HeroMenuColour)
 
           let matches = content.match(
             /href=("|')((?!(https?:){0,1}\/\/))([a-z\/A-Z\?0-9-_\{\}]+)("|')/g
@@ -122,6 +123,9 @@ export default {
       top: 66.67%
       left: 0
       transform: translateY(-66.67%)
+
+  .latest-content
+    padding-bottom: rem(300)
 
   .latest-item
     color: $black

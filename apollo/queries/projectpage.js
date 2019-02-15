@@ -34,6 +34,7 @@ export default `query getProject($urlSegment: String) {
       Colour
     }
     HeroTitle
+    HeroMenuColour
     HeroImages {
       edges {
         node {

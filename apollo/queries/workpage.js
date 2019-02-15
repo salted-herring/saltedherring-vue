@@ -32,6 +32,7 @@ export default `query getWorkPage {
     }
     Introduction
     HeroTitle
+    HeroMenuColour
     HeroImages {
       edges {
         node {

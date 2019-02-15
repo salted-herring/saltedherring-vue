@@ -3,7 +3,7 @@
     :class="{ isloading: loading }"
     class="loading-page">
     <img
-      src="~assets/img/loader.gif"
+      src="~static/img/loader.gif"
       alt="loading..."
       class="image-loader">
   </div>

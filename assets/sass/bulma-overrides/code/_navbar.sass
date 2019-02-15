@@ -4,6 +4,24 @@
 .navbar
     padding: rem(30)
 
+    &--is-white
+      color: $white
+
+      .hamburger
+        &-inner
+          background-color: $white !important
+
+          &:before,
+          &:after
+            background-color: $white !important
+
+      .navbar-end
+        .navbar-item
+          color: $white !important
+
+          &:after
+            background-color: $white !important
+
     .navbar-menu
       flex-direction: column
       position: relative

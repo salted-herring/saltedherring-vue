@@ -3,7 +3,9 @@ export const state = () => ({
   hamburgerVisible: true,
   menuVisible: false,
   canHideMenu: false,
-  menuHidden: false
+  menuHidden: false,
+  color: 'black',
+  currentColor: 'black'
 })
 
 export const getters = {
@@ -22,6 +24,12 @@ export const getters = {
     }
 
     return children
+  },
+  getMenuColour(state) {
+    return state.color
+  },
+  getMenuCurrentColour(state) {
+    return state.currentColor
   }
 }
 
@@ -40,5 +48,11 @@ export const mutations = {
   },
   setMenuHidden(state, hide) {
     state.menuHidden = hide
+  },
+  setMenuColour(state, colour) {
+    state.color = colour
+  },
+  setMenuCurrentColour(state, colour) {
+    state.currentColor = colour
   }
 }

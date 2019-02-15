@@ -192,7 +192,8 @@ export default {
 
         if (projects.length === 1) {
           currentProject = projects[0]
-          store.commit('updateProject', projects[0])
+          store.commit('updateProject', currentProject)
+          store.commit('menu/setMenuColour', currentProject.HeroMenuColour)
         }
 
         return store.app.$axios({
