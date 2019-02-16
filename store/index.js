@@ -71,8 +71,8 @@ export const mutations = {
       }
 
       // Check if ID already in store
-      if (!(node.ID in state.projects)) {
-        state.projects[node.ID] = node
+      if (!(node.URLSegment in state.projects)) {
+        state.projects[node.URLSegment] = node
       }
     }
 

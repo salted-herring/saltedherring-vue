@@ -12,6 +12,10 @@
           :src="internalVideoPath"
           type="video/mp4">
       </video>
+      <div
+        v-if="details.VideoSource === 'External'"
+        class="video"
+        v-html="details.VideoLink"/>
     </div>
   </div>
 </template>
@@ -49,6 +53,7 @@ export default {
   @import "~assets/sass/config/bulma-variables"
   @import "~assets/sass/config/colours"
   @import "~assets/sass/imports/mixins"
+  @import "~bulma/sass/utilities/mixins"
 
   .video-block
     position: relative
@@ -61,4 +66,17 @@ export default {
 
       video
         max-width: 100%
+
+      .video
+        max-width: calc(100% - #{rem(60)})
+        margin: 0 auto
+
+      +tablet
+        .videoiframe
+          > div
+            padding-bottom: rem(500) !important
+
+  .hero-video
+    display: block !important
+
 </style>

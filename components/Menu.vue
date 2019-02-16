@@ -72,10 +72,8 @@ export default {
     window.addEventListener('scroll', this.onScroll)
   },
   mounted() {
-    this.$store.commit(
-      'menu/setMenuCurrentColour',
-      this.$store.state.menu.color
-    )
+    let colour = this.$store.state.menu.color
+    this.$store.commit('menu/setMenuCurrentColour', colour)
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.onScroll)

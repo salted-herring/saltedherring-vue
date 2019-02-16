@@ -119,10 +119,15 @@ export default {
     .columns
       .column
         position: relative
-    .page-introduction
-      top: 66.67%
-      left: 0
-      transform: translateY(-66.67%)
+
+    .page-header__main-container
+      .page-introduction
+        position: relative
+        top: auto
+        margin-top: rem(300)
+        transform: none
+        left: auto
+        margin-bottom: rem(400)
 
   .latest-content
     padding-bottom: rem(300)

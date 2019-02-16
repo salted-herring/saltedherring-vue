@@ -101,7 +101,7 @@ export default `query getWorkPage {
     Projects {
       edges {
         node {
-          ID
+          URLSegment
           MenuTitle
           Link
           HeroVideo {

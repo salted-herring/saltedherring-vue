@@ -223,6 +223,7 @@ export default {
   @import '~assets/sass/config/typography'
   @import '~assets/sass/imports/mixins'
   @import '~assets/sass/imports/bulma-overrides'
+  @import '~bulma/sass/utilities/mixins'
 
   .hero-section
     position: fixed
@@ -265,6 +266,41 @@ export default {
   .project-introduction
     padding-top: rem(150)
     padding-bottom: 0
+
+    +until($desktop)
+      .columns
+        display: flex
+        flex-direction: column
+        align-items: center
+        padding-left: rem(100)
+        padding-right: rem(100)
+
+        aside,
+        .project-summary
+          width: 100%
+          max-width: rem(900)
+
+        aside
+          order: 1
+          margin-top: rem(40)
+          display: flex
+
+          .project-tags
+            width: 50%
+
+    +touch
+      aside
+        flex-direction: column
+        align-items: center
+        text-align: center
+        flex-basis: 100%
+
+        .project-tags
+          width: 100%
+          margin-bottom: rem(30)
+
+          &:last-child
+            margin-bottom: rem(60)
 
   .project-summary
     font-weight: $weight-bold
