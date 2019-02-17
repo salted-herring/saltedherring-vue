@@ -122,6 +122,13 @@ export default `query getWorkPage {
               }
             }
           }
+          PreviewVideo {
+            id
+            url
+          }
+          PreviewImage {
+            URL
+          }
         }
       }
     }

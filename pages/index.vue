@@ -91,6 +91,7 @@ export default {
           let data = returnVal[0]
           let content = data.Content
           store.commit('menu/setMenuColour', data.HeroMenuColour)
+          store.commit('menu/setMenuCurrentColour', data.HeroMenuColour)
 
           let matches = content.match(
             /href=("|')((?!(https?:){0,1}\/\/))([a-z\/A-Z\?0-9-_\{\}]+)("|')/g
