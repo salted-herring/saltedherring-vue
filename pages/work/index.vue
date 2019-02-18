@@ -15,9 +15,15 @@
           :link="link.Link"
           :label="link.MenuTitle"
           :images="link.HeroImages"
-          :video="link.HeroVideo">{{ index }} {{ link.MenuTitle }}</ProjectLink>
+          :video="link.HeroVideo">{{ link.MenuTitle }}</ProjectLink>
       </nav>
     </Header>
+
+    <PreviewOverlay
+      v-for="(project, index) in projects"
+      :key="index"
+      :video="project.PreviewVideo"
+      :image="project.PreviewImage" />
 
     <section
       v-if="$store.state.awards.show"
@@ -98,12 +104,14 @@
 <script>
 import getWorkPage from '~/apollo/queries/workpage'
 import ProjectLink from '~/components/ProjectLink'
+import PreviewOverlay from '~/components/PreviewOverlay'
 import Header from '~/components/Header'
 
 export default {
   components: {
+    Header,
     ProjectLink,
-    Header
+    PreviewOverlay
   },
   computed: {
     projects() {

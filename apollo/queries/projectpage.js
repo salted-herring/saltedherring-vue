@@ -57,6 +57,12 @@ export default `query getProject($urlSegment: String) {
     Services
     Recognition
     Summary
+    PreviewImage {
+      URL
+    }
+    PreviewVideo {
+      url
+    }
     RelatedProjectsTitle
     RelatedProjects {
       edges {
