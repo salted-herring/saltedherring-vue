@@ -58,7 +58,7 @@ module.exports = {
   },
   proxy: {
     '/graphql/': {
-      target: process.env.API_ENDPOINT
+      target: process.env.GRAPHQL_ENDPOINT
     },
     '/assets/': {
       target: process.env.API_ENDPOINT
@@ -70,6 +70,10 @@ module.exports = {
         return ['script', 'style', 'font', 'image', 'video'].includes(type)
       }
     }
+  },
+
+  env: {
+    graphQLEndpoint: process.env.GRAPHQL_ENDPOINT
   },
 
   /*

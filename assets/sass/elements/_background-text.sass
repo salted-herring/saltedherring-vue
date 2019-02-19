@@ -2,7 +2,7 @@
 /// Background text element
 ////
 .background-text
-    font-size: rem(300)
+    font-size: rem(140)
     font-weight: $weight-extrabold
     line-height: 1em
     letter-spacing: normal
@@ -13,3 +13,12 @@
     top: 50%
     transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg)
     z-index: 0
+
+    // +until($desktop)
+    //   font-size: rem(140)
+
+    +widescreen
+      font-size: rem(240)
+
+    +fullhd
+        font-size: rem(300)

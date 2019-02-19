@@ -1,19 +1,27 @@
 <template>
-  <Carousel
-    v-if="getImages.length > 1"
-    :nav="false"
-    :autoplay="true"
-    :items="1"
-    :loop="true"
-    :autoplay-timeout="5000"
-    :dots="false"
-    class="content-block image-block has-background-black">
-    <div
+  <div class="image-block has-background-light">
+    <Carousel
+      v-if="getImages.length > 1"
+      :nav="false"
+      :autoplay="true"
+      :items="1"
+      :loop="true"
+      :autoplay-timeout="5000"
+      :dots="false"
+      class="content-block image-block has-background-light">
+      <img
+        v-for="(image, index) in getImages"
+        :key="index"
+        :src="image.FitFullScreen"
+        class="image-block__image has-background-black">
+    </Carousel>
+    <img
       v-for="(image, index) in getImages"
+      v-else
       :key="index"
-      :style="{ 'background-image': 'url(' + image.FitFullScreen + ')' }"
-      class="image-block__image has-background-black" />
-  </Carousel>
+      :src="image.FitFullScreen"
+      class="image-block__image image-block__image--single has-background-light">
+  </div>
 </template>
 <script>
 let components = {}
@@ -52,21 +60,30 @@ export default {
   @import "~bulma/sass/utilities/mixins"
 
   .image-block
-    height: 100vh
-    min-height: rem(320)
+    // height: 100vh
+    // min-height: rem(320)
     position: relative
 
     // +until($desktop)
-    //   max-height: rem(400)
-    //   height: auto
+    //   height: rem(400)
     //   min-height: rem(400)
 
     &__image
       display: none
-      width: 100%
-      height: 100%
-      background-size: cover
-      background-position: left top
+      // width: 100%
+      // height: 100%
+      max-width: rem(1920)
+      // background-size: cover
+      // background-position: left top
+      margin-left: auto
+      margin-right: auto
+
+      &--single
+        display: block
+        height: 100vh
+
+        +until($desktop)
+          height: 100%
 
       &:first-child
         display: block
@@ -78,8 +95,10 @@ export default {
       margin-left: auto
       margin-right: auto
       overflow: hidden
-      left: 50%
-      transform: translateX(-50%)
+      position: relative
+      height: auto
+      // left: 50%
+      // transform: translateX(-50%)
 
       // +until($desktop)
       //   max-height: rem(400)

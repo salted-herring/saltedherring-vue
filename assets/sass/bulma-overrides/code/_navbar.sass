@@ -33,10 +33,13 @@
         width: auto
         display: inline-block
         position: absolute
-        right: rem(30)
-        top: rem(30)
+        right: 0
+        top: 0
         overflow: hidden
-        // background: green
+
+        +tablet
+          right: rem(30)
+          top: rem(30)
 
     .navbar-end
         position: absolute
@@ -59,7 +62,6 @@
             padding: 0
             margin-left: auto
             align-text: right
-            // align-items: flex-end
             transform-origin: right bottom
             transform: rotate(-5deg) skew(-5deg)
             font-size: rem(48)
@@ -67,7 +69,6 @@
             font-weight: 800
             color: $black
             text-decoration: none
-            // background: red
 
             &:after
                 position: absolute

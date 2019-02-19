@@ -47,13 +47,12 @@
       </div>
     </Header>
     <section class="section project-introduction has-background-light">
-      <div class="container">
+      <div class="container content-container">
         <div class="columns">
           <aside class="column is-3">
             <div
               v-if="currentProject.Services"
               class="project-tags">
-              <span class="project-tags__label">Services</span>
               <div
                 class="cms-content"
                 v-html="currentProject.Services"/>
@@ -61,7 +60,6 @@
             <div
               v-if="currentProject.Recognition"
               class="project-tags">
-              <span class="project-tags__label">Recognition</span>
               <div
                 class="cms-content"
                 v-html="currentProject.Recognition"/>
@@ -69,7 +67,7 @@
           </aside>
 
           <div
-            class="column project-summary is-7"
+            class="column project-summary is-9"
             v-html="currentProject.Summary" />
         </div>
       </div>
@@ -176,10 +174,12 @@ export default {
     let slug = params.slug
     let currentProject = null
 
+    console.log(process.env.graphQLEndpoint)
+
     return store.app
       .$axios({
         url: '/graphql/',
-        method: 'post',
+        method: 'get',
         data: {
           query: getProject,
           variables: {
@@ -198,7 +198,7 @@ export default {
 
         return store.app.$axios({
           url: '/graphql/',
-          method: 'post',
+          method: 'get',
           data: {
             query: readBlocks,
             variables: {
@@ -265,7 +265,7 @@ export default {
 
   .project-introduction
     padding-top: rem(150)
-    padding-bottom: 0
+    padding-bottom: rem(0)
 
     +until($desktop)
       .columns
@@ -288,30 +288,52 @@ export default {
           .project-tags
             width: 50%
 
-    +touch
-      aside
+    +mobile
+      .columns
+        display: flex
         flex-direction: column
         align-items: center
-        text-align: center
-        flex-basis: 100%
+        padding-left: rem(30)
+        padding-right: rem(30)
 
-        .project-tags
+        aside,
+        .project-summary
           width: 100%
-          margin-bottom: rem(30)
+          max-width: rem(900)
 
-          &:last-child
-            margin-bottom: rem(60)
+        aside
+          order: 2
+          margin-top: rem(40)
+          display: block
+
+          .project-tags
+            width: 100%
+            margin-bottom: rem(20)
 
   .project-summary
     font-weight: $weight-bold
     font-size: rem(36)
     line-height: em(40, 36)
 
+    +widescreen
+      font-size: rem(28)
+      line-height: em(36, 28)
+
+    +fullhd
+      font-size: rem(36)
+      line-height: em(40, 36)
+
   .project-tags
-    font-size: rem(24)
+    font-size: rem(18)
 
     &:first-child
       margin-bottom: rem(90)
+
+    +widescreen
+      font-size: rem(16)
+      line-height: em(22, 16)
+    +fullhd
+      font-size: rem(18)
 
     &__label
       font-weight: $weight-bold
@@ -327,8 +349,18 @@ export default {
     .page-header__main-container
       .page-introduction
         font-weight: $weight-bold
-        font-size: rem(60)
+        font-size: rem(28)
         top: rem(200)
+
+        +desktop-only
+          top: rem(250)
+
+        +widescreen
+          font-size: rem(36)
+          top: rem(220)
+
+        +fullhd
+          font-size: rem(48)
 
     .background-text
       top: 50%

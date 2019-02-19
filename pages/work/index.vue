@@ -19,11 +19,13 @@
       </nav>
     </Header>
 
-    <PreviewOverlay
-      v-for="(project, index) in projects"
-      :key="index"
-      :video="project.PreviewVideo"
-      :image="project.PreviewImage" />
+    <div class="preview-overlays">
+      <PreviewOverlay
+        v-for="project in projects"
+        :key="project.URLSegment"
+        :video="project.PreviewVideo"
+        :image="project.PreviewImage" />
+    </div>
 
     <section
       v-if="$store.state.awards.show"
@@ -183,6 +185,7 @@ export default {
 
   .workpage-nav
     position: relative
+    z-index: 3
     padding-top: rem(400)
     margin-bottom: rem(100)
     // top: 50%
@@ -192,5 +195,15 @@ export default {
     // transform: translateY(50%)
     // margin-bottom: 100%
 
+  .preview-overlays
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
 
+    video
+      object-fit: cover
+      position: relative
+      z-index: 0
 </style>

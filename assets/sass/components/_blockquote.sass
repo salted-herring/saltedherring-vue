@@ -1,5 +1,5 @@
 .blockquote
-  @extend .is-3
+  // @extend .is-3
   // margin-top: auto
   // margin-bottom: auto
   padding: rem(40)
@@ -13,6 +13,18 @@
     margin: 0 !important
     padding: 0
 
+    +mobile
+      font-size: rem(24) !important
+      line-height: em(30, 24) !important
+
+    +widescreen
+      font-size: rem(28) !important
+      line-height: em(36, 28) !important
+
+    +fullhd
+      font-size: rem(36) !important
+      line-height: em(46, 36) !important
+
     + .blockquote__footer
       margin-top: rem(30)
 
@@ -23,5 +35,13 @@
       content: '\201D'
 
   &__footer
-    font-size: rem(24)
-    line-height: em(30)
+    font-size: rem(18)
+    line-height: em(24, 18)
+
+    +widescreen
+      font-size: rem(16)
+      line-height: em(22, 16)
+
+    +fullhd
+      font-size: rem(18)
+      line-height: em(24, 18)

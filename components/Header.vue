@@ -9,7 +9,7 @@
         class="columns">
         <div
           :class="introductionClass"
-          class="column is-half introduction cms-content">
+          class="column introduction cms-content">
           <div
             v-if="introduction"
             :class="introductionVariation"

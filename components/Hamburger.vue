@@ -50,11 +50,9 @@ export default {
 </script>
 <style lang="sass" scoped>
   /// Config
-  @import '~assets/sass/config/bulma-variables'
-  // @import 'config/colours'
-  // @import 'config/fonts'
-  // @import 'config/typography'
-  @import '~assets/sass/imports/mixins'
+  @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/imports/mixins"
+  @import "~bulma/sass/utilities/mixins"
 
   $hamburger-layer-border-radius: 0
   $hamburger-layer-height: 5px
@@ -68,8 +66,12 @@ export default {
     cursor: pointer
     align-self: center
     position: absolute
-    top: rem(40)
-    right: rem(30)
+    right: rem(0)
+
+    +tablet
+      right: rem(30)
+      top: rem(40)
+
 
     .hamburger-box
       transition: width 0.125s ease

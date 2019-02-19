@@ -1,6 +1,7 @@
 import getFooter from '~/apollo/queries/footer.js'
 
 export default function({ store, route, redirect }) {
+  console.log('footer', process.env.graphQLEndpoint)
   return store
     .$axios({
       url: '/graphql/',

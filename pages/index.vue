@@ -4,7 +4,7 @@
       :titleBg="$store.state.homePageData.TitleColour.Colour"
       :title="$store.state.homePageData.HeroTitle"
       :introduction="$store.state.homePageData.Content"
-      :introductionClass="'is-offset-1'"
+      :introductionClass="'is-offset-1 is-half'"
       :introductionVariation="'page-introduction--left'"
       :isCentered="false"
       :pageClass="'homepage-header'" />
@@ -101,7 +101,6 @@ export default {
             let match = matches[i]
             let oldmatch = match
             let newmatch = match.replace('href', ':to')
-            // content.replace(oldmatch, newmatch)
           }
 
           store.commit('updateHomePageData', data)

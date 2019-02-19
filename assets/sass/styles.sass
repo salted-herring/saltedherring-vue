@@ -28,19 +28,21 @@
 @import 'route-transitions/page'
 
 
-html
-  @include until($desktop)
-    font-size: 12px
-  @include desktop-only
-    font-size: 14px
-  @include fullhd
-    font-size: 16px
-  @include until($tablet)
-    font-size: 10px
+// html
+//
+//   @include until($desktop)
+//     font-size: 12px
+//   @include desktop-only
+//     font-size: 14px
+//   @include fullhd
+//     font-size: 16px
+//   @include until($tablet)
+//     font-size: 10px
 
 
 body
   position: relative
+  overflow: hidden
 
   &:before
     position: fixed
@@ -53,3 +55,6 @@ body
     content: ''
     z-index: 100
     pointer-events: none
+
+    +mobile
+      display: none
