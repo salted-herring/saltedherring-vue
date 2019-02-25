@@ -146,10 +146,13 @@ export default {
       if (project !== null) {
         if (project.HeroVideo.id !== 0) {
           video = project.HeroVideo.url
-          let match = video.match(/(https?:\/\/[^\/]+)(.*)/)
 
-          if (match !== null) {
-            video = match[2]
+          if (video !== null) {
+            let match = video.match(/(https?:\/\/[^\/]+)(.*)/)
+
+            if (match !== null) {
+              video = match[2]
+            }
           }
         }
 
@@ -174,12 +177,15 @@ export default {
     let slug = params.slug
     let currentProject = null
 
-    console.log(process.env.graphQLEndpoint)
-
     return store.app
       .$axios({
         url: '/graphql/',
-        method: 'get',
+        method: 'post',
+        withCredentials: true,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
         data: {
           query: getProject,
           variables: {
@@ -198,7 +204,12 @@ export default {
 
         return store.app.$axios({
           url: '/graphql/',
-          method: 'get',
+          method: 'post',
+          withCredentials: true,
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
           data: {
             query: readBlocks,
             variables: {

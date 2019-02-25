@@ -129,6 +129,11 @@ export default {
       .$axios({
         url: '/graphql/',
         method: 'post',
+        withCredentials: true,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
         data: {
           query: getWorkPage
         }

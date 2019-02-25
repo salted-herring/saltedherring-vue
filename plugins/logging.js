@@ -1,10 +1,10 @@
 export default ({ $axios, store }) => {
   $axios.onResponse(response => {
-    console.log(`[${response.status}] ${response.request.path}`)
+    console.log(`[${response.status}] ${response.request.path}`, response)
   })
 
   $axios.onRequest(config => {
-    console.log('Making request to ' + config.url)
+    console.log('Making request to ' + config.url, config.data)
   })
 
   $axios.onError(err => {

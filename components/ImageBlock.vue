@@ -60,21 +60,11 @@ export default {
   @import "~bulma/sass/utilities/mixins"
 
   .image-block
-    // height: 100vh
-    // min-height: rem(320)
     position: relative
-
-    // +until($desktop)
-    //   height: rem(400)
-    //   min-height: rem(400)
 
     &__image
       display: none
-      // width: 100%
-      // height: 100%
       max-width: rem(1920)
-      // background-size: cover
-      // background-position: left top
       margin-left: auto
       margin-right: auto
 
@@ -97,11 +87,6 @@ export default {
       overflow: hidden
       position: relative
       height: auto
-      // left: 50%
-      // transform: translateX(-50%)
-
-      // +until($desktop)
-      //   max-height: rem(400)
 
     .owl-stage
       transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1)

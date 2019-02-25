@@ -74,12 +74,17 @@ export default {
     this.$store.commit('menu/setMenuHidden', true)
   },
   async fetch({ store, params }) {
-    // console.log(store.app)
-    // store.app.nuxt.$loading.start()
+    // console.log('home', process.env.GRAPHQL_ENDPOINT)
     return store.app
       .$axios({
+        // baseURL: process.env.GRAPHQL_ENDPOINT,
         url: '/graphql/',
         method: 'post',
+        withCredentials: true,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
         data: {
           query: getHomePage
         }
