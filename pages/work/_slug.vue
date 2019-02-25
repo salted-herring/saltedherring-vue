@@ -114,6 +114,7 @@ import ProjectLink from '~/components/ProjectLink'
 import ImageBlock from '~/components/ImageBlock'
 import TextBlock from '~/components/TextBlock'
 import VideoBlock from '~/components/VideoBlock'
+import MetaData from '~/mixins/MetaMixin'
 
 let Carousel = null
 
@@ -130,6 +131,7 @@ export default {
     VideoBlock,
     Carousel
   },
+  mixins: [MetaData],
   computed: {
     headerImages() {
       let images = []
@@ -171,11 +173,17 @@ export default {
     },
     currentProject() {
       return this.$store.getters.getCurrentProject
+    },
+    metaData() {
+      return this.$store.state.meta.pages[
+        this.$store.getters.getCurrentProject.URLSegment
+      ]
     }
   },
   async fetch({ store, params }) {
     let slug = params.slug
     let currentProject = null
+    let self = this
 
     return store.app
       .$axios({
@@ -200,6 +208,8 @@ export default {
           currentProject = projects[0]
           store.commit('updateProject', currentProject)
           store.commit('menu/setMenuColour', currentProject.HeroMenuColour)
+          // console.log(currentProject)
+          self.setupMeta(store, slug, currentProject)
         }
 
         return store.app.$axios({

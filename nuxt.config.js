@@ -35,7 +35,12 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    ['nuxt-robots-module', {
+      /* module options */
+      UserAgent: '*',
+      Disallow: '/',
+    }],
   ],
 
   /*

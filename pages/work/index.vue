@@ -108,6 +108,7 @@ import getWorkPage from '~/apollo/queries/workpage'
 import ProjectLink from '~/components/ProjectLink'
 import PreviewOverlay from '~/components/PreviewOverlay'
 import Header from '~/components/Header'
+import MetaData from '~/mixins/MetaMixin'
 
 export default {
   components: {
@@ -115,15 +116,21 @@ export default {
     ProjectLink,
     PreviewOverlay
   },
+  mixins: [MetaData],
   computed: {
     projects() {
       return this.$store.state.projects
+    },
+    metaData() {
+      return this.$store.state.meta.pages.work
     }
   },
   async fetch({ store, params }) {
     if (store.state.workPageData !== null) {
       return false
     }
+
+    let self = this
 
     return store.app
       .$axios({
@@ -145,6 +152,7 @@ export default {
           let data = returnVal[0]
           store.commit('menu/setMenuColour', data.HeroMenuColour)
           store.commit('updateWorkPageData', data)
+          self.setupMeta(store, 'work', data)
         }
       })
   },

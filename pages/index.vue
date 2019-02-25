@@ -43,29 +43,16 @@
 // import gql from 'graphql-tag'
 import getHomePage from '~/apollo/queries/homepage.js'
 import Header from '~/components/Header'
+import MetaData from '~/mixins/MetaMixin'
 
 export default {
   components: {
     Header
   },
-  head() {
-    return {
-      title: this.MetaTitle,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.MetaDescription
-        }
-      ]
-    }
-  },
+  mixins: [MetaData],
   computed: {
-    MetaTitle() {
-      return this.$store.state.homePageData.MetaTitle
-    },
-    MetaDescription() {
-      return this.$store.state.homePageData.MetaDescription
+    metaData() {
+      return this.$store.state.meta.pages.home
     }
   },
   mounted() {
@@ -74,10 +61,10 @@ export default {
     this.$store.commit('menu/setMenuHidden', true)
   },
   async fetch({ store, params }) {
-    // console.log('home', process.env.GRAPHQL_ENDPOINT)
+    let self = this
+
     return store.app
       .$axios({
-        // baseURL: process.env.GRAPHQL_ENDPOINT,
         url: '/graphql/',
         method: 'post',
         withCredentials: true,
@@ -109,6 +96,7 @@ export default {
           }
 
           store.commit('updateHomePageData', data)
+          self.setupMeta(store, 'home', data)
         }
       })
   }

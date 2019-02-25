@@ -1,7 +1,13 @@
 import getFooter from '~/apollo/queries/footer.js'
 
 export default function({ store, route, redirect }) {
-  console.log('footer', process.env.GRAPHQL_ENDPOINT)
+  // console.log('footer', process.env.GRAPHQL_ENDPOINT)
+
+  // only execute if the footer is not present.
+  if (store.state.footer.footerList.length !== 0) {
+    return
+  }
+
   return store
     .$axios({
       // baseURL: process.env.GRAPHQL_ENDPOINT,

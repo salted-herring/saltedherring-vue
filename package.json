@@ -22,6 +22,7 @@
     "cross-env": "^5.2.0",
     "hamburgers": "^1.1.3",
     "nuxt": "^2.4.3",
+    "nuxt-robots-module": "^1.5.1",
     "nuxt-sass-resources-loader": "^2.0.5",
     "vue-check-view": "^0.2.4",
     "vue-owl-carousel": "^2.0.3",
