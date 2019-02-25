@@ -4,7 +4,7 @@ export default ({ $axios, store }) => {
   })
 
   $axios.onRequest(config => {
-    console.log('Making request to ' + config.url, config.data)
+    console.log('Making request to ' + config.url, config.data, config)
   })
 
   $axios.onError(err => {
