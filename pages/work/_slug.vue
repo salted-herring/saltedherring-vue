@@ -385,7 +385,9 @@ export default {
 
     .background-text
       top: 50%
-      transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg)
+      transform-origin: top center
+      transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg) translate3d(0, 0, 0)
+      backface-visibility: hidden
 
   .related-projects
     .page-introduction

@@ -1,8 +1,12 @@
 <template>
   <nuxt-link
     :to="link"
-    class="project-link"
-    v-html="labelText" />
+    class="project-link">
+    <div
+      @mouseover="mouseOver"
+      @mouseout="mouseOut"
+      v-html="labelText" />
+  </nuxt-link>
 </template>
 <script>
 export default {
@@ -16,17 +20,15 @@ export default {
       type: String,
       default: ''
     },
-    images: {
-      type: Array,
-      default: function() {
-        return []
-      }
+    id: {
+      type: String,
+      default: ''
     }
   },
   computed: {
     labelText() {
       let text = this.label
-      let splitLabel = text.split(/\s/)
+      let splitLabel = text.trim().split(/\s/)
       let outputLabel = ''
 
       for (let i in splitLabel) {
@@ -42,27 +44,13 @@ export default {
       return outputLabel
     }
   },
-  created() {
-    // Preload images
-    for (let i in this.images) {
-      let image = this.images[i]
-
-      // this.$axios({
-      //   url: image.FitFullScreen,
-      //   method: 'get',
-      //   responseType: 'stream'
-      // }).then(result => {
-      //   // console.log(result.data)
-      // })
-
-      // let img = new Image()
-      // img.src = image.FitFullScreen
-      // console.log(image, img)
+  methods: {
+    mouseOver() {
+      this.$store.commit('workpage/updateHoveredItem', this.id)
+    },
+    mouseOut() {
+      this.$store.commit('workpage/resetHoveredItem')
     }
-    // console.log(this.images)
-    // details() {
-    //   return this.$store.state.footer.footerList
-    // }
   }
 }
 </script>

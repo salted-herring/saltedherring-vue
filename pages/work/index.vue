@@ -1,7 +1,6 @@
 <template>
   <div class="work-page">
     <Header
-      :headerBg="$store.state.workPageData.BackgroundColour.Colour"
       :introduction="$store.state.workPageData.Introduction"
       :titleBg="$store.state.workPageData.TitleColour.Colour"
       :title="$store.state.workPageData.HeroTitle"
@@ -13,16 +12,18 @@
           v-for="(link, index) in projects"
           :key="index"
           :link="link.Link"
-          :label="link.MenuTitle"
-          :images="link.HeroImages"
-          :video="link.HeroVideo">{{ link.MenuTitle }}</ProjectLink>
+          :id="link.URLSegment"
+          :label="link.MenuTitle">{{ link.MenuTitle }}</ProjectLink>
       </nav>
     </Header>
 
-    <div class="preview-overlays">
+    <div
+      :style="{ 'background-color': '#' + $store.state.workPageData.BackgroundColour.Colour }"
+      class="preview-overlays">
       <PreviewOverlay
         v-for="project in projects"
         :key="project.URLSegment"
+        :id="project.URLSegment"
         :video="project.PreviewVideo"
         :image="project.PreviewImage" />
     </div>
@@ -182,6 +183,7 @@ export default {
   .page-header.workpage-header
     height: auto
     min-height: 100vh
+    z-index: 2
 
     .page-header__main-container
       min-height: 100vh
@@ -214,9 +216,5 @@ export default {
     left: 0
     width: 100%
     height: 100%
-
-    video
-      object-fit: cover
-      position: relative
-      z-index: 0
+    z-index: 1
 </style>

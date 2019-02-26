@@ -1,7 +1,9 @@
 <template>
   <div
     ref="preloaders"
-    :style="{ 'background-image': 'url(' + getImage + ')'}"
+    :style="getImageStyle"
+    :data-id="id"
+    :class="{ 'is-visible': isVisible }"
     class="preview-overlay">
     <video
       v-if="getVideo"
@@ -20,6 +22,10 @@
 export default {
   name: 'PreviewOverlay',
   props: {
+    id: {
+      type: String,
+      default: ''
+    },
     video: {
       type: Object,
       default: function() {
@@ -49,6 +55,20 @@ export default {
     },
     getVideo() {
       return this.videoURL
+    },
+    getImageStyle() {
+      let image = this.imageURL
+
+      if (image) {
+        return {
+          backgroundImage: 'url(' + image + ')'
+        }
+      }
+
+      return {}
+    },
+    isVisible() {
+      return this.$store.state.workpage.hoveredItem === this.id
     }
   },
   mounted() {
@@ -85,3 +105,20 @@ export default {
   }
 }
 </script>
+<style lang="sass">
+  .preview-overlay
+    display: none
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+
+    &.is-visible
+      display: block
+
+    video
+      object-fit: cover
+      position: relative
+      z-index: 0
+</style>
