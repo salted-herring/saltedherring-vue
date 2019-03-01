@@ -4,7 +4,6 @@
     class="project-link">
     <div
       @mouseover="mouseOver"
-      @mouseout="mouseOut"
       v-html="labelText" />
   </nuxt-link>
 </template>

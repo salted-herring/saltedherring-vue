@@ -107,15 +107,17 @@ export default {
 </script>
 <style lang="sass">
   .preview-overlay
-    display: none
+    display: block
     position: absolute
     left: 0
     top: 0
     width: 100%
     height: 100%
+    opacity: 0
+    transition: all 0.25s ease
 
     &.is-visible
-      display: block
+      opacity: 1
 
     video
       object-fit: cover

@@ -1,6 +1,7 @@
 <template>
   <div
-    v-view="viewHandler"
+    v-waypoint="{ active: true, callback: onWaypoint }"
+    ref="textblockcontainer"
     class="content-block text-block has-background-light">
     <div class="container">
       <div
@@ -56,7 +57,8 @@ export default {
       originalTextBlockMarginTop: 100,
       textBlockMarginTop: 100,
       originalQuoteMarginTop: 200,
-      quoteMarginTop: 200
+      quoteMarginTop: 200,
+      animateUp: false
     }
   },
   computed: {
@@ -88,20 +90,34 @@ export default {
       return this.quoteMarginTop + 'px'
     }
   },
+  created() {
+    if (process.browser) {
+      window.addEventListener('scroll', this.onScroll, { passive: true })
+    }
+  },
+  destroyed() {
+    if (process.browser) {
+      window.removeEventListener('scroll', this.onScroll)
+    }
+  },
   methods: {
-    viewHandler(e) {
-      let rect = e.target.element.getBoundingClientRect()
+    onWaypoint({ going, direction }) {
+      if (going === 'in' && direction === 'top') {
+        this.animateUp = true
+      }
+    },
+    onScroll(e) {
+      if (!this.animateUp) {
+        return false
+      }
+
+      let rect = this.$refs.textblockcontainer.getBoundingClientRect()
       let top = rect.top
       let textBlockMarginTop = top - 200
       let quoteMarginTop = top - 100
-      // if (textBlockMarginTop < 0) textBlockMarginTop = 0
 
       this.textBlockMarginTop = textBlockMarginTop
       this.quoteMarginTop = quoteMarginTop
-
-      requestAnimationFrame(timestamp => {
-        console.log('animation')
-      })
     }
   }
 }

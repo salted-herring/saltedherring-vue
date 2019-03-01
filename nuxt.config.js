@@ -36,7 +36,7 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    ['nuxt-robots-module', {
+    ['@nuxtjs/robots', {
       /* module options */
       UserAgent: '*',
       Disallow: '/',
@@ -48,7 +48,8 @@ module.exports = {
   */
   plugins: [
     '~/plugins/vue-preload',
-    '~/plugins/logging'
+    '~/plugins/logging',
+    { src: '~/plugins/waypoints', ssr: false }
   ],
 
   router: {

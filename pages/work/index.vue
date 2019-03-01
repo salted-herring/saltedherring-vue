@@ -7,6 +7,7 @@
       :pageClass="'workpage-header'">
       <nav
         slot="introductionContent"
+        :class="{ 'is-hovered' : $store.state.workpage.hoveredItem !== null }"
         class="workpage-nav">
         <ProjectLink
           v-for="(link, index) in projects"
@@ -45,6 +46,7 @@
           <a
             :href="programme.link.LinkURL"
             :target="programme.link.OpenInNewWindow ? '_blank' : '_self'"
+            rel="noopener"
             class="awards-programme__link">{{ programme.title }}</a>
 
           <div class="columns">
@@ -209,6 +211,13 @@ export default {
     transform-origin: top center
     // transform: translateY(50%)
     // margin-bottom: 100%
+
+    &.is-hovered
+      a
+        color: rgba($white, 0.5)
+
+        &:hover
+          color: $white
 
   .preview-overlays
     position: fixed
