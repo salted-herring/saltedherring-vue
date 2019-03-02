@@ -112,6 +112,7 @@ import ProjectLink from '~/components/ProjectLink'
 import PreviewOverlay from '~/components/PreviewOverlay'
 import Header from '~/components/Header'
 import MetaData from '~/mixins/MetaMixin'
+import PageState from '~/mixins/PageState'
 
 export default {
   components: {
@@ -119,7 +120,7 @@ export default {
     ProjectLink,
     PreviewOverlay
   },
-  mixins: [MetaData],
+  mixins: [MetaData, PageState],
   computed: {
     projects() {
       return this.$store.state.projects
@@ -205,19 +206,19 @@ export default {
     z-index: 3
     padding-top: rem(400)
     margin-bottom: rem(100)
-    // top: 50%
-    // left: 50%
     white-space: normal
     transform-origin: top center
-    // transform: translateY(50%)
-    // margin-bottom: 100%
 
     &.is-hovered
       a
-        color: rgba($white, 0.5)
+        color: rgba($white, 0.3)
 
         &:hover
           color: $white
+
+        span
+          &:after
+            background: rgba($white, 0.3)
 
   .preview-overlays
     position: fixed

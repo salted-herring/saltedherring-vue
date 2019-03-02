@@ -13,9 +13,11 @@
     top: 50%
     transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg)
     z-index: 0
+    pointer-events: none
+    transition: opacity 0.25s ease
 
-    // +until($desktop)
-    //   font-size: rem(140)
+    &--is-not-opaque
+      opacity: 0.1
 
     +widescreen
       font-size: rem(240)

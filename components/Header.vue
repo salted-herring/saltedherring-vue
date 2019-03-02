@@ -12,7 +12,7 @@
           class="column introduction cms-content">
           <div
             v-if="introduction"
-            :class="introductionVariation"
+            :class="cssVariants"
             :style="{ color: '#' + introductionBg }"
             class="page-introduction"
             v-html="introduction" />
@@ -22,6 +22,7 @@
     </div>
     <div
       :style="{ color: '#' + titleBg }"
+      :class="{ 'background-text--is-not-opaque': isNotOpaque }"
       class="background-text">
       {{ title }}
     </div>
@@ -68,6 +69,20 @@ export default {
       type: String,
       default: ''
     }
+  },
+  computed: {
+    isNotOpaque() {
+      return !this.$store.state.pagestate.backgroundTextOpaque
+    },
+    cssVariants() {
+      let css = [this.introductionVariation]
+
+      if (!this.$store.state.pagestate.backgroundTextOpaque) {
+        css.push('page-introduction--is-not-opaque')
+      }
+
+      return css.join(' ')
+    }
   }
 }
 </script>
@@ -96,5 +111,8 @@ export default {
         top: rem(300)
         left: 50%
         transform: translateX(-50%)
+
+        &--is-not-opaque
+          color: $white !important
 
 </style>

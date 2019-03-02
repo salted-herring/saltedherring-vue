@@ -100,7 +100,8 @@
           v-for="(link, index) in currentProject.RelatedProjects"
           :key="index"
           :link="link.Link"
-          :label="link.MenuTitle"/>
+          :label="link.MenuTitle"
+          :ignore-hovered-state="true" />
       </nav>
     </section>
   </div>
@@ -115,6 +116,7 @@ import ImageBlock from '~/components/ImageBlock'
 import TextBlock from '~/components/TextBlock'
 import VideoBlock from '~/components/VideoBlock'
 import MetaData from '~/mixins/MetaMixin'
+import PageState from '~/mixins/PageState'
 
 let Carousel = null
 
@@ -131,7 +133,7 @@ export default {
     VideoBlock,
     Carousel
   },
-  mixins: [MetaData],
+  mixins: [MetaData, PageState],
   computed: {
     headerImages() {
       let images = []
@@ -208,7 +210,6 @@ export default {
           currentProject = projects[0]
           store.commit('updateProject', currentProject)
           store.commit('menu/setMenuColour', currentProject.HeroMenuColour)
-          // console.log(currentProject)
           self.setupMeta(store, slug, currentProject)
         }
 
@@ -390,13 +391,8 @@ export default {
       backface-visibility: hidden
 
   .related-projects
+    padding: rem(100) 0
     .page-introduction
-      position: absolute
-      left: 50%
-      top: 25%
-      transform: translate(-50%, -25%)
-
-    nav
-      margin-top: rem(300)
+      margin-bottom: rem(40)
 
 </style>

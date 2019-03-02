@@ -16,8 +16,6 @@ export default {
     metaData.data.ogType = data.OGType || ''
     metaData.data.ogImage = data.OGImage.Cropped || ''
 
-    console.log(metaData.data)
-
     store.commit('meta/addPageData', metaData)
   },
   computed: {

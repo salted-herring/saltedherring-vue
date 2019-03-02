@@ -1,6 +1,7 @@
 <template>
   <nuxt-link
     :to="link"
+    :class="{ 'is-hovered': isHovered }"
     class="project-link">
     <div
       @mouseover="mouseOver"
@@ -18,6 +19,10 @@ export default {
     label: {
       type: String,
       default: ''
+    },
+    ignoreHoveredState: {
+      type: Boolean,
+      default: false
     },
     id: {
       type: String,
@@ -41,14 +46,18 @@ export default {
       }
 
       return outputLabel
+    },
+    isHovered() {
+      return (
+        this.ignoreHoveredState === false &&
+        this.$store.state.workpage.hoveredItem === this.id
+      )
     }
   },
   methods: {
     mouseOver() {
       this.$store.commit('workpage/updateHoveredItem', this.id)
-    },
-    mouseOut() {
-      this.$store.commit('workpage/resetHoveredItem')
+      this.$store.commit('pagestate/updatebackgroundTextOpaque', false)
     }
   }
 }
@@ -77,12 +86,22 @@ export default {
     left: 50%
     transform: translateX(-50%) rotate(-5deg) skew(-5deg)
 
-
-
     &:hover
         span
           &:after
             width: 0
+
+    &.is-hovered
+      color: $white !important
+
+      &:hover
+        span
+          &:after
+            width: 100%
+
+      span
+        &:after
+          background: $white !important
 
     span
       display: inline-block
@@ -97,5 +116,4 @@ export default {
           background: $black
           content: ''
           display: block
-          // transition: width 0.25s ease
 </style>

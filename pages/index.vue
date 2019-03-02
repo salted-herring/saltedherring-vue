@@ -44,12 +44,13 @@
 import getHomePage from '~/apollo/queries/homepage.js'
 import Header from '~/components/Header'
 import MetaData from '~/mixins/MetaMixin'
+import PageState from '~/mixins/PageState'
 
 export default {
   components: {
     Header
   },
-  mixins: [MetaData],
+  mixins: [MetaData, PageState],
   computed: {
     metaData() {
       return this.$store.state.meta.pages.home
