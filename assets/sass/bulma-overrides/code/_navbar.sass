@@ -3,6 +3,7 @@
 ////
 .navbar
     padding: rem(30)
+    pointer-events: none
 
     &--is-white
       color: $white
@@ -21,6 +22,10 @@
 
           &:after
             background-color: $white !important
+
+    .navbar-brand,
+    .hamburger
+        pointer-events: all
 
     .navbar-menu
       flex-direction: column
@@ -50,6 +55,7 @@
         transition: all 0.125s ease
         text-align: right
         display: block
+        pointer-events: all
         // background: blue
 
         &.is-visible

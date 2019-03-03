@@ -26,11 +26,12 @@
     "node-sass": "^4.11.0",
     "nuxt": "^2.4.5",
     "nuxt-sass-resources-loader": "^2.0.5",
+    "sass-loader": "^7.1.0",
     "vue-check-view": "^0.2.4",
+    "vue-mouse-parallax": "^0.9.2",
     "vue-owl-carousel": "^2.0.3",
     "vue-preload": "^0.1.11",
-    "vue-waypoint": "^3.2.2",
-    "sass-loader": "^7.1.0"
+    "vue-waypoint": "^3.2.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

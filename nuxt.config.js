@@ -49,7 +49,8 @@ module.exports = {
   plugins: [
     '~/plugins/vue-preload',
     '~/plugins/logging',
-    { src: '~/plugins/waypoints', ssr: false }
+    { src: '~/plugins/waypoints', ssr: false },
+    { src: '~/plugins/parallax', ssr: false }
   ],
 
   router: {

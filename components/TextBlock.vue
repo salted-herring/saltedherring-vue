@@ -1,6 +1,5 @@
 <template>
   <div
-    v-waypoint="{ active: true, callback: onWaypoint }"
     ref="textblockcontainer"
     class="content-block text-block has-background-light">
     <div class="container">
@@ -33,11 +32,6 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
-import checkView from 'vue-check-view'
-
-Vue.use(checkView)
-
 export default {
   name: 'TextBlock',
   props: {
@@ -54,11 +48,12 @@ export default {
   },
   data() {
     return {
-      originalTextBlockMarginTop: 100,
-      textBlockMarginTop: 100,
+      textBlockMarginTop: 0,
+      quoteMarginTop: 0,
+      originalTextBlockMarginTop: 200,
       originalQuoteMarginTop: 200,
-      quoteMarginTop: 200,
-      animateUp: false
+      animateIn: false,
+      direction: 'top'
     }
   },
   computed: {
@@ -80,7 +75,7 @@ export default {
       )
     },
     marginTop() {
-      if (this.textBlockMarginTop >= 0) {
+      if (this.textBlockMarginTop > 0) {
         return this.textBlockMarginTop + 'px'
       }
 
@@ -101,23 +96,20 @@ export default {
     }
   },
   methods: {
-    onWaypoint({ going, direction }) {
-      if (going === 'in' && direction === 'top') {
-        this.animateUp = true
-      }
-    },
     onScroll(e) {
-      if (!this.animateUp) {
-        return false
-      }
+      this.textBlockMarginTop =
+        this.originalTextBlockMarginTop + this.calcParallax(1.24)
+      this.quoteMarginTop =
+        this.originalQuoteMarginTop + this.calcParallax(0.75)
+    },
+    calcParallax(factor) {
+      let containerRect = this.$el.getBoundingClientRect()
+      let height = containerRect.height
+      let viewportOffsetTop = containerRect.top
+      let viewportOffsetBottom = viewportOffsetTop - window.innerHeight
 
-      let rect = this.$refs.textblockcontainer.getBoundingClientRect()
-      let top = rect.top
-      let textBlockMarginTop = top - 200
-      let quoteMarginTop = top - 100
-
-      this.textBlockMarginTop = textBlockMarginTop
-      this.quoteMarginTop = quoteMarginTop
+      let scrollFactor = viewportOffsetBottom / (window.innerHeight + height)
+      return height * scrollFactor * factor
     }
   }
 }
