@@ -5,6 +5,7 @@
     class="project-link">
     <div
       @mouseover="mouseOver"
+      @mouseout="mouseOut"
       v-html="labelText" />
   </nuxt-link>
 </template>
@@ -58,6 +59,10 @@ export default {
     mouseOver() {
       this.$store.commit('workpage/updateHoveredItem', this.id)
       this.$store.commit('pagestate/updatebackgroundTextOpaque', false)
+    },
+    mouseOut() {
+      this.$store.commit('workpage/updateHoveredItem', null)
+      this.$store.commit('pagestate/updatebackgroundTextOpaque', true)
     }
   }
 }

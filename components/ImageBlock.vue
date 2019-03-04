@@ -1,13 +1,15 @@
 <template>
-  <div class="image-block has-background-light">
+  <div
+    class="image-block has-background-light">
     <Carousel
       v-if="getImages.length > 1"
+      ref="carousel"
       :nav="false"
       :autoplay="true"
       :items="1"
       :loop="true"
       :autoplay-timeout="5000"
-      :dots="false"
+      :dots="true"
       class="content-block image-block has-background-light">
       <img
         v-for="(image, index) in getImages"
@@ -50,6 +52,9 @@ export default {
     getImages() {
       return this.details.Images
     }
+  },
+  created() {
+    // console.log(this.$refs.carousel.elementHandle)
   }
 }
 </script>
@@ -61,6 +66,10 @@ export default {
 
   .image-block
     position: relative
+    padding-bottom: rem(20)
+
+    img
+      margin-bottom: 0
 
     &__image
       display: none

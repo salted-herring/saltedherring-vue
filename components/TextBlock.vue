@@ -50,8 +50,8 @@ export default {
     return {
       textBlockMarginTop: 0,
       quoteMarginTop: 0,
-      originalTextBlockMarginTop: 200,
-      originalQuoteMarginTop: 200,
+      originalTextBlockMarginTop: 400,
+      originalQuoteMarginTop: 400,
       animateIn: false,
       direction: 'top'
     }

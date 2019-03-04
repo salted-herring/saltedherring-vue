@@ -17,8 +17,16 @@
       </video>
       <div
         v-if="details.VideoSource === 'External'"
-        class="video"
-        v-html="details.VideoLink"/>
+        class="video external">
+        <iframe
+          :src="externalVideoURL"
+          width="100%"
+          height="100%"
+          frameborder="0"
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen />
+      </div>
     </div>
   </div>
 </template>
@@ -53,6 +61,29 @@ export default {
 
       return match[2]
     },
+    externalVideoURL() {
+      if (this.details.VideoSource !== 'External') {
+        return null
+      }
+
+      let path = this.details.VideoLink
+
+      if (path === null) {
+        return null
+      }
+
+      let match = path.match(/(https?:\/\/[^\/]+)(.*)/)
+
+      if (match === null) {
+        return null
+      }
+
+      return (
+        'https://player.vimeo.com/video' +
+        match[2] +
+        '?background=1&muted=1&autoplay=1&loop=1'
+      )
+    },
     sourceCSS() {
       return 'video-block--is-' + this.details.VideoSource.toLowerCase()
     }
@@ -68,8 +99,8 @@ export default {
   .video-block
     position: relative
 
-    &--is-external
-      padding: rem(60) 0
+    // &--is-external
+    //   padding: rem(60) 0
 
     .video-container
       max-width: rem(1920)
@@ -91,6 +122,16 @@ export default {
       .video
         max-width: calc(100% - #{rem(60)})
         margin: 0 auto
+
+        &.external
+          height: 100vh
+          pointer-events: none
+          position: relative
+
+          iframe
+            width: 100%
+            height: 100%
+            position: absolute
 
         +mobile
           max-width: 100%

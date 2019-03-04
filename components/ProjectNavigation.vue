@@ -1,0 +1,118 @@
+<template>
+  <div
+    class="project-navigation">
+    <section
+      :class="cssVariants">
+      <span
+        :class="introVariant"
+        class="page-introduction"
+        v-html="title"/>
+      <nav>
+        <ProjectLink
+          v-for="(link, index) in projects"
+          :key="index"
+          :id="link.URLSegment"
+          :link="link.Link"
+          :label="link.MenuTitle" />
+      </nav>
+
+      <div
+        v-if="backgroundText !== ''"
+        class="background-text"
+        v-html="backgroundText" />
+    </section>
+
+    <div
+      class="preview-overlays">
+      <PreviewOverlay
+        v-for="project in projects"
+        :key="project.URLSegment"
+        :id="project.URLSegment"
+        :video="project.PreviewVideo"
+        :image="project.PreviewImage" />
+    </div>
+  </div>
+</template>
+<script>
+import ProjectLink from '~/components/ProjectLink'
+import PreviewOverlay from '~/components/PreviewOverlay'
+
+export default {
+  components: {
+    ProjectLink,
+    PreviewOverlay
+  },
+  props: {
+    backgroundText: {
+      type: String,
+      default: ''
+    },
+    projects: {
+      type: Array,
+      default: function() {
+        return []
+      }
+    },
+    cssVariants: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    isNotOpaque() {
+      return !this.$store.state.pagestate.backgroundTextOpaque
+    },
+    introVariant() {
+      let css = []
+
+      if (!this.$store.state.pagestate.backgroundTextOpaque) {
+        css.push('page-introduction--is-not-opaque')
+      }
+
+      return css.join(' ')
+    }
+  }
+}
+</script>
+<style lang="sass">
+  @import '~assets/sass/config/bulma-variables'
+  @import '~assets/sass/config/colours'
+  @import '~assets/sass/config/fonts'
+  @import '~assets/sass/config/typography'
+  @import '~assets/sass/imports/mixins'
+  @import '~assets/sass/imports/bulma-overrides'
+  @import '~bulma/sass/utilities/mixins'
+
+  .page-introduction
+    &--is-not-opaque
+      color: $white
+
+  .project-navigation
+    // position: absolute
+    clip: rect(0, auto, auto, 0)
+    position: relative
+
+    &:after
+      display: block
+      content: ''
+      position: absolute
+      left: 0
+      top: 0
+      width: 100%
+      height: 100%
+      z-index: 2
+      background-color: $robins-egg
+
+  .preview-overlays
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    pointer-events: none
+    z-index: 3
+</style>

@@ -89,21 +89,12 @@
           :details="block" />
       </template>
     </section>
-    <section
+    <ProjectNavigation
       v-if="currentProject.RelatedProjects.length > 0"
-      class="section related-projects has-background-robins-egg">
-      <span
-        class="page-introduction"
-        v-html="currentProject.RelatedProjectsTitle"/>
-      <nav>
-        <ProjectLink
-          v-for="(link, index) in currentProject.RelatedProjects"
-          :key="index"
-          :link="link.Link"
-          :label="link.MenuTitle"
-          :ignore-hovered-state="true" />
-      </nav>
-    </section>
+      :css-variants="'section related-projects'"
+      :title="currentProject.RelatedProjectsTitle"
+      :projects="currentProject.RelatedProjects"
+    />
   </div>
 </template>
 <script>
@@ -115,6 +106,7 @@ import ProjectLink from '~/components/ProjectLink'
 import ImageBlock from '~/components/ImageBlock'
 import TextBlock from '~/components/TextBlock'
 import VideoBlock from '~/components/VideoBlock'
+import ProjectNavigation from '~/components/ProjectNavigation'
 import MetaData from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
 
@@ -131,7 +123,8 @@ export default {
     ProjectLink,
     TextBlock,
     VideoBlock,
-    Carousel
+    Carousel,
+    ProjectNavigation
   },
   mixins: [MetaData, PageState],
   computed: {
@@ -264,6 +257,7 @@ export default {
     width: auto
     min-width: 100%
     object-fit: cover
+    z-index: 1
 
   .hero-images
     position: absolute
@@ -392,7 +386,9 @@ export default {
 
   .related-projects
     padding: rem(100) 0
+    position: relative
+    z-index: 4
+
     .page-introduction
       margin-bottom: rem(40)
-
 </style>

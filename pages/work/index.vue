@@ -205,7 +205,7 @@ export default {
     position: relative
     z-index: 3
     padding-top: rem(400)
-    margin-bottom: rem(100)
+    margin-bottom: 50vh
     white-space: normal
     transform-origin: top center
 
@@ -221,7 +221,7 @@ export default {
             background: rgba($white, 0.3)
 
   .preview-overlays
-    position: fixed
+    // position: fixed
     top: 0
     left: 0
     width: 100%

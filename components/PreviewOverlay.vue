@@ -114,7 +114,7 @@ export default {
     width: 100%
     height: 100%
     opacity: 0
-    transition: all 0.25s ease
+    transition: opacity 0.5s cubic-bezier(0.895, 0.03, 0.685, 0.22)
 
     &.is-visible
       opacity: 1

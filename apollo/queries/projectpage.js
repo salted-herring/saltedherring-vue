@@ -70,6 +70,32 @@ export default `query getProject($urlSegment: String) {
           ID
           Link
           MenuTitle
+          URLSegment
+          HeroImages {
+            edges {
+              node {
+                ID
+                Title
+                URL
+                FitFullScreen
+              }
+            }
+          }
+          HeroVideo {
+            id
+            filename
+            size
+            url
+            width
+            height
+          }
+          PreviewVideo {
+            id
+            url
+          }
+          PreviewImage {
+            URL
+          }
         }
       }
     }
