@@ -182,11 +182,15 @@ export default {
   @import '~bulma/sass/utilities/derived-variables'
   @import '~bulma/sass/utilities/mixins'
 
+  .work-page
+    .section
+      position: relative
+      z-index: 4
 
   .page-header.workpage-header
     height: auto
     min-height: 100vh
-    z-index: 2
+    z-index: 4
 
     .page-header__main-container
       min-height: 100vh
