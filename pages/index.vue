@@ -40,17 +40,19 @@
 </template>
 
 <script>
-// import gql from 'graphql-tag'
-import getHomePage from '~/apollo/queries/homepage.js'
+import getHomePage from '~/apollo/queries/homepage'
+
 import Header from '~/components/Header'
-import MetaData from '~/mixins/MetaMixin'
+
+import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
+import Transition from '~/mixins/TransitionMixin'
 
 export default {
   components: {
     Header
   },
-  mixins: [MetaData, PageState],
+  mixins: [Meta, PageState, Transition],
   computed: {
     metaData() {
       return this.$store.state.meta.pages.home
@@ -97,7 +99,7 @@ export default {
           }
 
           store.commit('updateHomePageData', data)
-          self.setupMeta(store, 'home', data)
+          store.commit('meta/setupMeta', { slug: 'home', data: data })
         }
       })
   }

@@ -9,6 +9,7 @@ export default `query getProject($urlSegment: String) {
     ExtraMeta
     MenuTitle
     Link
+    Sort
     OGType
     OGTitle
     OGDescription

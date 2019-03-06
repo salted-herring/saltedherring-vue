@@ -86,20 +86,23 @@
 
 <script>
 import getWorkPage from '~/apollo/queries/workpage'
+
 import ProjectNavigation from '~/components/ProjectNavigation'
 import Header from '~/components/Header'
-import MetaData from '~/mixins/MetaMixin'
+
+import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
+import Transition from '~/mixins/TransitionMixin'
 
 export default {
   components: {
     Header,
     ProjectNavigation
   },
-  mixins: [MetaData, PageState],
+  mixins: [Meta, PageState, Transition],
   computed: {
     projects() {
-      return this.$store.state.projects
+      return this.$store.state.projects.sorted
     },
     metaData() {
       return this.$store.state.meta.pages.work
@@ -132,7 +135,7 @@ export default {
           let data = returnVal[0]
           store.commit('menu/setMenuColour', data.HeroMenuColour)
           store.commit('updateWorkPageData', data)
-          self.setupMeta(store, 'work', data)
+          store.commit('meta/setupMeta', { slug: 'work', data: data })
         }
       })
   },

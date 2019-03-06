@@ -98,18 +98,18 @@ export default {
       }
     },
     mouseMove(e) {
-      if (
-        e.target.classList.value.match(/navbar-end/g) === null ||
-        this.$store.state.menu.menuHidden
-      ) {
-        return false
-      }
-
-      if (this.$store.state.menu.canHideMenu) {
-        this.$store.commit('menu/setMenu', false)
-        this.$store.commit('menu/setHamburger', true)
-        this.$store.commit('menu/setCanHideMenu', false)
-      }
+      // if (
+      //   e.target.classList.value.match(/navbar-end/g) === null ||
+      //   this.$store.state.menu.menuHidden
+      // ) {
+      //   return false
+      // }
+      //
+      // if (this.$store.state.menu.canHideMenu) {
+      //   this.$store.commit('menu/setMenu', false)
+      //   this.$store.commit('menu/setHamburger', true)
+      //   this.$store.commit('menu/setCanHideMenu', false)
+      // }
     }
   }
 }

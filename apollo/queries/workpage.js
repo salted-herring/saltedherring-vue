@@ -101,6 +101,8 @@ export default `query getWorkPage {
     Projects {
       edges {
         node {
+          ID
+          Sort
           URLSegment
           MenuTitle
           Link

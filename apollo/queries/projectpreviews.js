@@ -3,6 +3,7 @@ export default `query getProjectPreviews {
     ID
     MenuTitle
     Link
+    Sort
     PreviewVideo {
       id
       url

@@ -67,7 +67,7 @@
           </aside>
 
           <div
-            class="column project-summary is-9"
+            class="column project-summary is-6"
             v-html="currentProject.Summary" />
         </div>
       </div>
@@ -92,7 +92,7 @@
     <ProjectNavigation
       :css-variants="'section related-projects'"
       :title="currentProject.RelatedProjectsTitle"
-      :projects="currentProject.RelatedProjects"
+      :projects="currentProject.RelatedProjects.sorted"
     />
   </div>
 </template>
@@ -101,13 +101,14 @@ import getProject from '~/apollo/queries/projectpage'
 import readBlocks from '~/apollo/queries/readBlocks'
 
 import Header from '~/components/Header'
-import ProjectLink from '~/components/ProjectLink'
 import ImageBlock from '~/components/ImageBlock'
 import TextBlock from '~/components/TextBlock'
 import VideoBlock from '~/components/VideoBlock'
 import ProjectNavigation from '~/components/ProjectNavigation'
-import MetaData from '~/mixins/MetaMixin'
+
+import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
+import Transition from '~/mixins/TransitionMixin'
 
 let Carousel = null
 
@@ -119,13 +120,12 @@ export default {
   components: {
     Header,
     ImageBlock,
-    ProjectLink,
     TextBlock,
     VideoBlock,
     Carousel,
     ProjectNavigation
   },
-  mixins: [MetaData, PageState],
+  mixins: [Meta, PageState, Transition],
   computed: {
     headerImages() {
       let images = []
@@ -202,7 +202,7 @@ export default {
           currentProject = projects[0]
           store.commit('updateProject', currentProject)
           store.commit('menu/setMenuColour', currentProject.HeroMenuColour)
-          self.setupMeta(store, slug, currentProject)
+          store.commit('meta/setupMeta', { slug: slug, data: currentProject })
         }
 
         return store.app.$axios({

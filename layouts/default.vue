@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Footer from '~/components/Footer.vue'
-import Menu from '~/components/Menu.vue'
+import Footer from '~/components/Footer'
+import Menu from '~/components/Menu'
 
 export default {
   components: {

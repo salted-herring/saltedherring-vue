@@ -9,7 +9,23 @@ export const getters = {
 }
 
 export const mutations = {
-  addPageData(state, pagemeta) {
-    state.pages[pagemeta.slug] = pagemeta.data
+  setupMeta(state, pagemeta) {
+    let metaData = {
+      slug: pagemeta.slug,
+      data: {}
+    }
+
+    metaData.data.title = pagemeta.data.MetaTitle || pagemeta.data.Title || ''
+    metaData.data.description = pagemeta.data.MetaDescription || ''
+    metaData.data.keywords = pagemeta.data.MetaKeywords || ''
+    metaData.data.robots = pagemeta.data.MetaRobots || ''
+
+    metaData.data.ogTitle = pagemeta.data.OGTitle || pagemeta.data.title
+    metaData.data.ogDescription =
+      pagemeta.data.OGDescription || pagemeta.data.description || ''
+    metaData.data.ogType = pagemeta.data.OGType || ''
+    metaData.data.ogImage = pagemeta.data.OGImage.Cropped || ''
+
+    state.pages[pagemeta.slug] = metaData.data
   }
 }

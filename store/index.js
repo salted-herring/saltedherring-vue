@@ -41,6 +41,22 @@ export const getters = {
     }
 
     return null
+  },
+  getSortedProjects(state) {
+    // let sortable = []
+    // let obj = {}
+    //
+    // for (let key in state.projects) {
+    //   sortable.push(state.projects[key])
+    // }
+    //
+    // sortable.sort(function(a, b) {
+    //   return a.Sort - b.Sort
+    // })
+    //
+    // for (let i in sortable) {
+    //   obj
+    // }
   }
 }
 
@@ -75,6 +91,22 @@ export const mutations = {
         state.projects[node.URLSegment] = node
       }
     }
+
+    // Add sorted projects Array
+    state.projects.sorted = []
+    let sortable = []
+
+    for (let key in state.projects) {
+      if (key !== 'sorted') {
+        sortable.push(state.projects[key])
+      }
+    }
+
+    sortable.sort(function(a, b) {
+      return a.Sort - b.Sort
+    })
+
+    state.projects.sorted = sortable
 
     /// Process programmes data.
     let programmes = {
@@ -176,12 +208,42 @@ export const mutations = {
         relatedProjects[edge.node.URLSegment] = edge.node
       }
 
-      console.log(relatedProjects)
-
       project.RelatedProjects = relatedProjects
+
+      // Add sorted projects Array
+      project.RelatedProjects.sorted = []
+      let sortable = []
+
+      for (let key in project.RelatedProjects) {
+        if (key !== 'sorted') {
+          sortable.push(project.RelatedProjects[key])
+        }
+      }
+
+      sortable.sort(function(a, b) {
+        return a.Sort - b.Sort
+      })
+
+      project.RelatedProjects.sorted = sortable
 
       state.projects[project.URLSegment] = project
       state.currentProject = project.URLSegment
+
+      // Add sorted projects Array
+      state.projects.sorted = []
+      sortable = []
+
+      for (let key in state.projects) {
+        if (key !== 'sorted') {
+          sortable.push(state.projects[key])
+        }
+      }
+
+      sortable.sort(function(a, b) {
+        return a.Sort - b.Sort
+      })
+
+      state.projects.sorted = sortable
     }
   },
   updateProjectBlocks(state, updateOptions) {

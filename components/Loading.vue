@@ -16,13 +16,13 @@ export default {
   }),
   methods: {
     start() {
-      this.loading = true
+      this.loading = false
     },
     finish() {
-      // let self = this
-      // setTimeout(function() {
-      this.loading = false
-      // }, 1000)
+      let self = this
+      setTimeout(function() {
+        self.loading = false
+      }, 300)
     }
   }
 }
@@ -31,18 +31,19 @@ export default {
 <style lang="sass" scoped>
 .loading-page
   position: fixed
-  top: 0
-  left: 0
+  top: 30px
+  left: 30px
   width: 0
-  height: 100%
+  height: calc(100% - 60px)
   background: #fff
   text-align: center
   z-index: 1000
   transition: all 0.25s ease
+  transform: translate3d(0, 0, 0)
   overflow: hidden
 
 .isloading
-  width: 100%
+  width: calc(100% - 60px)
 
 .image-loader
   display: block

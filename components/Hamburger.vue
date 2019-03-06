@@ -1,14 +1,14 @@
 <template>
-  <a
+  <button
     :class="{ 'is-active': active, 'is-hidden': isHamburgerHidden }"
     class="hamburger hamburger--minus js-hamburger"
     role="button"
-    @click="toggleActive"
-    @mouseover="mouseOver">
+    @mouseover="mouseOver"
+    @click="toggleActive">
     <span class="hamburger-box">
       <span class="hamburger-inner" />
     </span>
-  </a>
+  </button>
 </template>
 <script>
 export default {
@@ -28,11 +28,11 @@ export default {
     }
   },
   methods: {
-    toggleActive: function(e) {
+    mouseOver(e) {
       e.preventDefault()
-      this.active = !this.active
+      this.active = false
     },
-    mouseOver() {
+    toggleActive() {
       if (this.$store.state.menu.menuHidden) {
         return false
       }
@@ -78,10 +78,10 @@ export default {
       transform: rotate(-5deg) skew(-5deg)
       transform-origin: right top
 
-    &.is-hidden
-      display: block !important
-
-      .hamburger-box
-        width: 0
-        overflow: hidden
+    // &.is-hidden
+    //   display: block !important
+    //
+    //   .hamburger-box
+    //     width: 0
+    //     overflow: hidden
 </style>

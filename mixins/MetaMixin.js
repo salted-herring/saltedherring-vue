@@ -1,23 +1,4 @@
 export default {
-  setupMeta(store, key, data) {
-    let metaData = {
-      slug: key,
-      data: {}
-    }
-
-    metaData.data.title = data.MetaTitle || data.Title || ''
-    metaData.data.description = data.MetaDescription || ''
-    metaData.data.keywords = data.MetaKeywords || ''
-    metaData.data.robots = data.MetaRobots || ''
-
-    metaData.data.ogTitle = data.OGTitle || metaData.data.title
-    metaData.data.ogDescription =
-      data.OGDescription || metaData.data.description || ''
-    metaData.data.ogType = data.OGType || ''
-    metaData.data.ogImage = data.OGImage.Cropped || ''
-
-    store.commit('meta/addPageData', metaData)
-  },
   computed: {
     metaData() {
       return {

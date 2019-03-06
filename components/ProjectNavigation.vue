@@ -51,9 +51,9 @@ export default {
       default: ''
     },
     projects: {
-      type: Object,
+      type: Array,
       default: function() {
-        return {}
+        return []
       }
     },
     cssVariants: {
