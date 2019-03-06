@@ -90,7 +90,6 @@
       </template>
     </section>
     <ProjectNavigation
-      v-if="currentProject.RelatedProjects.length > 0"
       :css-variants="'section related-projects'"
       :title="currentProject.RelatedProjectsTitle"
       :projects="currentProject.RelatedProjects"

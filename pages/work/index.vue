@@ -1,33 +1,11 @@
 <template>
   <div class="work-page">
-    <Header
-      :introduction="$store.state.workPageData.Introduction"
-      :titleBg="$store.state.workPageData.TitleColour.Colour"
-      :title="$store.state.workPageData.HeroTitle"
-      :pageClass="'workpage-header'">
-      <nav
-        slot="introductionContent"
-        :class="{ 'is-hovered' : $store.state.workpage.hoveredItem !== null }"
-        class="workpage-nav">
-        <ProjectLink
-          v-for="(link, index) in projects"
-          :key="index"
-          :link="link.Link"
-          :id="link.URLSegment"
-          :label="link.MenuTitle">{{ link.MenuTitle }}</ProjectLink>
-      </nav>
-    </Header>
-
-    <div
-      :style="{ 'background-color': '#' + $store.state.workPageData.BackgroundColour.Colour }"
-      class="preview-overlays">
-      <PreviewOverlay
-        v-for="project in projects"
-        :key="project.URLSegment"
-        :id="project.URLSegment"
-        :video="project.PreviewVideo"
-        :image="project.PreviewImage" />
-    </div>
+    <ProjectNavigation
+      :title="$store.state.workPageData.Introduction"
+      :projects="projects"
+      :css-variants="'workpage-nav'"
+      :background-text="$store.state.workPageData.HeroTitle"
+    />
 
     <section
       v-if="$store.state.awards.show"
@@ -108,8 +86,7 @@
 
 <script>
 import getWorkPage from '~/apollo/queries/workpage'
-import ProjectLink from '~/components/ProjectLink'
-import PreviewOverlay from '~/components/PreviewOverlay'
+import ProjectNavigation from '~/components/ProjectNavigation'
 import Header from '~/components/Header'
 import MetaData from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
@@ -117,8 +94,7 @@ import PageState from '~/mixins/PageState'
 export default {
   components: {
     Header,
-    ProjectLink,
-    PreviewOverlay
+    ProjectNavigation
   },
   mixins: [MetaData, PageState],
   computed: {
@@ -187,6 +163,10 @@ export default {
       position: relative
       z-index: 4
 
+    .background-text
+      color: $white
+      z-index: -1
+
   .page-header.workpage-header
     height: auto
     min-height: 100vh
@@ -206,10 +186,8 @@ export default {
         height: 100%
 
   .workpage-nav
-    position: relative
-    z-index: 3
     padding-top: rem(400)
-    margin-bottom: 50vh
+    padding-bottom: 50vh
     white-space: normal
     transform-origin: top center
 
@@ -223,12 +201,4 @@ export default {
         span
           &:after
             background: rgba($white, 0.3)
-
-  .preview-overlays
-    // position: fixed
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-    z-index: 1
 </style>

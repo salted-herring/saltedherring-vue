@@ -168,14 +168,15 @@ export const mutations = {
 
       project.HeroImages = heroImages
 
-      let relatedProjects = []
+      let relatedProjects = {}
       edges = project.RelatedProjects.edges
 
       for (let y in edges) {
         let edge = edges[y]
-
-        relatedProjects.push(edge.node)
+        relatedProjects[edge.node.URLSegment] = edge.node
       }
+
+      console.log(relatedProjects)
 
       project.RelatedProjects = relatedProjects
 

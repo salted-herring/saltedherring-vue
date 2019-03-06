@@ -2,7 +2,8 @@
   <div
     class="project-navigation">
     <section
-      :class="cssVariants">
+      :class="cssVariants"
+      class="project-navigation__nav">
       <span
         :class="introVariant"
         class="page-introduction"
@@ -18,12 +19,14 @@
 
       <div
         v-if="backgroundText !== ''"
+        :class="{ 'background-text--is-not-opaque': isNotOpaque }"
         class="background-text"
         v-html="backgroundText" />
     </section>
 
     <div
       class="preview-overlays">
+      {{ projects.length }}
       <PreviewOverlay
         v-for="project in projects"
         :key="project.URLSegment"
@@ -48,9 +51,9 @@ export default {
       default: ''
     },
     projects: {
-      type: Array,
+      type: Object,
       default: function() {
-        return []
+        return {}
       }
     },
     cssVariants: {
@@ -106,6 +109,11 @@ export default {
       height: 100%
       z-index: 2
       background-color: $robins-egg
+
+
+    &__nav
+      position: relative
+      z-index: 4
 
   .preview-overlays
     position: fixed

@@ -103,7 +103,7 @@ export default {
     //   padding: rem(60) 0
 
     .video-container
-      max-width: rem(1920)
+      // max-width: rem(1920)
       margin-left: auto
       margin-right: auto
       overflow: hidden
@@ -127,6 +127,10 @@ export default {
           height: 100vh
           pointer-events: none
           position: relative
+          max-width: rem(1344)
+          width: 100%
+          margin-left: auto
+          margin-right: auto
 
           iframe
             width: 100%

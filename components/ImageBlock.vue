@@ -66,20 +66,20 @@ export default {
 
   .image-block
     position: relative
-    padding-bottom: rem(20)
+    // padding-bottom: rem(20)
 
     img
       margin-bottom: 0
 
     &__image
       display: none
-      max-width: rem(1920)
+      // max-width: rem(1920)
       margin-left: auto
       margin-right: auto
 
       &--single
         display: block
-        height: 100vh
+        // height: 100vh
 
         +until($desktop)
           height: 100%
