@@ -5,7 +5,8 @@ export const state = () => ({
   canHideMenu: false,
   menuHidden: false,
   color: 'black',
-  currentColor: 'black'
+  currentColor: 'black',
+  hoveredMenuTitle: ''
 })
 
 export const getters = {
@@ -54,5 +55,8 @@ export const mutations = {
   },
   setMenuCurrentColour(state, colour) {
     state.currentColor = colour
+  },
+  setHoveredText(state, title) {
+    state.hoveredMenuTitle = title
   }
 }

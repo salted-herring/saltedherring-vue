@@ -1,6 +1,6 @@
 <template lang="html">
   <div
-    :class="{ isloading: loading }"
+    :class="{ isloading: getLoading }"
     class="loading-page">
     <img
       src="~static/img/loader.gif"
@@ -11,18 +11,20 @@
 
 <script>
 export default {
-  data: () => ({
-    loading: false
-  }),
+  computed: {
+    getLoading() {
+      return this.$store.state.loading.loading
+    }
+  },
   methods: {
     start() {
-      this.loading = false
+      this.$store.commit('loading/updateLoading', true)
     },
     finish() {
       let self = this
       setTimeout(function() {
-        self.loading = false
-      }, 300)
+        self.$store.commit('loading/updateLoading', false)
+      }, 2000)
     }
   }
 }

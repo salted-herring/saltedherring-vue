@@ -66,6 +66,7 @@ export default {
 
   .image-block
     position: relative
+
     // padding-bottom: rem(20)
 
     img
@@ -76,6 +77,8 @@ export default {
       // max-width: rem(1920)
       margin-left: auto
       margin-right: auto
+      width: auto !important
+      max-width: 100% !important
 
       &--single
         display: block

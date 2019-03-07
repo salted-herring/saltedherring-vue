@@ -2,7 +2,8 @@
   <div id="home-page">
     <Header
       :titleBg="$store.state.homePageData.TitleColour.Colour"
-      :title="$store.state.homePageData.HeroTitle"
+      :title="backgroundTitle"
+      :headerBg="$store.state.homePageData.BackgroundColour.Colour"
       :introduction="$store.state.homePageData.Content"
       :introductionClass="'is-offset-1 is-half'"
       :introductionVariation="'page-introduction--left'"
@@ -56,6 +57,12 @@ export default {
   computed: {
     metaData() {
       return this.$store.state.meta.pages.home
+    },
+    backgroundTitle() {
+      if (this.$store.state.menu.hoveredMenuTitle !== '') {
+        return this.$store.state.menu.hoveredMenuTitle
+      }
+      return this.$store.state.homePageData.HeroTitle
     }
   },
   mounted() {
@@ -63,7 +70,7 @@ export default {
     this.$store.commit('menu/setHamburger', false)
     this.$store.commit('menu/setMenuHidden', true)
   },
-  async fetch({ store, params }) {
+  asyncData({ store, params }) {
     let self = this
 
     return store.app
@@ -147,8 +154,12 @@ export default {
       max-width: rem(580)
 
     b
-      font-size: rem(36)
-      line-height: em(40, 36)
+      font-size: rem(18)
+      line-height: em(20, 86)
       font-weight: $weight-medium
       text-decoration: underline
+
+  #home-page
+    .section:last-child
+      padding-top: rem(80)
 </style>

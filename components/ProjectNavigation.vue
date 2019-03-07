@@ -8,7 +8,8 @@
         :class="introVariant"
         class="page-introduction"
         v-html="title"/>
-      <nav>
+      <nav
+        :class="{ 'is-hovered' : isNotOpaque }">
         <ProjectLink
           v-for="(link, index) in projects"
           :key="index"
@@ -95,7 +96,6 @@ export default {
       color: $white
 
   .project-navigation
-    // position: absolute
     clip: rect(0, auto, auto, 0)
     position: relative
 
@@ -114,6 +114,13 @@ export default {
     &__nav
       position: relative
       z-index: 4
+
+      nav
+        &.is-hovered
+          a.is-hovered
+            opacity: 1
+          a
+            opacity: 0.5
 
   .preview-overlays
     position: fixed

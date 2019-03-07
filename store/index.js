@@ -41,22 +41,6 @@ export const getters = {
     }
 
     return null
-  },
-  getSortedProjects(state) {
-    // let sortable = []
-    // let obj = {}
-    //
-    // for (let key in state.projects) {
-    //   sortable.push(state.projects[key])
-    // }
-    //
-    // sortable.sort(function(a, b) {
-    //   return a.Sort - b.Sort
-    // })
-    //
-    // for (let i in sortable) {
-    //   obj
-    // }
   }
 }
 

@@ -2,6 +2,9 @@ export default {
   transition: {
     name: 'page',
     mode: 'out-in',
-    duration: 500
+    duration: {
+      enter: 500,
+      leave: 400
+    }
   }
 }

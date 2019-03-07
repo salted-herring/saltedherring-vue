@@ -3,7 +3,6 @@
     :class="{ 'is-active': active, 'is-hidden': isHamburgerHidden }"
     class="hamburger hamburger--minus js-hamburger"
     role="button"
-    @mouseover="mouseOver"
     @click="toggleActive">
     <span class="hamburger-box">
       <span class="hamburger-inner" />
@@ -20,30 +19,30 @@ export default {
   },
   computed: {
     isHamburgerHidden() {
-      if (this.$store.state.menu.menuHidden) {
-        return true
-      }
-
-      return !this.$store.state.menu.hamburgerVisible
+      return this.$store.state.menu.hamburgerVisible
     }
   },
   methods: {
-    mouseOver(e) {
-      e.preventDefault()
-      this.active = false
-    },
     toggleActive() {
-      if (this.$store.state.menu.menuHidden) {
-        return false
-      }
+      this.active = !this.active
 
-      this.$store.commit('menu/setMenu', true)
-      this.$store.commit('menu/setHamburger', false)
-      // wait until menu item is visible before allowing it to be closed
-      let self = this
-      setTimeout(function() {
-        self.$store.commit('menu/setCanHideMenu', true)
-      }, 125)
+      if (this.active) {
+        this.$store.commit('menu/setMenu', true)
+        this.$store.commit('menu/setHamburger', false)
+        // wait until menu item is visible before allowing it to be closed
+        let self = this
+        setTimeout(function() {
+          self.$store.commit('menu/setCanHideMenu', true)
+        }, 125)
+      } else {
+        this.$store.commit('menu/setMenu', false)
+        this.$store.commit('menu/setHamburger', true)
+        // wait until menu item is visible before allowing it to be closed
+        let self = this
+        setTimeout(function() {
+          self.$store.commit('menu/setCanHideMenu', false)
+        }, 125)
+      }
     }
   }
 }

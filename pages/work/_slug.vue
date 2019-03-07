@@ -90,6 +90,7 @@
       </template>
     </section>
     <ProjectNavigation
+      v-if="currentProject.RelatedProjects.sorted.length > 0"
       :css-variants="'section related-projects'"
       :title="currentProject.RelatedProjectsTitle"
       :projects="currentProject.RelatedProjects.sorted"
@@ -174,7 +175,7 @@ export default {
       ]
     }
   },
-  async fetch({ store, params }) {
+  asyncData({ store, req, res, params, error }) {
     let slug = params.slug
     let currentProject = null
     let self = this
@@ -203,6 +204,8 @@ export default {
           store.commit('updateProject', currentProject)
           store.commit('menu/setMenuColour', currentProject.HeroMenuColour)
           store.commit('meta/setupMeta', { slug: slug, data: currentProject })
+        } else {
+          error({ statusCode: 404, message: 'Project not found' })
         }
 
         return store.app.$axios({
@@ -222,6 +225,10 @@ export default {
         })
       })
       .then(result => {
+        if (currentProject === null) {
+          return error({ statusCode: 404, message: 'Project not found' })
+        }
+
         store.commit('updateProjectBlocks', {
           projectId: currentProject.URLSegment,
           blocks: result.data.data.readContentBlocks.edges
@@ -329,6 +336,7 @@ export default {
     font-weight: $weight-bold
     font-size: rem(36)
     line-height: em(40, 36)
+    padding-bottom: rem(40)
 
     +widescreen
       font-size: rem(28)

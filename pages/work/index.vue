@@ -108,7 +108,7 @@ export default {
       return this.$store.state.meta.pages.work
     }
   },
-  async fetch({ store, params }) {
+  asyncData({ store, params }) {
     if (store.state.workPageData !== null) {
       return false
     }
@@ -142,8 +142,8 @@ export default {
 
   mounted() {
     this.$store.commit('menu/setMenu', false)
-    this.$store.commit('menu/setHamburger', true)
-    this.$store.commit('menu/setMenuHidden', false)
+    this.$store.commit('menu/setHamburger', false)
+    // this.$store.commit('menu/setMenuHidden', false)
   }
 }
 </script>

@@ -26,8 +26,7 @@
       <Hamburger />
       <div
         :class="{'is-visible': isMenuVisible}"
-        class="navbar-end"
-        @mousemove="mouseMove">
+        class="navbar-end">
         <div
           class="navbar-menu-outer">
           <nuxt-link
@@ -35,8 +34,12 @@
             :key="index"
             :to="link.Link"
             class="navbar-item"
-            active-class="is-active"
-            v-text="link.MenuTitle" />
+            active-class="is-active">
+            <div
+              @mouseover="onMouseOver"
+              @mouseout="onMouseOut"
+              v-text="link.MenuTitle" />
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -69,7 +72,7 @@ export default {
     }
   },
   beforeMount() {
-    window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('scroll', this.onScroll, { passive: true })
   },
   mounted() {
     let colour = this.$store.state.menu.color
@@ -79,36 +82,28 @@ export default {
     window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
-    onScroll(e) {
-      let doc = document.documentElement
-      let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
-      let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
-
-      let height = window.innerHeight - 60
-
-      if (top >= height) {
-        // change to black
-        this.$store.commit('menu/setMenuColour', 'black')
-      } else {
-        // back to original - be it white or black.
-        this.$store.commit(
-          'menu/setMenuColour',
-          this.$store.state.menu.currentColor
-        )
-      }
+    onMouseOver: function(e) {
+      this.$store.commit('menu/setHoveredText', e.target.innerHTML)
     },
-    mouseMove(e) {
-      // if (
-      //   e.target.classList.value.match(/navbar-end/g) === null ||
-      //   this.$store.state.menu.menuHidden
-      // ) {
-      //   return false
-      // }
+    onMouseOut: function(e) {
+      this.$store.commit('menu/setHoveredText', '')
+    },
+    onScroll(e) {
+      // let doc = document.documentElement
+      // let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
+      // let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
       //
-      // if (this.$store.state.menu.canHideMenu) {
-      //   this.$store.commit('menu/setMenu', false)
-      //   this.$store.commit('menu/setHamburger', true)
-      //   this.$store.commit('menu/setCanHideMenu', false)
+      // let height = window.innerHeight - 60
+      //
+      // if (top >= height) {
+      //   // change to black
+      //   this.$store.commit('menu/setMenuColour', 'black')
+      // } else {
+      //   // back to original - be it white or black.
+      //   this.$store.commit(
+      //     'menu/setMenuColour',
+      //     this.$store.state.menu.currentColor
+      //   )
       // }
     }
   }
