@@ -4,5 +4,30 @@ export default `query getMainMenu {
     Title
     MenuTitle
     Link
+    TitleColour {
+      Name
+      Colour
+    }
+    BackgroundColour {
+      Name
+      Colour
+    }
+    Children {
+      edges {
+        node {
+          ID
+          Link
+          Title
+          TitleColour {
+            Name
+            Colour
+          }
+          BackgroundColour {
+            Name
+            Colour
+          }
+        }
+      }
+    }
   }
 }`

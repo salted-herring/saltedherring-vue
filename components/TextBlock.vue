@@ -97,7 +97,6 @@ export default {
   },
   methods: {
     onScroll(e) {
-      console.log('onScroll')
       this.textBlockMarginTop =
         this.originalTextBlockMarginTop + this.calcParallax(1.24)
       this.quoteMarginTop =

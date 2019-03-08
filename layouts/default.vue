@@ -1,7 +1,9 @@
 <template>
   <div class="main-container is-flex flex-direction-column">
     <Menu/>
-    <main aria-role="main flex-grow-contents">
+    <main
+      id="main-container"
+      aria-role="main flex-grow-contents">
       <nuxt/>
     </main>
     <Footer/>
@@ -16,6 +18,39 @@ export default {
   components: {
     Menu,
     Footer
+  },
+  created() {
+    if (process.browser) {
+      window.addEventListener('scroll', this.defaultScroll, { passive: true })
+    }
+  },
+  destroyed() {
+    if (process.browser) {
+      window.removeEventListener('scroll', this.defaultScroll)
+    }
+  },
+  methods: {
+    defaultScroll() {
+      let firstSection = document.querySelector(
+        '#main-container section.section:first-of-type'
+      )
+
+      if (firstSection === null) {
+        return false
+      }
+
+      let sectionTop = firstSection.getBoundingClientRect().top
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop
+
+      if (sectionTop <= 0) {
+        this.$store.commit('menu/setmenuScrolledIntoView', true)
+      }
+
+      if (scrollTop === 0) {
+        this.$store.commit('menu/setmenuScrolledIntoView', false)
+        this.$store.commit('menu/setMenuClicked', false)
+      }
+    }
   }
 }
 </script>

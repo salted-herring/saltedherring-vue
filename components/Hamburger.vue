@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="{ 'is-active': active, 'is-hidden': isHamburgerHidden }"
+    :class="{ 'is-active': active, 'is-visible': isVisible }"
     class="hamburger hamburger--minus js-hamburger"
     role="button"
     @click="toggleActive">
@@ -18,31 +18,21 @@ export default {
     }
   },
   computed: {
-    isHamburgerHidden() {
-      return this.$store.state.menu.hamburgerVisible
+    isVisible() {
+      if (!this.$store.state.menu.menuScrolledIntoView) {
+        return false
+      } else {
+        if (this.$store.state.menu.menuClicked) {
+          return false
+        }
+      }
+
+      return true
     }
   },
   methods: {
     toggleActive() {
-      this.active = !this.active
-
-      if (this.active) {
-        this.$store.commit('menu/setMenu', true)
-        this.$store.commit('menu/setHamburger', false)
-        // wait until menu item is visible before allowing it to be closed
-        let self = this
-        setTimeout(function() {
-          self.$store.commit('menu/setCanHideMenu', true)
-        }, 125)
-      } else {
-        this.$store.commit('menu/setMenu', false)
-        this.$store.commit('menu/setHamburger', true)
-        // wait until menu item is visible before allowing it to be closed
-        let self = this
-        setTimeout(function() {
-          self.$store.commit('menu/setCanHideMenu', false)
-        }, 125)
-      }
+      this.$store.commit('menu/setMenuClicked', true)
     }
   }
 }
@@ -66,21 +56,17 @@ export default {
     align-self: center
     position: absolute
     right: rem(0)
+    display: none
+
+    &.is-visible
+      display: block
 
     +tablet
       right: rem(30)
       top: rem(40)
 
-
     .hamburger-box
       transition: width 0.125s ease
       transform: rotate(-5deg) skew(-5deg)
       transform-origin: right top
-
-    // &.is-hidden
-    //   display: block !important
-    //
-    //   .hamburger-box
-    //     width: 0
-    //     overflow: hidden
 </style>

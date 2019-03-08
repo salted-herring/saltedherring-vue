@@ -59,7 +59,19 @@ export default {
       return this.$store.state.menu.menuItems
     },
     isMenuVisible() {
-      return this.$store.state.menu.menuVisible
+      if (!this.$store.state.menu.menuScrolledIntoView) {
+        if (!this.$store.state.menu.menuClicked) {
+          return true
+        }
+
+        return false
+      } else {
+        if (this.$store.state.menu.menuClicked) {
+          return true
+        }
+      }
+
+      return false
     },
     menuColour() {
       return this.$store.state.menu.color
@@ -88,24 +100,7 @@ export default {
     onMouseOut: function(e) {
       this.$store.commit('menu/setHoveredText', '')
     },
-    onScroll(e) {
-      // let doc = document.documentElement
-      // let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
-      // let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
-      //
-      // let height = window.innerHeight - 60
-      //
-      // if (top >= height) {
-      //   // change to black
-      //   this.$store.commit('menu/setMenuColour', 'black')
-      // } else {
-      //   // back to original - be it white or black.
-      //   this.$store.commit(
-      //     'menu/setMenuColour',
-      //     this.$store.state.menu.currentColor
-      //   )
-      // }
-    }
+    onScroll(e) {}
   }
 }
 </script>

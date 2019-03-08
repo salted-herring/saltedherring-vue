@@ -31,7 +31,8 @@
               :src="item.Image"
               srcset=""
               alt="">
-            <p>{{ item.Title }}<br>{{ item.SummaryText }}</p>
+            <h3>{{ item.Title }}</h3>
+            <p>{{ item.SummaryText }}</p>
             <b class="link-label">Learn more</b>
           </a>
         </div>
@@ -68,7 +69,6 @@ export default {
   mounted() {
     this.$store.commit('menu/setMenu', true)
     this.$store.commit('menu/setHamburger', false)
-    this.$store.commit('menu/setMenuHidden', true)
   },
   asyncData({ store, params }) {
     let self = this
@@ -145,18 +145,27 @@ export default {
     img
       margin-bottom: rem(70)
 
-    p
-      font-size: rem(36)
-      line-height: em(40, 36)
+    h3
+      font-size: rem(30)
+      line-height: em(36, 30)
       font-weight: $weight-bold
-      margin-bottom: rem(50)
+      margin-bottom: rem(14)
+
+    h3,
+    p
       width: 100%
       max-width: rem(580)
 
-    b
-      font-size: rem(18)
-      line-height: em(20, 86)
+    b,
+    p
+      font-size: rem(20)
+      line-height: em(24, 20)
       font-weight: $weight-medium
+
+    p
+      margin-bottom: rem(50)
+
+    b
       text-decoration: underline
 
   #home-page

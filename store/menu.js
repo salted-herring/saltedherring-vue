@@ -1,12 +1,13 @@
 export const state = () => ({
   menuItems: [],
-  hamburgerVisible: true,
-  menuVisible: false,
-  canHideMenu: false,
-  menuHidden: false,
   color: 'black',
   currentColor: 'black',
-  hoveredMenuTitle: ''
+  hoveredMenuTitle: '',
+  menuHidden: false,
+  menuScrolledIntoView: false,
+  menuClicked: false,
+  menuVisible: false,
+  menuHamburgerVisible: false
 })
 
 export const getters = {
@@ -44,9 +45,6 @@ export const mutations = {
   setMenu(state, menuVisible) {
     state.menuVisible = menuVisible
   },
-  setCanHideMenu(state, canHide) {
-    state.canHideMenu = canHide
-  },
   setMenuHidden(state, hide) {
     state.menuHidden = hide
   },
@@ -58,5 +56,11 @@ export const mutations = {
   },
   setHoveredText(state, title) {
     state.hoveredMenuTitle = title
+  },
+  setMenuClicked(state, status) {
+    state.menuClicked = status
+  },
+  setmenuScrolledIntoView(state, status) {
+    state.menuScrolledIntoView = status
   }
 }
