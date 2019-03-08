@@ -120,7 +120,7 @@ export default {
           a.is-hovered
             opacity: 1
           a
-            opacity: 0.5
+            opacity: 0.1
 
   .preview-overlays
     position: fixed
