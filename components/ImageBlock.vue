@@ -11,26 +11,39 @@
       :autoplay-timeout="5000"
       :dots="true"
       class="content-block image-block has-background-light">
-      <img
+      <LazyImage
         v-for="(image, index) in getImages"
         :key="index"
-        :src="image.FitFullScreen"
-        class="image-block__image has-background-black">
+        :background-color="'#e4ece4'"
+        :lazy-src="image.FitFullScreen"
+        :width="image.FitFullScreenWidth"
+        :height="image.FitFullScreenHeight"
+        :trigger="true"
+        :additional-css="'image-block__image has-background-black'"
+      />
     </Carousel>
-    <img
+    <LazyImage
       v-for="(image, index) in getImages"
       v-else
       :key="index"
-      :src="image.FitFullScreen"
-      class="image-block__image image-block__image--single has-background-light">
+      :background-color="'#e4ece4'"
+      :lazy-src="image.FitFullScreen"
+      :width="image.FitFullScreenWidth"
+      :height="image.FitFullScreenHeight"
+    />
   </div>
 </template>
 <script>
-let components = {}
+import LazyImage from '~/components/LazyLoadImage'
+
+let components = {
+  LazyImage
+}
 
 if (process.client) {
   let Carousel = require('vue-owl-carousel')
   components = {
+    LazyImage,
     Carousel
   }
 }

@@ -74,9 +74,6 @@ export default `query getWorkPage {
               Image
               ImageWidth
               ImageHeight
-              Imagex2
-              Imagex2Width
-              Imagex2Height
               AwardDetails {
                 edges {
                   node {
@@ -103,7 +100,6 @@ export default `query getWorkPage {
         node {
           ID
           Title
-          URL
           Thumbnail
           ThumbnailWidth
           ThumbnailHeight

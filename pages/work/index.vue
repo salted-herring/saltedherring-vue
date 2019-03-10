@@ -33,9 +33,12 @@
               :key="i"
               class="column award is-3">
               <div class="award__image">
-                <img
-                  :src="award.image"
-                  alt="">
+                <LazyImage
+                  :lazy-src="award.Image"
+                  :width="award.ImageWidth"
+                  :height="award.ImageHeight"
+                  :background-color="$store.state.awards.backgroundColour"
+                />
               </div>
 
               <span class="award__title">{{ award.title }}</span>
@@ -73,9 +76,12 @@
               v-for="(client, i) in $store.state.clients.clients"
               :key="i"
               class="column client is-3">
-              <img
-                :src="client.url"
-                alt="client.title">
+              <LazyImage
+                v-if="client.Thumbnail"
+                :lazy-src="client.Thumbnail"
+                :width="client.ThumbnailWidth"
+                :height="client.ThumbnailHeight"
+              />
             </div>
           </div>
         </div>
@@ -87,8 +93,9 @@
 <script>
 import getWorkPage from '~/apollo/queries/workpage'
 
-import ProjectNavigation from '~/components/ProjectNavigation'
 import Header from '~/components/Header'
+import LazyImage from '~/components/LazyLoadImage'
+import ProjectNavigation from '~/components/ProjectNavigation'
 
 import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
@@ -97,6 +104,7 @@ import Transition from '~/mixins/TransitionMixin'
 export default {
   components: {
     Header,
+    LazyImage,
     ProjectNavigation
   },
   mixins: [Meta, PageState, Transition],

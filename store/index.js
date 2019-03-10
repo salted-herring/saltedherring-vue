@@ -116,23 +116,16 @@ export const mutations = {
 
       for (let j in awards.edges) {
         let award = awards.edges[j].node
-
-        let awardRecord = {
-          id: award.ID,
-          image: award.Image,
-          imagex2: award.Imagex2,
-          title: award.Title,
-          details: []
-        }
-
         let details = award.AwardDetails
+
+        award.details = []
 
         for (let k in details.edges) {
           let detail = details.edges[k].node
-          awardRecord.details.push(detail)
+          award.details.push(detail)
         }
 
-        record.awards.push(awardRecord)
+        record.awards.push(award)
       }
 
       programmes.awards.push(record)
@@ -154,12 +147,7 @@ export const mutations = {
 
     for (let i in pageResult.ClientLogos.edges) {
       let node = pageResult.ClientLogos.edges[i].node
-
-      clients.clients.push({
-        id: node.ID,
-        title: node.Title,
-        url: node.Thumbnail
-      })
+      clients.clients.push(node)
     }
 
     if (state.clients === null) {

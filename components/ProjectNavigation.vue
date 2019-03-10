@@ -27,7 +27,6 @@
 
     <div
       class="preview-overlays">
-      {{ projects.length }}
       <PreviewOverlay
         v-for="project in projects"
         :key="project.URLSegment"

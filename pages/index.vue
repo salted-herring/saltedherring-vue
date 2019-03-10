@@ -26,11 +26,13 @@
             :href="item.Link.LinkURL"
             :target="item.OpenInNewWindow ? '_blank' : '_self'"
             class="column latest-item is-half">
-            <img
+            <LazyImage
               v-if="item.Image"
-              :src="item.Image"
-              srcset=""
-              alt="">
+              :lazy-src="item.Image"
+              :width="item.ImageWidth"
+              :height="item.ImageHeight"
+              :background-color="'#ffffff'"
+            />
             <h3>{{ item.Title }}</h3>
             <p>{{ item.SummaryText }}</p>
             <b class="link-label">Learn more</b>
@@ -45,6 +47,7 @@
 import getHomePage from '~/apollo/queries/homepage'
 
 import Header from '~/components/Header'
+import LazyImage from '~/components/LazyLoadImage'
 
 import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
@@ -52,7 +55,8 @@ import Transition from '~/mixins/TransitionMixin'
 
 export default {
   components: {
-    Header
+    Header,
+    LazyImage
   },
   mixins: [Meta, PageState, Transition],
   computed: {

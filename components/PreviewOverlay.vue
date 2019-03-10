@@ -19,6 +19,7 @@
   </div>
 </template>
 <script>
+import lozad from 'lozad'
 export default {
   name: 'PreviewOverlay',
   props: {
@@ -45,8 +46,8 @@ export default {
   },
   data() {
     return {
-      videoURL: '',
-      imageURL: ''
+      videoURL: false,
+      imageURL: false
     }
   },
   computed: {

@@ -13,11 +13,16 @@
       :pageClass="'project-header'">
       <div
         slot="background"
-        class="hero-section">
+        :style="heroStyle"
+        :class="heroClass"
+        class="hero-section ">
         <video
           v-if="headerVideo.video !== null"
-          :src="headerVideo.video"
-          :poster="headerVideo.poster"
+          ref="headerVideo"
+          :data-src="headerVideo.video"
+          :data-poster="headerVideo.poster"
+          :class="heroClass"
+          data-toggle-class="active"
           muted
           autoplay
           loop
@@ -98,11 +103,14 @@
   </div>
 </template>
 <script>
+import lozad from 'lozad'
+
 import getProject from '~/apollo/queries/projectpage'
 import readBlocks from '~/apollo/queries/readBlocks'
 
 import Header from '~/components/Header'
 import ImageBlock from '~/components/ImageBlock'
+import LazyImage from '~/components/LazyLoadImage'
 import TextBlock from '~/components/TextBlock'
 import VideoBlock from '~/components/VideoBlock'
 import ProjectNavigation from '~/components/ProjectNavigation'
@@ -121,13 +129,35 @@ export default {
   components: {
     Header,
     ImageBlock,
+    LazyImage,
     TextBlock,
     VideoBlock,
     Carousel,
     ProjectNavigation
   },
   mixins: [Meta, PageState, Transition],
+  props: {
+    isLoaded: {
+      type: Boolean,
+      default: false
+    }
+  },
   computed: {
+    heroClass() {
+      return this.isLoaded ? 'is-loaded' : ''
+    },
+    heroStyle() {
+      if (
+        this.currentProject.BackgroundColour !== null &&
+        this.currentProject.BackgroundColour.Colour !== null
+      ) {
+        return {
+          backgroundColor: '#' + this.currentProject.BackgroundColour.Colour
+        }
+      }
+
+      return ''
+    },
     headerImages() {
       let images = []
       if (this.currentProject !== null) {
@@ -174,6 +204,24 @@ export default {
         this.$store.getters.getCurrentProject.URLSegment
       ]
     }
+  },
+  mounted() {
+    const setLoadingState = () => {
+      this.isLoaded = true
+    }
+
+    this.$refs['headerVideo'].addEventListener('load', setLoadingState)
+
+    this.$once('hook:destroyed', () => {
+      if (typeof this.$refs['headerVideo'] === 'undefined') {
+        return
+      }
+
+      this.$refs['headerVideo'].removeEventListener('load', setLoadingState)
+    })
+
+    const observer = lozad(this.$refs['headerVideo'])
+    observer.observe()
   },
   asyncData({ store, req, res, params, error }) {
     let slug = params.slug
@@ -264,6 +312,11 @@ export default {
     min-width: 100%
     object-fit: cover
     z-index: 1
+    opacity: 0
+    transition: opacity 0.5s ease
+
+    &.active
+      opacity: 1
 
   .hero-images
     position: absolute
