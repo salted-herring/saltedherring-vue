@@ -44,7 +44,6 @@
 <script>
 import getHomePage from '~/apollo/queries/homepage'
 
-import Cube from '~/components/Cube'
 import Header from '~/components/Header'
 
 import Meta from '~/mixins/MetaMixin'
@@ -53,7 +52,6 @@ import Transition from '~/mixins/TransitionMixin'
 
 export default {
   components: {
-    Cube,
     Header
   },
   mixins: [Meta, PageState, Transition],
