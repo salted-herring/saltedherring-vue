@@ -13,12 +13,16 @@ export default `query getMeta($urlSegment: String) {
       Title
       URL
       Cropped
+      Width
+      Height
     }
     OGImageLarge {
       ID
       Title
       URL
       Cropped
+      Width
+      Height
     }
     Title
   }

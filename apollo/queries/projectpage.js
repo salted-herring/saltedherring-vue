@@ -18,12 +18,16 @@ export default `query getProject($urlSegment: String) {
       Title
       URL
       Cropped
+      Width
+      Height
     }
     OGImageLarge {
       ID
       Title
       URL
       Cropped
+      Width
+      Height
     }
     Title
     TitleColour {
@@ -43,6 +47,8 @@ export default `query getProject($urlSegment: String) {
           Title
           URL
           FitFullScreen
+          FitFullScreenWidth
+          FitFullScreenHeight
         }
       }
     }
@@ -79,6 +85,8 @@ export default `query getProject($urlSegment: String) {
                 Title
                 URL
                 FitFullScreen
+                FitFullScreenWidth
+                FitFullScreenHeight
               }
             }
           }
@@ -96,6 +104,9 @@ export default `query getProject($urlSegment: String) {
           }
           PreviewImage {
             URL
+            FitFullScreen
+            FitFullScreenWidth
+            FitFullScreenHeight
           }
         }
       }

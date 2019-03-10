@@ -24,6 +24,8 @@ export default `query readBlocks($urlSegment: String) {
                 ID
                 Title
                 FitFullScreen
+                FitFullScreenWidth
+                FitFullScreenHeight
               }
             }
           }
@@ -35,7 +37,12 @@ export default `query readBlocks($urlSegment: String) {
           SortOrder
           VideoSource
           VideoLink
-          OptionalPreview
+          OptionalPreview {
+            ID
+            FitFullScreen
+            FitFullScreenWidth
+            FitFullScreenHeight
+          }
           VideoFile {
             id
             filename

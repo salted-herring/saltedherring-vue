@@ -14,6 +14,8 @@ export default `query getHomePage {
         Title
         URL
         Cropped
+        Width
+        Height
       }
       OGImageLarge {
         ID
@@ -41,6 +43,8 @@ export default `query getHomePage {
                 Title
                 URL
                 FitFullScreen
+                FitFullScreenWidth
+                FitFullScreenHeight
             }
         }
       }
@@ -52,7 +56,11 @@ export default `query getHomePage {
                 Title
                 SummaryText
                 Image
+                ImageWidth
+                ImageHeight
                 Imagex2
+                Imagex2Width
+                Imagex2Height
                 Link {
                   ID
                   Title

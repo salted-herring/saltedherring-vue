@@ -10,6 +10,9 @@ export default `query getProjectPreviews {
     }
     PreviewImage {
       URL
+      FitFullScreen
+      FitFullScreenWidth
+      FitFullScreenHeight
     }
   }
 }`

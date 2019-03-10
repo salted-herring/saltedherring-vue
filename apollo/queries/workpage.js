@@ -14,12 +14,16 @@ export default `query getWorkPage {
       Title
       URL
       Cropped
+      Width
+      Height
     }
     OGImageLarge {
       ID
       Title
       URL
       Cropped
+      Width
+      Height
     }
     Title
     TitleColour {
@@ -40,6 +44,8 @@ export default `query getWorkPage {
           Title
           URL
           FitFullScreen
+          FitFullScreenWidth
+          FitFullScreenHeight
         }
       }
     }
@@ -66,7 +72,11 @@ export default `query getWorkPage {
               ID
               Title
               Image
+              ImageWidth
+              ImageHeight
               Imagex2
+              Imagex2Width
+              Imagex2Height
               AwardDetails {
                 edges {
                   node {
@@ -95,6 +105,8 @@ export default `query getWorkPage {
           Title
           URL
           Thumbnail
+          ThumbnailWidth
+          ThumbnailHeight
         }
       }
     }
@@ -121,6 +133,8 @@ export default `query getWorkPage {
                 Title
                 URL
                 FitFullScreen
+                FitFullScreenWidth
+                FitFullScreenHeight
               }
             }
           }
@@ -130,6 +144,9 @@ export default `query getWorkPage {
           }
           PreviewImage {
             URL
+            FitFullScreen
+            FitFullScreenWidth
+            FitFullScreenHeight
           }
         }
       }
