@@ -7,8 +7,8 @@
       ref="lazy-img"
       :data-src="lazySrc"
       :data-srcset="lazySrcset"
-      :width="width"
-      :height="height"
+      :width="parseInt(width)"
+      :height="parseInt(height)"
       :style="imgStyle"
       data-toggle-class="active"
       class="lozad">
@@ -133,7 +133,7 @@ export default {
 
     img
       opacity: 0
-      transition: opacity 0.5s 0.5s ease
+      transition: opacity 0.5s ease
       max-width: 100%
       height: auto
       display: block

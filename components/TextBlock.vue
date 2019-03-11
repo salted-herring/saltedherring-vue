@@ -1,7 +1,8 @@
 <template>
   <div
     ref="textblockcontainer"
-    class="content-block text-block has-background-light">
+    :class="backgroundVariation"
+    class="content-block text-block">
     <div class="container">
       <div
         :class="{ 'is-centered': isCentered, 'align-left': alignedLeft, 'align-right': alignedRight }"
@@ -44,6 +45,10 @@ export default {
           Alignment: 'left'
         }
       }
+    },
+    backgroundVariation: {
+      type: String,
+      default: 'has-background-light'
     }
   },
   data() {

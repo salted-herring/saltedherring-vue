@@ -8,7 +8,14 @@
       :introductionClass="'is-offset-1 is-half'"
       :introductionVariation="'page-introduction--left'"
       :isCentered="false"
-      :pageClass="'homepage-header'" />
+      :pageClass="'homepage-header'">
+      http://www.emergentmind.com/boids
+      <canvas
+        id="boids"
+        slot="background"
+        class="boids-canvas"
+      />
+    </Header>
 
     <section
       class="section has-background-white">
@@ -25,6 +32,7 @@
             :key="item.ID"
             :href="item.Link.LinkURL"
             :target="item.OpenInNewWindow ? '_blank' : '_self'"
+            :rel="item.OpenInNewWindow ? 'noopener' : ''"
             class="column latest-item is-half">
             <LazyImage
               v-if="item.Image"
@@ -53,12 +61,16 @@ import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
 import Transition from '~/mixins/TransitionMixin'
 
+/// Boids:
+import CanvasInit from '~/mixins/boids/CanvasInit'
+import Simulation from '~/mixins/boids/Simulation'
+
 export default {
   components: {
     Header,
     LazyImage
   },
-  mixins: [Meta, PageState, Transition],
+  mixins: [CanvasInit, Meta, PageState, Transition],
   computed: {
     metaData() {
       return this.$store.state.meta.pages.home
@@ -73,6 +85,18 @@ export default {
   mounted() {
     this.$store.commit('menu/setMenu', true)
     this.$store.commit('menu/setHamburger', false)
+
+    this.resizeCanvas()
+
+    let simulation = new Simulation()
+    simulation.initialize()
+    simulation.run()
+  },
+  beforeMount() {
+    window.addEventListener('resize', this.resizeCanvas)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeCanvas)
   },
   asyncData({ store, params }) {
     let self = this
@@ -135,6 +159,11 @@ export default {
         transform: none
         left: auto
         margin-bottom: rem(400)
+
+  .boids-canvas
+    position: fixed
+    top: 0
+    left: 0
 
   .latest-content
     padding-bottom: rem(300)

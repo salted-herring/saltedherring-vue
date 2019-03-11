@@ -24,7 +24,10 @@ export const mutations = {
     metaData.data.ogDescription =
       pagemeta.data.OGDescription || pagemeta.data.description || ''
     metaData.data.ogType = pagemeta.data.OGType || ''
-    metaData.data.ogImage = pagemeta.data.OGImage.Cropped || ''
+    metaData.data.ogImage =
+      typeof pagemeta.data.OGImage !== 'undefined'
+        ? pagemeta.data.OGImage.Cropped
+        : ''
 
     state.pages[pagemeta.slug] = metaData.data
   }

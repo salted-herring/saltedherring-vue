@@ -81,7 +81,7 @@ export default {
       return (
         'https://player.vimeo.com/video' +
         match[2] +
-        '?background=1&muted=1&autoplay=1&loop=1'
+        '?muted=1&autoplay=0&loop=1&byline=0&title=0&portrait=0'
       )
     },
     sourceCSS() {

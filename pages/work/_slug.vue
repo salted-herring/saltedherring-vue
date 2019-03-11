@@ -206,6 +206,10 @@ export default {
     }
   },
   mounted() {
+    if (typeof this.$refs['headerVideo'] === 'undefined') {
+      return
+    }
+
     const setLoadingState = () => {
       this.isLoaded = true
     }
