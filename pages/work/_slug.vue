@@ -108,6 +108,7 @@ import lozad from 'lozad'
 import getProject from '~/apollo/queries/projectpage'
 import readBlocks from '~/apollo/queries/readBlocks'
 
+import Carousel from '~/components/Carousel'
 import Header from '~/components/Header'
 import ImageBlock from '~/components/ImageBlock'
 import LazyImage from '~/components/LazyLoadImage'
@@ -119,20 +120,14 @@ import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
 import Transition from '~/mixins/TransitionMixin'
 
-let Carousel = null
-
-if (process.client) {
-  Carousel = require('vue-owl-carousel')
-}
-
 export default {
   components: {
+    Carousel,
     Header,
     ImageBlock,
     LazyImage,
     TextBlock,
     VideoBlock,
-    Carousel,
     ProjectNavigation
   },
   mixins: [Meta, PageState, Transition],

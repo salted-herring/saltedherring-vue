@@ -151,6 +151,10 @@ export default {
       .column
         position: relative
 
+    .introduction
+      p
+        font-size: rem(32)
+
     .page-header__main-container
       .page-introduction
         position: relative

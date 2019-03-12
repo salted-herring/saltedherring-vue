@@ -7,21 +7,12 @@
       <div
         :class="{ 'is-centered': isCentered, 'align-left': alignedLeft, 'align-right': alignedRight }"
         class="columns">
-        <blockquote
-          v-if="details.ShowQuote && details.Quote"
+        <Quote
           ref="blockquote"
-          :style="{ 'transform': 'translate3d(0,' + quoteBlockMarginTop +',0)' }"
-          class="blockquote column has-background-black has-text-light is-4">
-          <p
-            class="blockquote__quote"
-            v-html="details.Quote" />
-          <footer
-            v-if="details.Source"
-            class="blockquote__footer">
-            <cite
-              v-html="details.Source" />
-          </footer>
-        </blockquote>
+          :show-quote="details.ShowQuote"
+          :quote="details.Quote"
+          :quote-source="details.Source"
+          :style="{ 'transform': 'translate3d(0,' + quoteBlockMarginTop +',0)' }"/>
         <div
           ref="textblock"
           :style="{ 'transform': 'translate3d(0,' + marginTop +',0)' }"
@@ -33,8 +24,13 @@
   </div>
 </template>
 <script>
+import Quote from '~/components/Quote'
+
 export default {
   name: 'TextBlock',
+  components: {
+    Quote
+  },
   props: {
     details: {
       type: Object,
@@ -145,6 +141,13 @@ export default {
       +until($desktop)
         margin: rem(0) auto !important
         padding: rem(60) rem(30) rem(30) !important
+
+      a
+        color: $black
+        text-decoration: underline
+
+        &:hover
+          text-decoration: none
 
       p,
       li

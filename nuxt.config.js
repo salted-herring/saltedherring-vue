@@ -1,5 +1,6 @@
 const pkg = require('./package')
 require('dotenv').config()
+import webpack from 'webpack'
 
 module.exports = {
   mode: 'universal',
@@ -85,6 +86,13 @@ module.exports = {
         }
       }
     },
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery'
+      })
+    ],
     /*
     ** You can extend webpack config here
     */

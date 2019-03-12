@@ -35,22 +35,14 @@
 </template>
 <script>
 import LazyImage from '~/components/LazyLoadImage'
-
-let components = {
-  LazyImage
-}
-
-if (process.client) {
-  let Carousel = require('vue-owl-carousel')
-  components = {
-    LazyImage,
-    Carousel
-  }
-}
+import Carousel from '~/components/Carousel'
 
 export default {
   name: 'ImageBlock',
-  components: components,
+  components: {
+    Carousel,
+    LazyImage
+  },
   props: {
     details: {
       type: Object,

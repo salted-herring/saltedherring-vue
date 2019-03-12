@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import Boid from './Boid'
 
-const NUM_BOIDS = 256
+const NUM_BOIDS = 128
 
 function Simulation() {
   let canvas = document.getElementById('boids')
