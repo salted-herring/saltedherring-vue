@@ -7,20 +7,19 @@
     </span>
     <div
       ref="owlCarousel"
-      :class="['owl-carousel']">
+      :class="['owl-carousel', 'owl-theme']">
       <slot />
     </div>
     <span
       v-show="showNext"
-      ref="next"
-      :id="nextHandler">
+      ref="next">
       <slot name="next" />
     </span>
   </div>
 </template>
 <script>
 import 'owl.carousel/dist/assets/owl.carousel.css'
-// import 'owl.carousel/dist/assets/owl.theme.default.css'
+import 'owl.carousel/dist/assets/owl.theme.default.css'
 
 import events from './utils/events'
 import autoplayEvents from './utils/autoplay-events'

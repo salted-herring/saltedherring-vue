@@ -21,11 +21,10 @@
       <Carousel
         v-if="section.Blocks.length != 0"
         :nav="false"
-        :autoplay="true"
-        :items="1"
-        :loop="true"
-        :autoplay-timeout="5000"
+        :autoplay="false"
+        :items="3"
         :dots="true"
+        :center="true"
         class="blocks">
         <Block
           v-for="(block, index) in section.Blocks"
