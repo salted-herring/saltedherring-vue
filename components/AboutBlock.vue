@@ -1,6 +1,8 @@
 <template>
   <div class="about-block">
-    <div class="about-block__information">
+    <div
+      :class="{ 'has-quote': showQuote && quote }"
+      class="about-block__information">
       <span
         class="about-block__index"
         v-text="getIndex"/>
@@ -27,6 +29,7 @@
     <Quote
       :show-quote="showQuote"
       :quote="quote"
+      :text-colour="'#fced85'"
       :quote-source="quoteSource"/>
   </div>
 </template>
@@ -122,6 +125,7 @@ export default {
       display: block
       transform: rotate(-5deg) skew(-5deg)
       margin-bottom: rem(40)
+      hyphens: auto
 
     &__content
       font-size: rem(24)
@@ -134,18 +138,19 @@ export default {
         margin-top: rem(40)
 
     &__details
-      transition: max-height 0.25s ease
       overflow: hidden
-      max-height: 1px
-      // height: 100%
-      opacity: 0
+      max-height: 0
+      display: block
+      height: 100%
+      transition: max-height 0.5s cubic-bezier(0, 1, 0, 1)
 
       &.is-shown
-        opacity: 1
+        transition: max-height 1s ease-in-out
         max-height: rem(10000)
 
       p
         margin-bottom: 1em
+        position: relative
 
         &:last-child
           margin-bottom: 0
@@ -175,9 +180,8 @@ export default {
 
     .blockquote
       position: absolute
-      top: 0
-      left: 100%
-      transform: translate(-20%, -80%)
+      top: rem(-60)
+      left: rem(-60)
       width: calc(90% - 40px)
-      z-index: 1
+      z-index: -1
 </style>

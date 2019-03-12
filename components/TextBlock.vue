@@ -12,11 +12,12 @@
           :show-quote="details.ShowQuote"
           :quote="details.Quote"
           :quote-source="details.Source"
+          :text-colour="quoteTextColour"
           :style="{ 'transform': 'translate3d(0,' + quoteBlockMarginTop +',0)' }"/>
         <div
           ref="textblock"
           :style="{ 'transform': 'translate3d(0,' + marginTop +',0)' }"
-          :class="{ 'is-9' : details.ShowQuote && details.Quote }"
+          :class="textblockClasses"
           class="text-block__details column cms-content"
           v-html="details.Content" />
       </div>
@@ -45,6 +46,18 @@ export default {
     backgroundVariation: {
       type: String,
       default: 'has-background-light'
+    },
+    quoteTextColour: {
+      type: String,
+      default: null
+    },
+    detailsBackground: {
+      type: String,
+      default: 'has-background-white'
+    },
+    last: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -84,6 +97,19 @@ export default {
     },
     quoteBlockMarginTop() {
       return this.quoteMarginTop + 'px'
+    },
+    textblockClasses() {
+      let classes = []
+
+      if (this.details.ShowQuote && this.details.Quote) {
+        classes.push('is-9')
+      }
+
+      if (this.detailsBackground !== null) {
+        classes.push(this.detailsBackground)
+      }
+
+      return classes
     }
   },
   created() {
@@ -126,7 +152,7 @@ export default {
       // max-width: rem(900)
       font-size: rem(20)
       line-height: em(28, 20)
-      background: $white
+      // background: $white
       padding: rem(100) rem(100) rem(70)
       transform: translate3d(0,0,0)
 

@@ -6,6 +6,7 @@
     <AboutSection
       v-for="(section, index) in sections"
       :key="index"
+      :last="index === sections.length - 1"
       :section="section"
     />
   </div>
@@ -71,4 +72,9 @@ export default {
     display: block
     width: 100%
     height: 100%
+
+    .about-section
+      &:first-child
+        .about-section__header
+          min-height: 100vh
 </style>

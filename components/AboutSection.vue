@@ -1,7 +1,6 @@
 <template>
   <section
     v-if="section !== null"
-    id="about-section"
     class="about-section section">
     <header
       :style="headerStyle"
@@ -17,6 +16,9 @@
       <TextBlock
         v-if="section.Introduction !== null"
         :details="section.Introduction"
+        :quote-text-colour="'#fced85'"
+        :details-background="''"
+        :last="last"
         :background-variation="'about-section__introduction'" />
       <Carousel
         v-if="section.Blocks.length != 0"
@@ -25,7 +27,13 @@
         :items="3"
         :dots="true"
         :center="true"
-        class="blocks">
+        :margin="100"
+        :animate-in="'slideIn'"
+        :animate-out="'slideOut'"
+        :smart-speed="1500"
+        :drag-end-speed="1500"
+        :slide-transition="'cubic-bezier(0.23, 1, 0.32, 1)'"
+        class="about-section__blocks">
         <Block
           v-for="(block, index) in section.Blocks"
           :key="index"
@@ -57,6 +65,10 @@ export default {
     section: {
       type: Object,
       default: null
+    },
+    last: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -79,19 +91,48 @@ export default {
   .about-section
     &__header
       width: 100%
-      min-height: 100vh
+      min-height: 60vh
       position: relative
 
       .page-introduction
         position: absolute
         left: 0
         top: 50%
-        translate: transformY(-50%)
+        transform: translateY(-50%)
         z-index: 2
         font-size: rem(64)
         line-height: em(70, 64)
+        margin: 0
+        padding-left: rem(60)
+        padding-right: rem(60)
 
       .background-text
         position: absolute
         color: $white
+
+    &__blocks
+      margin: rem(100) 0
+
+      .owl-stage-outer
+        overflow: visible
+
+      .owl-item
+        transition: all 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+
+        .about-block__information
+          transition: all 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+
+        .blockquote
+          transition: all 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+
+        &.active
+          &:hover
+            .blockquote
+              transform: translate3d(rem(-10), rem(-10), 0)
+
+          &.center
+            &:hover
+              .blockquote
+                transform: translate3d(rem(-10), rem(-50), 0)
+                z-index: 1
 </style>
