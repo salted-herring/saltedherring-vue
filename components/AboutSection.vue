@@ -114,8 +114,9 @@ export default {
     &__blocks
       margin: rem(100) 0
 
-      .owl-stage-outer
-        overflow: visible
+      .owl-carousel
+        .owl-stage-outer
+          overflow: visible
 
       .owl-item
         transition: all 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955)
