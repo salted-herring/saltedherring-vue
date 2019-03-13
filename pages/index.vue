@@ -33,7 +33,7 @@
             :href="item.Link.LinkURL"
             :target="item.OpenInNewWindow ? '_blank' : '_self'"
             :rel="item.OpenInNewWindow ? 'noopener' : ''"
-            class="column latest-item is-half">
+            class="column latest-item">
             <LazyImage
               v-if="item.Image"
               :lazy-src="item.Image"
@@ -171,9 +171,16 @@ export default {
 
   .latest-content
     padding-bottom: rem(300)
+    // justify-content: center
 
   .latest-item
     color: $black
+
+    &:nth-child(odd)
+      padding-right: rem(40)
+
+    &:nth-child(even)
+      padding-left: rem(40)
 
     &:hover
       b
@@ -191,7 +198,7 @@ export default {
     h3,
     p
       width: 100%
-      max-width: rem(580)
+      max-width: rem(460)
 
     b,
     p

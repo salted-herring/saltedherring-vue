@@ -18,7 +18,39 @@ module.exports = {
     htmlAttrs: {
       class: 'has-navbar-fixed-top'
     },
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_0_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_0_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_1_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_1_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_2_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_2_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_3_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_3_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_4_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_4_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_5_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_5_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_6_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_6_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_7_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_7_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_8_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_8_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_9_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_9_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_A_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_A_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_B_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_B_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_C_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_C_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_D_0.woff2', type: 'font/woff2', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'font', href: '/webfonts/382CF0_D_0.woff', type: 'font/woff', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'image', href: '/img/logo.svg', type: 'image/svg+xml', crossorigin: 'anonymous'},
+      { rel: 'preload', as: 'image', href: '/img/logo-white.svg', type: 'image/svg+xml', crossorigin: 'anonymous'}
+    ]
   },
 
   /*
@@ -55,7 +87,19 @@ module.exports = {
   ],
 
   router: {
-    middleware: ['footer', 'menu']
+    middleware: ['footer', 'menu', 'scroll'],
+    scrollBehavior: function(to, from, savedPosition) {
+      if (to.hash) {
+        return {
+          selector: to.hash
+        }
+      } else {
+        return {
+          x: 0,
+          y: 0
+        }
+      }
+    }
   },
   /*
   ** Axios module configuration

@@ -137,6 +137,7 @@ export default {
       default: false
     }
   },
+  scrollToTop: false,
   computed: {
     heroClass() {
       return this.isLoaded ? 'is-loaded' : ''

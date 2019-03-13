@@ -1,6 +1,7 @@
 <template>
   <section
     v-if="section !== null"
+    :id="section.Slug"
     class="about-section section">
     <header
       :style="headerStyle"

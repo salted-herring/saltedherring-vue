@@ -1,5 +1,6 @@
 export const state = () => ({
   Sections: [],
+  activeSection: null,
   BackgroundColour: ''
 })
 
@@ -13,6 +14,7 @@ export const mutations = {
         HeroTitle: res.HeroTitle,
         HeroIntroduction: res.HeroIntroduction,
         Introduction: null,
+        Slug: res.Slug,
         Blocks: []
       }
 

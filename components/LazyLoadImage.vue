@@ -28,7 +28,7 @@ export default {
       default: null
     },
     height: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     lazySrc: {
@@ -40,7 +40,7 @@ export default {
       default: null
     },
     width: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     trigger: {

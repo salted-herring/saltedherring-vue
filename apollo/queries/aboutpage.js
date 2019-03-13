@@ -28,6 +28,7 @@ export default `query {
       edges {
         node {
           SortOrder
+          Slug
           HeroTitle
           HeroIntroduction
           Introduction {

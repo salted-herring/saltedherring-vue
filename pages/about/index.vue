@@ -3,6 +3,9 @@
     id="about-page"
     :style="{ backgroundColor: BackgroundColour }"
     class="about-page">
+    <Navigation
+      :sections="sections"
+    />
     <AboutSection
       v-for="(section, index) in sections"
       :key="index"
@@ -14,14 +17,17 @@
 <script>
 import Query from '~/apollo/queries/aboutpage'
 
+import Navigation from '~/components/AboutNavigation'
 import AboutSection from '~/components/AboutSection'
 
 import Meta from '~/mixins/MetaMixin'
 
 export default {
   components: {
-    AboutSection
+    AboutSection,
+    Navigation
   },
+  scrollToTop: false,
   mixins: [Meta],
   computed: {
     metaData() {
@@ -72,6 +78,11 @@ export default {
     display: block
     width: 100%
     height: 100%
+
+    .about-navigation
+      + .about-section
+        .about-section__header
+          min-height: 100vh
 
     .about-section
       &:first-child
