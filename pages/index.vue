@@ -27,24 +27,43 @@
         </header>
 
         <div class="latest-content columns">
-          <a
+          <template
             v-for="item in $store.getters.getLatest"
-            :key="item.ID"
-            :href="item.Link.LinkURL"
-            :target="item.OpenInNewWindow ? '_blank' : '_self'"
-            :rel="item.OpenInNewWindow ? 'noopener' : ''"
-            class="column latest-item">
-            <LazyImage
-              v-if="item.Image"
-              :lazy-src="item.Image"
-              :width="item.ImageWidth"
-              :height="item.ImageHeight"
-              :background-color="'#ffffff'"
-            />
-            <h3>{{ item.Title }}</h3>
-            <p>{{ item.SummaryText }}</p>
-            <b class="link-label">Learn more</b>
-          </a>
+          >
+            <a
+              v-if="item.Link.LinkURL !== null"
+              :href="item.Link.LinkURL"
+              :target="item.OpenInNewWindow ? '_blank' : '_self'"
+              :rel="item.OpenInNewWindow ? 'noopener' : ''"
+              :key="item.ID"
+              class="column latest-item">
+              <LazyImage
+                v-if="item.Image"
+                :lazy-src="item.Image"
+                :width="item.ImageWidth"
+                :height="item.ImageHeight"
+                :background-color="'#ffffff'"
+              />
+              <h3>{{ item.Title }}</h3>
+              <p>{{ item.SummaryText }}</p>
+              <b class="link-label">Learn more</b>
+            </a>
+            <div
+              v-else
+              :key="item.ID"
+              class="column latest-item">
+              <LazyImage
+                v-if="item.Image"
+                :lazy-src="item.Image"
+                :width="item.ImageWidth"
+                :height="item.ImageHeight"
+                :background-color="'#ffffff'"
+              />
+              <h3>{{ item.Title }}</h3>
+              <p>{{ item.SummaryText }}</p>
+            </div>
+          </template>
+
         </div>
       </div>
     </section>

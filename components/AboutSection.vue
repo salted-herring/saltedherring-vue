@@ -136,4 +136,20 @@ export default {
               .blockquote
                 transform: translate3d(rem(-10), rem(-50), 0)
                 z-index: 1
+
+      .owl-dots
+        .owl-dot
+          &:hover
+            span
+              background-color: $black
+
+          &.active
+            span
+              background-color: $black
+
+          span
+            width: rem(28)
+            height: rem(28)
+            background-color: $white
+            transition: all 0.25s ease
 </style>

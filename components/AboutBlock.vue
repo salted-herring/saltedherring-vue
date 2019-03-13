@@ -106,6 +106,12 @@ export default {
     position: relative
     display: block
 
+    +until($widescreen)
+      width: rem(480)
+
+    +until($desktop)
+      width: rem(300)
+
     &__index
       font-size: rem(64)
       line-height: 1em
