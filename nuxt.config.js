@@ -97,7 +97,7 @@ module.exports = {
 
         if (type === 'image') {
           // only preload important images
-          return /logo\.svg|logo-white\.svg|loader\.gif/.test(file)
+          return /(logo\.svg|logo-white\.svg|loader\.gif)$/.test(file)
         }
       }
     }

@@ -14,7 +14,11 @@ function Simulation() {
 
 Simulation.prototype = {
   initialize: function() {
-    this.getCanvasDimensions()
+    let dim = this.getCanvasDimensions()
+    if (!dim) {
+      return false
+    }
+
     this.boids = []
     for (let i = 0; i < NUM_BOIDS; i++) {
       let boid = new Boid(this.canvasWidth / 2, this.canvasHeight / 2, this)
@@ -25,9 +29,15 @@ Simulation.prototype = {
     let canvas = document.getElementById('boids')
     let canvas$ = $(canvas)
 
+    if (canvas === null) {
+      return false
+    }
+
     this.ctx = canvas.getContext('2d')
     this.canvasHeight = canvas$.height()
     this.canvasWidth = canvas$.width()
+
+    return true
   },
   addBoid: function(boid) {
     this.boids.push(boid)
