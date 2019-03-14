@@ -46,6 +46,7 @@
               />
               <h3>{{ item.Title }}</h3>
               <div
+                class="summary-text"
                 v-html="item.SummaryText" />
               <b class="link-label">Learn more</b>
             </a>
@@ -62,6 +63,7 @@
               />
               <h3>{{ item.Title }}</h3>
               <div
+                class="summary-text"
                 v-html="item.SummaryText" />
             </div>
           </template>
@@ -227,11 +229,16 @@ export default {
       line-height: em(24, 20)
       font-weight: $weight-medium
 
-    p
+    .summary-text
       margin-bottom: rem(50)
 
+    a,
     b
       text-decoration: underline
+      color: $black
+
+      &:hover
+        text-decoration: none
 
   #home-page
     .section:last-child
