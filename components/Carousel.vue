@@ -291,6 +291,8 @@ export default {
         checkVisible: this.checkVisible
       }
 
+      console.log(options)
+
       const owl = $(this.$refs.owlCarousel).owlCarousel(options)
 
       $(this.$refs.prev).click(function() {

@@ -125,7 +125,6 @@ export default {
 
         &.external
           height: 100vh
-          pointer-events: none
           position: relative
           max-width: rem(1344)
           width: 100%

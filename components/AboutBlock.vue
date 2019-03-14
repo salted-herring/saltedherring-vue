@@ -108,6 +108,7 @@ export default {
 
     +until($widescreen)
       width: rem(480)
+      padding: rem(40)
 
     +until($desktop)
       width: rem(300)
@@ -126,16 +127,20 @@ export default {
 
     &__title
       font-weight: $weight-extrabold
-      font-size: rem(64)
-      line-height: rem(70)
+      font-size: rem(24)
+      line-height: em(32, 24)
       display: block
       transform: rotate(-5deg) skew(-5deg)
       margin-bottom: rem(40)
       hyphens: auto
 
+      +fullhd
+        font-size: rem(64)
+        line-height: em(70, 64)
+
     &__content
-      font-size: rem(24)
-      line-height: em(30, 24)
+      font-size: rem(18)
+      line-height: em(24, 18)
 
     &__introduction
       font-weight: $weight-bold
@@ -190,4 +195,12 @@ export default {
       left: rem(-60)
       width: calc(90% - 40px)
       z-index: -1
+
+      +until($widescreen)
+        width: 100%
+
+      .blockquote__quote
+        +until($widescreen)
+          font-size: rem(18)
+          line-height: em(24, 18)
 </style>

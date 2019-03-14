@@ -34,6 +34,8 @@
         :smart-speed="1500"
         :drag-end-speed="1500"
         :slide-transition="'cubic-bezier(0.23, 1, 0.32, 1)'"
+        :responsive-class="true"
+        :responsive="{ 0 : { items: 1 } }"
         class="about-section__blocks">
         <Block
           v-for="(block, index) in section.Blocks"
@@ -70,6 +72,24 @@ export default {
     last: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      responsiveData: {
+        0: {
+          items: 1,
+          margin: 20
+        },
+        600: {
+          items: 2,
+          margin: 20
+        },
+        1000: {
+          items: 3,
+          margin: 100
+        }
+      }
     }
   },
   computed: {

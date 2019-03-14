@@ -45,7 +45,8 @@
                 :background-color="'#ffffff'"
               />
               <h3>{{ item.Title }}</h3>
-              <p>{{ item.SummaryText }}</p>
+              <div
+                v-html="item.SummaryText" />
               <b class="link-label">Learn more</b>
             </a>
             <div
