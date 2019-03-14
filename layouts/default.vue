@@ -43,10 +43,13 @@ export default {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop
 
       if (sectionTop <= 0) {
+        this.$store.commit('menu/setMenuColour', 'black')
         this.$store.commit('menu/setmenuScrolledIntoView', true)
       }
 
       if (scrollTop === 0) {
+        let colour = this.$store.state.menu.currentColor
+        this.$store.commit('menu/setMenuColour', colour)
         this.$store.commit('menu/setmenuScrolledIntoView', false)
         this.$store.commit('menu/setMenuClicked', false)
       }

@@ -87,6 +87,7 @@
         </div>
       </div>
     </section>
+    <nuxt-child/>
   </div>
 </template>
 
@@ -118,6 +119,14 @@ export default {
   },
   asyncData({ store, params }) {
     if (store.state.workPageData !== null) {
+      store.commit(
+        'menu/setMenuColour',
+        store.state.workPageData.HeroMenuColour
+      )
+      store.commit(
+        'menu/setMenuCurrentColour',
+        store.state.workPageData.HeroMenuColour
+      )
       return false
     }
 

@@ -21,7 +21,14 @@
       </nuxt-link>
 
     </div>
+    <button
+      :class="{ 'close-item--is-black': isBlack, 'close-item--is-white': isWhite, 'is-visible' : isChildPage }"
+      class="close-item"
+      @click="closeChildPage">
+      close
+    </button>
     <div
+      :class="{ 'is-visible' : !isChildPage }"
       class="navbar-menu">
       <Hamburger />
       <div
@@ -81,17 +88,15 @@ export default {
     },
     isWhite() {
       return this.$store.state.menu.color === 'white'
+    },
+    isChildPage() {
+      let parts = this.$route.path.replace(/^\/+|\/+$/g, '').split('/')
+      return parts.length > 1
     }
-  },
-  beforeMount() {
-    window.addEventListener('scroll', this.onScroll, { passive: true })
   },
   mounted() {
     let colour = this.$store.state.menu.color
     this.$store.commit('menu/setMenuCurrentColour', colour)
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
     onMouseOver: function(e) {
@@ -100,7 +105,81 @@ export default {
     onMouseOut: function(e) {
       this.$store.commit('menu/setHoveredText', '')
     },
-    onScroll(e) {}
+    closeChildPage: function(e) {
+      let parts = this.$route.path.replace(/^\/+|\/+$/g, '').split('/')
+
+      if (parts.length > 1) {
+        let url = '/'
+        for (let i = 0; i < parts.length - 1; i++) {
+          url += parts[i] + '/'
+        }
+
+        this.$router.push(url)
+      }
+    }
   }
 }
 </script>
+<style lang="sass">
+  /// Config
+  @import "~assets/sass/config/colours"
+  @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/imports/mixins"
+  @import "~bulma/sass/utilities/mixins"
+
+  .close-item
+    position: absolute
+    right: rem(60px)
+    top: rem(80px)
+    width: rem(44px)
+    height: rem(44px)
+    z-index: 1000
+    pointer-events: all
+    cursor: pointer
+    display: none
+    appearance: none
+    border: none
+    outline: none
+    background: none
+    text-indent: -10000px
+    font-size: 0
+    line-height: 0
+
+    &:before,
+    &:after
+      position: absolute
+      top: 50%
+      left: 50%
+      width: rem(62px)
+      height: rem(4px)
+      display: block
+      content: ''
+      background: $black
+      transform-origin: center
+      transition: all 0.15s cubic-bezier(0.77, 0, 0.175, 1)
+
+    &--is-white
+      &:before,
+      &:after
+        background: $white
+
+    &:before
+      transform: translate(-50%, -50%) rotate(45deg)
+
+    &:after
+      transform: translate(-50%, -50%) rotate(-45deg)
+
+    &:hover
+      &:before,
+      &:after
+        width: rem(30)
+
+      &:before
+        transform: translate(-50%, -50%) rotate(0deg)
+
+      &:after
+        transform: translate(-50%, -50%) rotate(0deg)
+
+    &.is-visible
+      display: block
+</style>

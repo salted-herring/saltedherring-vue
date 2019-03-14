@@ -1,17 +1,29 @@
 .owl-carousel
-  position: absolute
-  top: 0
-  left: 0
-  height: 100vh
-  width: 100vw
-
-  &.owl-loaded
-    .hero-images__image
-      display: block
-
   .owl-stage-outer,
   .owl-stage
     height: 100%
 
   .owl-item
     height: 100% !important
+    transition: all 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+
+.owl-theme
+  .owl-nav.disabled
+    + .owl-dots
+      margin-top: rem(100) !important
+      margin-bottom: rem(40)
+
+      .owl-dot
+        outline: none
+
+        &:hover
+        &:focus
+        &.active
+          span
+            background-color: $black
+
+        span
+          width: rem(20)
+          height: rem(20)
+          background-color: $white
+          transition: all 0.25s ease

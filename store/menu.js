@@ -58,7 +58,11 @@ export const mutations = {
     state.hoveredMenuTitle = title
   },
   setMenuClicked(state, status) {
-    state.menuClicked = status
+    if (typeof status === 'undefined') {
+      state.menuClicked = !state.menuClicked
+    } else {
+      state.menuClicked = status
+    }
   },
   setmenuScrolledIntoView(state, status) {
     state.menuScrolledIntoView = status

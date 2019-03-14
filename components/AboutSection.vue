@@ -128,29 +128,13 @@ export default {
           transition: all 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955)
 
         &.active
-          &:hover
-            .blockquote
+          .blockquote
+            &:hover
               transform: translate3d(rem(-10), rem(-10), 0)
 
           &.center
-            &:hover
-              .blockquote
+            .blockquote
+              &:hover
                 transform: translate3d(rem(-10), rem(-50), 0)
                 z-index: 1
-
-      .owl-dots
-        .owl-dot
-          &:hover
-            span
-              background-color: $black
-
-          &.active
-            span
-              background-color: $black
-
-          span
-            width: rem(28)
-            height: rem(28)
-            background-color: $white
-            transition: all 0.25s ease
 </style>

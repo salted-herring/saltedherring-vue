@@ -30,39 +30,36 @@
     .navbar-menu
       flex-direction: column
       position: relative
-      display: block
+      display: none
       overflow: visible !important
       margin-left: auto
 
-    .navbar-menu-outer
-        width: auto
-        display: inline-block
-        position: absolute
-        right: 0
-        top: 0
-        overflow: hidden
+      &.is-visible
+        display: block
 
-        +tablet
-          right: rem(30)
-          top: rem(30)
+    .navbar-menu-outer
+        display: inline-block
+        overflow: hidden
 
     .navbar-end
         position: absolute
-        top: 0
-        right: 0
-        width: 0
+        top: rem(40)
+        right: rem(30)
         overflow: hidden
         transition: all 0.125s ease
         text-align: right
         display: block
         pointer-events: all
-        transform: translate3d(0, 0, 0)
+        transform-origin: top right
+        transform: translate3d(0, 0, 0) scale(0)
         backface-visibility: hidden
 
         &.is-visible
-          width: rem(300)
-          height: rem(300)
           z-index: 100
+          transform: translate3d(0, 0, 0) scale(1.0)
+
+          .navbar-item
+            color: $black
 
         .navbar-item
             display: table
@@ -74,7 +71,7 @@
             font-size: rem(48)
             line-height: 1.2em
             font-weight: 800
-            color: $black
+            color: transparent
             text-decoration: none
 
             &:after
@@ -87,7 +84,6 @@
                 content: ''
                 display: block
                 transition: width 0.25s ease
-
 
             &:hover
                 &:after

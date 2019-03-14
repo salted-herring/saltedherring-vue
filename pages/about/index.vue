@@ -40,6 +40,10 @@ export default {
       return this.$store.state.aboutpage.Sections
     }
   },
+  mounted() {
+    this.$store.commit('menu/setMenuColour', 'black')
+    this.$store.commit('menu/setMenuCurrentColour', 'black')
+  },
   asyncData({ store, params, error }) {
     let self = this
 

@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     toggleActive() {
-      this.$store.commit('menu/setMenuClicked', true)
+      this.$store.commit('menu/setMenuClicked')
     }
   }
 }
@@ -56,10 +56,16 @@ export default {
     align-self: center
     position: absolute
     right: rem(0)
-    display: none
+    opacity: 0
+    transition: none
+    z-index: 2
+    transform: scale(1.5)
+    transform-origin: top right
 
     &.is-visible
-      display: block
+      opacity: 1
+      transform: scale(1)
+      transition: all 0.125s
 
     +tablet
       right: rem(30)
