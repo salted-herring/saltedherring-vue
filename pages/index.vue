@@ -61,7 +61,8 @@
                 :background-color="'#ffffff'"
               />
               <h3>{{ item.Title }}</h3>
-              <p>{{ item.SummaryText }}</p>
+              <div
+                v-html="item.SummaryText" />
             </div>
           </template>
 
