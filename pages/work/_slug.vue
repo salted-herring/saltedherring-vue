@@ -15,7 +15,7 @@
         slot="background"
         :style="heroStyle"
         :class="heroClass"
-        class="hero-section ">
+        class="hero-section">
         <video
           v-if="headerVideo.video !== null"
           ref="headerVideo"
@@ -143,16 +143,23 @@ export default {
       return this.isLoaded ? 'is-loaded' : ''
     },
     heroStyle() {
+      let styles = {}
       if (
         this.currentProject.BackgroundColour !== null &&
         this.currentProject.BackgroundColour.Colour !== null
       ) {
-        return {
-          backgroundColor: '#' + this.currentProject.BackgroundColour.Colour
-        }
+        styles.backgroundColor =
+          '#' + this.currentProject.BackgroundColour.Colour
       }
 
-      return ''
+      if (this.headerVideo.video !== null && this.headerVideo.poster !== null) {
+        styles.backgroundImage = 'url(' + this.headerVideo.poster + ')'
+      } else if (this.headerImages.length > 1) {
+        styles.backgroundImage =
+          'url(' + project.HeroImages[0].FitFullScreen + ')'
+      }
+
+      return styles
     },
     headerImages() {
       let images = []
@@ -364,6 +371,8 @@ export default {
             width: 50%
 
     +mobile
+      padding-top: rem(40)
+
       .columns
         display: flex
         flex-direction: column
@@ -443,6 +452,12 @@ export default {
       transform-origin: top center
       transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg) translate3d(0, 0, 0)
       backface-visibility: hidden
+      display: block
+      white-space: normal
+      line-height: 1em
+
+      +mobile
+        font-size: rem(80)
 
   .related-projects
     padding: rem(100) 0

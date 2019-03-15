@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="{ 'is-active': active, 'is-visible': isVisible }"
+    :class="{ 'is-active': active, 'is-visible': isVisible, 'is-active': isClicked }"
     class="hamburger hamburger--minus js-hamburger"
     role="button"
     @click="toggleActive">
@@ -28,6 +28,9 @@ export default {
       }
 
       return true
+    },
+    isClicked() {
+      return this.$store.state.menu.menuClicked
     }
   },
   methods: {
@@ -55,21 +58,32 @@ export default {
     cursor: pointer
     align-self: center
     position: absolute
-    right: rem(0)
+    right: rem(30)
+    top: rem(40)
     opacity: 0
     transition: none
     z-index: 2
     transform: scale(1.5)
     transform-origin: top right
+    outline: none
+
+    +until($tablet)
+      top: rem(12)
+      right: 0
+
+    + .navbar-end
+      display: none !important
 
     &.is-visible
       opacity: 1
       transform: scale(1)
       transition: all 0.125s
 
-    +tablet
-      right: rem(30)
-      top: rem(40)
+    +mobile
+      opacity: 1 !important
+      transform: scale(1) !important
+
+
 
     .hamburger-box
       transition: width 0.125s ease

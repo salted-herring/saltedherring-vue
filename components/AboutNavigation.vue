@@ -50,6 +50,14 @@ export default {
     align-items: center
     justify-content: center
 
+    +until($tablet)
+      position: absolute
+      overflow: hidden
+      padding-top: rem(20)
+      padding-left: rem(30)
+      padding-right: rem(30)
+      flex-wrap: wrap
+
     a
       color: $black
       font-weight: $weight-bold
@@ -58,15 +66,20 @@ export default {
       padding: rem(4) rem(4) rem(4) rem(8)
       background: $picasso
 
+      +until($tablet)
+        font-size: rem(14)
+        background: none
+
       &:first-child
         padding-left: rem(4)
 
-      &:after
-        content: '.'
-
       &:last-child
         &:after
-          content: ''
+          display: none
+
+      &:after
+        padding-left: rem(10)
+        content: '.'
 
       &:hover
       &.nuxt-link-active

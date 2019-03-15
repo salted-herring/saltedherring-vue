@@ -78,6 +78,14 @@ export default {
 }
 </script>
 <style lang="sass">
+  @import '~assets/sass/config/bulma-variables'
+  @import '~assets/sass/config/colours'
+  @import '~assets/sass/config/fonts'
+  @import '~assets/sass/config/typography'
+  @import '~assets/sass/imports/mixins'
+  @import '~assets/sass/imports/bulma-overrides'
+  @import '~bulma/sass/utilities/mixins'
+
   .about-page
     display: block
     width: 100%
@@ -85,11 +93,11 @@ export default {
 
     .about-navigation
       + .about-section
-        .about-section__header
-          min-height: 100vh
+        +mobile
+          padding-top: rem(100)
 
-    .about-section
-      &:first-child
-        .about-section__header
-          min-height: 100vh
+    .text-block__details
+      padding-top: rem(0)
+      padding-bottom: rem(0)
+      transform: translate3d(0, 0, 0) !important
 </style>

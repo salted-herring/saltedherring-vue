@@ -99,9 +99,6 @@ export default {
   .video-block
     position: relative
 
-    // &--is-external
-    //   padding: rem(60) 0
-
     .video-container
       // max-width: rem(1920)
       margin-left: auto

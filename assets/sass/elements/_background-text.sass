@@ -3,8 +3,9 @@
 ////
 .background-text
     font-size: rem(140)
+    // font-size: 9vw
     font-weight: $weight-extrabold
-    line-height: 1em
+    line-height: 1.2em
     letter-spacing: normal
     text-align: center
     display: inline
@@ -21,8 +22,11 @@
     &--is-not-opaque
       opacity: 0
 
-    // +widescreen
-    //   font-size: rem(240)
+    +mobile
+      text-overflow: ellipsis
+      white-space: nowrap
+      overflow: hidden
+      font-size: rem(100)
 
     +fullhd
         font-size: rem(200)

@@ -34,8 +34,8 @@
         :smart-speed="1500"
         :drag-end-speed="1500"
         :slide-transition="'cubic-bezier(0.23, 1, 0.32, 1)'"
-        :responsive-class="true"
-        :responsive="{ 0 : { items: 1 } }"
+        :responsive="responsiveData"
+        :auto-width="true"
         class="about-section__blocks">
         <Block
           v-for="(block, index) in section.Blocks"
@@ -81,7 +81,7 @@ export default {
           items: 1,
           margin: 20
         },
-        600: {
+        768: {
           items: 2,
           margin: 20
         },
@@ -110,10 +110,20 @@ export default {
   @import "~bulma/sass/utilities/mixins"
 
   .about-section
+    // max-width: 100%
+
+    +mobile
+      overflow: hidden
+
     &__header
       width: 100%
       min-height: 60vh
       position: relative
+      max-width: 100%
+      overflow: hidden
+
+      +until($tablet)
+        min-height: rem(300)
 
       .page-introduction
         position: absolute
@@ -121,11 +131,21 @@ export default {
         top: 50%
         transform: translateY(-50%)
         z-index: 2
-        font-size: rem(64)
-        line-height: em(70, 64)
+        font-size: rem(40)
+        line-height: em(48, 40)
         margin: 0
         padding-left: rem(60)
         padding-right: rem(60)
+
+        +mobile
+          font-size: rem(24)
+          line-height: em(30, 24)
+          padding-left: rem(30)
+          padding-right: rem(30)
+
+        +fullhd
+          font-size: rem(64)
+          line-height: em(70, 64)
 
       .background-text
         position: absolute
@@ -137,6 +157,12 @@ export default {
       .owl-carousel
         .owl-stage-outer
           overflow: visible
+
+          +touch
+            overflow: hidden
+
+            .blockquote
+              display: none
 
       .owl-item
         transition: all 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955)

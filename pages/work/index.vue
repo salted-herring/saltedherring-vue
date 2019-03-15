@@ -187,6 +187,11 @@ export default {
       color: $white
       z-index: -1
 
+    .clients
+      +mobile
+        .columns
+          margin: 0
+
   .page-header.workpage-header
     height: auto
     min-height: 100vh
@@ -206,8 +211,7 @@ export default {
         height: 100%
 
   .workpage-nav
-    padding-top: rem(400)
-    padding-bottom: 50vh
+    padding: rem(400) rem(30) 50vh rem(30)
     white-space: normal
     transform-origin: top center
 

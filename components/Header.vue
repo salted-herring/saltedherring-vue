@@ -100,11 +100,11 @@ export default {
         min-height: 100vh
         display: block
         position: relative
+        margin-left: 0
+        margin-right: 0
 
         .column
           min-height: 100vh
-          // margin: 0 auto
-          // position: relative
 
       .page-introduction
         position: absolute

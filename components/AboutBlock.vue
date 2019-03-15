@@ -9,7 +9,7 @@
       <div class="about-block__content">
         <span
           class="about-block__title"
-          v-text="title"/>
+          v-html="title"/>
         <p
           v-if="introduction !== ''"
           class="about-block__introduction"
@@ -100,8 +100,9 @@ export default {
 
   .about-block
     background: $white
-    padding: rem(60) rem(80)
+    padding: rem(40)
     width: rem(680)
+    min-width: rem(320)
     max-width: 100%
     position: relative
     display: block
@@ -110,8 +111,16 @@ export default {
       width: rem(480)
       padding: rem(40)
 
-    +until($desktop)
-      width: rem(300)
+    +until($tablet)
+      max-width: rem(500)
+      width: 90%
+
+    +until(480px)
+      max-width: rem(320)
+      width: 100%
+
+    +fullhd
+      padding: rem(60)
 
     &__index
       font-size: rem(64)
@@ -127,20 +136,36 @@ export default {
 
     &__title
       font-weight: $weight-extrabold
-      font-size: rem(24)
-      line-height: em(32, 24)
+      font-size: rem(48)
+      line-height: em(56, 48)
       display: block
       transform: rotate(-5deg) skew(-5deg)
       margin-bottom: rem(40)
-      hyphens: auto
+      overflow: hidden
+
+      +until(480px)
+        font-size: rem(30)
+        line-height: em(36, 30)
+
+      +desktop
+        font-size: rem(48)
+        line-height: em(56, 48)
+
+      +widescreen
+        font-size: rem(70)
+        line-height: em(78, 70)
 
       +fullhd
-        font-size: rem(64)
-        line-height: em(70, 64)
+        font-size: rem(60)
+        line-height: em(68, 60)
 
     &__content
       font-size: rem(18)
       line-height: em(24, 18)
+
+      +until($tablet)
+        font-size: rem(16)
+        line-height: em(20, 16)
 
     &__introduction
       font-weight: $weight-bold

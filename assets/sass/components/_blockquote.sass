@@ -12,16 +12,15 @@
     position: relative
     margin: 0 !important
     padding: 0
-    hyphens: auto
     overflow: hidden
 
-    +mobile
-      font-size: rem(24) !important
-      line-height: em(30, 24) !important
+    // +mobile
+    //   font-size: rem(24) !important
+    //   line-height: em(30, 24) !important
 
-    +widescreen
-      font-size: rem(28) !important
-      line-height: em(36, 28) !important
+    +until($fullhd)
+      font-size: rem(20) !important
+      line-height: em(30, 24) !important
 
     +fullhd
       font-size: rem(36) !important

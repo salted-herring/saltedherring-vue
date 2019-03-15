@@ -107,6 +107,11 @@ export default {
 }
 </script>
 <style lang="sass">
+  @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/config/colours"
+  @import "~assets/sass/imports/mixins"
+  @import "~bulma/sass/utilities/mixins"
+
   .preview-overlay
     display: block
     position: absolute
@@ -116,6 +121,7 @@ export default {
     height: 100%
     opacity: 0
     transition: opacity 0.5s cubic-bezier(0.895, 0.03, 0.685, 0.22)
+    background-position: center
 
     &.is-visible
       opacity: 1
@@ -124,4 +130,9 @@ export default {
       object-fit: cover
       position: relative
       z-index: 0
+      height: 100%
+      width: 100%
+
+      +touch
+        display: none
 </style>

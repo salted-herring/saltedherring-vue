@@ -18,6 +18,7 @@
   </div>
 </template>
 <script>
+import $ from 'jquery'
 import 'owl.carousel/dist/assets/owl.carousel.css'
 import 'owl.carousel/dist/assets/owl.theme.default.css'
 
@@ -168,7 +169,7 @@ export default {
       default: true
     },
     responsive: {
-      type: Object,
+      type: [Object, Boolean],
       default: () => {}
     },
     responsiveRefreshRate: {
@@ -236,7 +237,9 @@ export default {
   },
   mounted: function() {
     if (process.browser) {
-      require('owl.carousel')
+      if (typeof $(this.$refs.owlCarousel).owlCarousel === 'undefined') {
+        require('owl.carousel')
+      }
 
       let options = {
         items: this.items,
@@ -291,8 +294,6 @@ export default {
         checkVisible: this.checkVisible
       }
 
-      console.log(options)
-
       const owl = $(this.$refs.owlCarousel).owlCarousel(options)
 
       $(this.$refs.prev).click(function() {
@@ -314,26 +315,6 @@ export default {
           this.$emit(eventName, event)
         })
       })
-
-      if (!this.loop) {
-        owl.on('changed.owl.carousel', event => {
-          // start
-          if (event.item.index === 0) {
-            this.showPrev = false
-            this.showNext = true
-          } else {
-            const currnetel = Math.floor(event.item.index + event.page.size)
-            // last
-            if (currnetel === event.item.count) {
-              this.showPrev = true
-              this.showNext = false
-            } else {
-              this.showPrev = true
-              this.showNext = true
-            }
-          }
-        })
-      }
     }
   }
 }

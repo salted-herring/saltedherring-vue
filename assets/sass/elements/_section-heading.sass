@@ -4,9 +4,13 @@
 .section-heading
     margin-bottom: rem(40)
 
-    @include until($desktop)
+    +until($desktop)
       padding-left: rem(60)
       padding-right: rem(60)
+
+    +mobile
+      padding-left: rem(30)
+      padding-right: rem(30)
 
     .title
         @extend .rotated-italics
@@ -15,3 +19,6 @@
         font-weight: $weight-black
         font-size: rem(60)
         line-height: 1em
+
+        +mobile
+          font-size: rem(40)

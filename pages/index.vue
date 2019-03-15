@@ -5,7 +5,7 @@
       :title="backgroundTitle"
       :headerBg="$store.state.homePageData.BackgroundColour.Colour"
       :introduction="$store.state.homePageData.Content"
-      :introductionClass="'is-offset-1 is-half'"
+      :introductionClass="'is-offset-1'"
       :introductionVariation="'page-introduction--left'"
       :isCentered="false"
       :pageClass="'homepage-header'">
@@ -168,6 +168,7 @@ export default {
   @import "~assets/sass/config/bulma-variables"
   @import "~assets/sass/config/colours"
   @import "~assets/sass/imports/mixins"
+  @import "~bulma/sass/utilities/mixins"
 
   .homepage-header
     .columns
@@ -178,14 +179,18 @@ export default {
       p
         font-size: rem(32)
 
+        +mobile
+          font-size: rem(24)
+          text-align: center
+
     .page-header__main-container
       .page-introduction
         position: relative
         top: auto
-        margin-top: rem(300)
+        padding-top: rem(300)
         transform: none
         left: auto
-        margin-bottom: rem(400)
+        padding-bottom: rem(400)
 
   .boids-canvas
     position: fixed
@@ -194,16 +199,42 @@ export default {
 
   .latest-content
     padding-bottom: rem(300)
-    // justify-content: center
+    flex-wrap: wrap
+
+    +until($desktop)
+      flex-direction: column
+      align-items: center
+      padding-left: rem(60)
+      padding-right: rem(60)
+      margin-left: 0
+      margin-rigth: 0
+
+    +mobile
+      padding-left: rem(30)
+      padding-right: rem(30)
 
   .latest-item
     color: $black
+    min-width: rem(300)
+    width: 100%
+
+    +until($desktop)
+      width: 100%
+      max-width: rem(650)
+      padding-left: 0
+      padding-right: 0
 
     &:nth-child(odd)
       padding-right: rem(40)
 
+      +until($desktop)
+        padding-right: 0
+
     &:nth-child(even)
       padding-left: rem(40)
+
+      +until($desktop)
+        padding-left: 0
 
     &:hover
       b
@@ -228,6 +259,10 @@ export default {
       font-size: rem(20)
       line-height: em(24, 20)
       font-weight: $weight-medium
+
+      +mobile
+        font-size: rem(16)
+        line-height: em(20, 16)
 
     .summary-text
       margin-bottom: rem(50)

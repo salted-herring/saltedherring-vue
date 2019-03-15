@@ -32,7 +32,7 @@
       class="navbar-menu">
       <Hamburger />
       <div
-        :class="{'is-visible': isMenuVisible}"
+        :class="{ 'is-visible': isMenuVisible, 'is-clicked': isClicked }"
         class="navbar-end">
         <div
           class="navbar-menu-outer">
@@ -92,6 +92,9 @@ export default {
     isChildPage() {
       let parts = this.$route.path.replace(/^\/+|\/+$/g, '').split('/')
       return parts.length > 1
+    },
+    isClicked() {
+      return this.$store.state.menu.menuClicked
     }
   },
   mounted() {
@@ -144,6 +147,10 @@ export default {
     text-indent: -10000px
     font-size: 0
     line-height: 0
+
+    +mobile
+      top: rem(30)
+      right: rem(30)
 
     &:before,
     &:after

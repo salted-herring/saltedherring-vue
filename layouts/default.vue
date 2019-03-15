@@ -41,6 +41,15 @@ export default {
 
       let sectionTop = firstSection.getBoundingClientRect().top
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      let screenWidth =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth
+
+      if (screenWidth <= 1024) {
+        this.$store.commit('menu/setmenuScrolledIntoView', true)
+        return
+      }
 
       if (sectionTop <= 0) {
         this.$store.commit('menu/setMenuColour', 'black')

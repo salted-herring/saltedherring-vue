@@ -91,6 +91,10 @@ export default {
     left: 50%
     transform: translateX(-50%) rotate(-5deg) skew(-5deg)
 
+    +mobile
+      font-size: rem(36)
+      line-height: em(48, 36)
+
     &:hover
         span
           &:after

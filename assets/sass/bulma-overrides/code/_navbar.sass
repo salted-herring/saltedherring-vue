@@ -54,9 +54,31 @@
         transform: translate3d(0, 0, 0) scale(0)
         backface-visibility: hidden
 
+        +mobile
+          right: 0
+          top: rem(80)
+          transform: translate3d(0, 0, 0) scale(0)
+
+          &.is-clicked
+              z-index: 100
+              transform: translate3d(0, 0, 0) scale(0.8)
+
+              .navbar-item
+                color: $black
+
         &.is-visible
           z-index: 100
           transform: translate3d(0, 0, 0) scale(1.0)
+
+          +mobile
+            transform: translate3d(0, 0, 0) scale(0)
+
+            &.is-clicked
+                z-index: 100
+                transform: translate3d(0, 0, 0) scale(0.8)
+
+                .navbar-item
+                  color: $black
 
           .navbar-item
             color: $black
