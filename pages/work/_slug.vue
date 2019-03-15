@@ -438,6 +438,9 @@ export default {
         font-size: rem(28)
         top: rem(180)
 
+        +mobile
+          font-size: rem(24)
+
         +desktop-only
           top: rem(250)
 
@@ -453,10 +456,11 @@ export default {
       transform-origin: top center
       transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg) translate3d(0, 0, 0)
       backface-visibility: hidden
-      display: block
+      display: inline-block
       white-space: normal
       line-height: 1em
       font-size: rem(200)
+      width: auto
 
       +until($desktop)
         font-size: rem(120)
