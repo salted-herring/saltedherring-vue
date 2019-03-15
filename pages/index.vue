@@ -197,7 +197,7 @@ export default {
     top: 0
     left: 0
 
-  .latest-content
+  .latest-content.columns
     padding-bottom: rem(300)
     flex-wrap: wrap
 
@@ -212,6 +212,9 @@ export default {
     +mobile
       padding-left: rem(30)
       padding-right: rem(30)
+      max-width: rem(568)
+      margin-left: auto
+      margin-right: auto
 
   .latest-item
     color: $black

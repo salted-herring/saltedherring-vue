@@ -6,12 +6,12 @@ $max-award-size: 294 !default
     justify-content: center
 
     +mobile
-      margin: 0
+      margin: 0 auto
 
     +until($widescreen)
       max-width: rem($max-award-size*2)
-      margin-left: auto
-      margin-right: auto
+      margin-left: auto !important
+      margin-right: auto !important
 
     .column
       min-width: rem($max-award-size)

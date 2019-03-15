@@ -322,6 +322,9 @@ export default {
     opacity: 0
     transition: opacity 0.5s ease
 
+    +touch
+      display: none !important
+
     &.active
       opacity: 1
 
