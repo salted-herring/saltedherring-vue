@@ -364,6 +364,8 @@ export default {
         .project-summary
           width: 100%
           max-width: rem(900)
+          padding-left: 0
+          padding-right: 0
 
         aside
           order: 1
@@ -403,13 +405,9 @@ export default {
     line-height: em(40, 36)
     padding-bottom: rem(40)
 
-    +widescreen
+    +until($widescreen)
       font-size: rem(28)
       line-height: em(36, 28)
-
-    +fullhd
-      font-size: rem(36)
-      line-height: em(40, 36)
 
   .project-tags
     font-size: rem(18)
@@ -438,7 +436,7 @@ export default {
       .page-introduction
         font-weight: $weight-bold
         font-size: rem(28)
-        top: rem(200)
+        top: rem(180)
 
         +desktop-only
           top: rem(250)
@@ -458,14 +456,19 @@ export default {
       display: block
       white-space: normal
       line-height: 1em
+      font-size: rem(200)
+
+      +until($desktop)
+        font-size: rem(120)
 
       +mobile
-        font-size: rem(80)
+        font-size: rem(60)
 
   .related-projects
     padding: rem(100) 0
     position: relative
     z-index: 4
+    min-height: 100vh
 
     .page-introduction
       margin-bottom: rem(40)

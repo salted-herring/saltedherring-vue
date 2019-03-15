@@ -211,6 +211,7 @@ export default {
           font-size: rem(60)
           line-height: 1em
           margin-bottom: 1em
+          font-size: rem(48)
 
         h3
           font-weight: $weight-normal
@@ -258,7 +259,8 @@ export default {
         +mobile
           margin-left: auto !important
           margin-right: auto !important
-          width: calc(100% - #{rem(60)})
+          max-width: rem(568)
+          width: 100%
           padding: rem(40)
           transform: translate3d(0,0,0) !important
 

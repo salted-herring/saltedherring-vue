@@ -123,7 +123,7 @@ export default {
         &.external
           height: 100vh
           position: relative
-          max-width: rem(1344)
+          max-width: rem(960)
           width: 100%
           margin-left: auto
           margin-right: auto

@@ -177,7 +177,8 @@ export default {
 
     .introduction
       p
-        font-size: rem(32)
+        font-size: rem(36)
+        font-weight: $weight-normal
 
         +mobile
           font-size: rem(24)
