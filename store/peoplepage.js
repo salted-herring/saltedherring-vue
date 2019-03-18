@@ -14,7 +14,10 @@ export const mutations = {
 
     for (let i in people) {
       let person = people[i].node
-      state.people[person.URLSegment] = person
+
+      if (!(person.URLSegment in state.people)) {
+        state.people[person.URLSegment] = person
+      }
       sorted.push(person)
     }
 

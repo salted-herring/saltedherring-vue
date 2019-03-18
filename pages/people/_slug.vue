@@ -1,80 +1,72 @@
 <template>
   <div class="person-page">
-    Hi person!
-    <!-- <Header
-      :titleBg="peoplepage.TitleColour.Colour"
-      :headerBg="peoplepage.BackgroundColour.Colour"
-      :title="peoplepage.Title"
-      :introduction="''"
-      :introductionClass="''"
-      :introductionVariation="'page-thing'"
-      :isCentered="true"
-      :pageClass="'people-header'">
-      <div
-        slot="background"
-        class="hero-section">
-        <Carousel
-          v-if="headerImages.length > 1"
-          :nav="false"
-          :autoplay="true"
-          :items="1"
-          :loop="true"
-          :autoplay-timeout="5000"
-          :dots="false"
-          class="hero-images">
-          <div
-            v-for="(image, index) in headerImages"
-            :key="index"
-            :style="{ 'background-image': 'url(' + image.FitFullScreen + ')' }"
-            class="hero-images__image" />
-        </Carousel>
-        <div
-          v-for="(image, index) in headerImages"
-          v-else
-          :key="index"
-          :style="{ 'background-image': 'url(' + image.FitFullScreen + ')', 'background-color': '#' + peoplepage.BackgroundColour.Colour }"
-          class="hero-images__image" />
-      </div>
-    </Header>
-
+    <generic-header
+      :title="person.Title"
+      :title-bg="person.TitleColour.Colour"
+      :header-bg="person.BackgroundColour.Colour"
+      :page-class="'people-header'"
+      :header-images="headerImages"
+      :introduction="person.Introduction" />
     <div
-      :style="{ 'background-color': '#' + peoplepage.BackgroundColour.Colour + 'B3' }"
+      :style="{ 'background-color': '#' + person.BackgroundColour.Colour }"
       class="people-content">
-      <span
-        class="background-text"
-        v-text="peoplepage.Title" />
       <div class="container">
         <div class="columns is-centered">
           <div
             class="column people-content__content is-8 cms-content"
-            v-html="peoplepage.Content"/>
+            v-html="person.Content"/>
         </div>
-        <Navigation
-          :projects="people" />
       </div>
+      <Navigation
+        :people="people" />
     </div>
-    <LatestSection
-      v-if="peoplepage.ShowPartners"
-      :title="peoplepage.PartnersTitle"
-      :latest-items="partners"
-      :column-width="'is-3'" /> -->
   </div>
 </template>
 <script>
+import getPeoplePage from '~/apollo/queries/peoplepage'
 import getPersonPage from '~/apollo/queries/personpage'
 
 import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
 import Transition from '~/mixins/TransitionMixin'
 
-import Carousel from '~/components/Carousel'
-import Header from '~/components/Header'
-import Navigation from '~/components/ProjectNavigation'
+import GenericHeader from '~/components/GenericHeader'
+import Navigation from '~/components/PeopleNavigation'
 
 export default {
-  components: { Carousel, Header, Navigation },
+  components: { GenericHeader, Navigation },
   mixins: [Meta, PageState, Transition],
-  computed: {},
+  computed: {
+    person() {
+      let person = this.$store.state.peoplepage.people[this.$route.params.slug]
+
+      if (typeof person === 'undefined') {
+        person = {
+          Title: '',
+          Introduction: '',
+          TitleColour: {
+            Colour: ''
+          },
+          BackgroundColour: {
+            Colour: ''
+          }
+        }
+      }
+
+      return person
+    },
+    headerImages() {
+      let person = this.$store.state.peoplepage.people[this.$route.params.slug]
+
+      return person.HeroImages
+    },
+    metaData() {
+      return this.$store.state.meta.pages['people-' + this.$route.params.slug]
+    },
+    people() {
+      return this.$store.state.peoplepage.people.sorted
+    }
+  },
   asyncData({ store, params, error }) {
     let slug = params.slug
 
@@ -109,8 +101,34 @@ export default {
             slug: slug,
             data: returnVal[0]
           })
+          store.commit('meta/setupMeta', {
+            slug: 'people-' + slug,
+            data: returnVal[0]
+          })
         } else {
           error({ statusCode: 404, message: 'Person not found' })
+        }
+
+        return store.app.$axios({
+          url: '/graphql/',
+          method: 'post',
+          withCredentials: true,
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          data: {
+            query: getPeoplePage
+          }
+        })
+      })
+      .then(result => {
+        let returnVal = result.data.data.readPeoplePage
+        //
+        if (returnVal.length === 1) {
+          let data = returnVal[0]
+          store.commit('peoplepage/updatePeoplePageState', data)
+          store.commit('meta/setupMeta', { slug: 'people', data: data })
         }
       })
   }

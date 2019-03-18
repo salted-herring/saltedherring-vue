@@ -1,40 +1,11 @@
 <template>
   <div class="people-page">
-    <Header
-      :titleBg="peoplepage.TitleColour.Colour"
-      :headerBg="peoplepage.BackgroundColour.Colour"
+    <generic-header
       :title="peoplepage.Title"
-      :introduction="''"
-      :introductionClass="''"
-      :introductionVariation="'page-thing'"
-      :isCentered="true"
-      :pageClass="'people-header'">
-      <div
-        slot="background"
-        class="hero-section">
-        <Carousel
-          v-if="headerImages.length > 1"
-          :nav="false"
-          :autoplay="true"
-          :items="1"
-          :loop="true"
-          :autoplay-timeout="5000"
-          :dots="false"
-          class="hero-images">
-          <div
-            v-for="(image, index) in headerImages"
-            :key="index"
-            :style="{ 'background-image': 'url(' + image.FitFullScreen + ')' }"
-            class="hero-images__image" />
-        </Carousel>
-        <div
-          v-for="(image, index) in headerImages"
-          v-else
-          :key="index"
-          :style="{ 'background-image': 'url(' + image.FitFullScreen + ')', 'background-color': '#' + peoplepage.BackgroundColour.Colour }"
-          class="hero-images__image" />
-      </div>
-    </Header>
+      :title-bg="peoplepage.TitleColour.Colour"
+      :header-bg="peoplepage.BackgroundColour.Colour"
+      :page-class="'people-header'"
+      :header-images="headerImages"/>
 
     <div
       :style="{ 'background-color': '#' + peoplepage.BackgroundColour.Colour + 'B3' }"
@@ -49,7 +20,7 @@
             v-html="peoplepage.Content"/>
         </div>
         <Navigation
-          :projects="people" />
+          :people="people" />
       </div>
     </div>
     <LatestSection
@@ -66,13 +37,12 @@ import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
 import Transition from '~/mixins/TransitionMixin'
 
-import Carousel from '~/components/Carousel'
-import Header from '~/components/Header'
+import GenericHeader from '~/components/GenericHeader'
 import LatestSection from '~/components/LatestSection'
-import Navigation from '~/components/ProjectNavigation'
+import Navigation from '~/components/PeopleNavigation'
 
 export default {
-  components: { Carousel, Header, LatestSection, Navigation },
+  components: { GenericHeader, LatestSection, Navigation },
   mixins: [Meta, PageState, Transition],
   computed: {
     metaData() {
@@ -92,6 +62,12 @@ export default {
     }
   },
   asyncData({ store, params }) {
+    // let peoplepage = store.state.peoplepage.peoplepage
+    //
+    // if (Object.keys(peoplepage).length !== 0) {
+    //   return false
+    // }
+
     return store.app
       .$axios({
         url: '/graphql/',
