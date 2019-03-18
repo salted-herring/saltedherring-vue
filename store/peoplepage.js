@@ -49,5 +49,11 @@ export const mutations = {
     }
 
     state.peoplepage.HeroImages = heros
+  },
+
+  updatePerson(state, record) {
+    if ('slug' in record && 'data' in record) {
+      state[record.slug] = record.data
+    }
   }
 }

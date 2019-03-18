@@ -31,7 +31,9 @@
             <div
               class="summary-text"
               v-html="item.SummaryText" />
-            <b class="link-label">Learn more</b>
+            <b
+              class="link-label"
+              v-text="item.Link.Title" />
           </a>
           <div
             v-else
