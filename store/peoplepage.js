@@ -53,7 +53,18 @@ export const mutations = {
 
   updatePerson(state, record) {
     if ('slug' in record && 'data' in record) {
-      state[record.slug] = record.data
+      // process hero images
+      let heros = []
+      let heroImages = record.data.HeroImages.edges
+
+      for (let i in heroImages) {
+        let image = heroImages[i].node
+        heros.push(image)
+      }
+
+      record.data.HeroImages = heros
+      record.data.FullRecord = true
+      state.people[record.slug] = record.data
     }
   }
 }

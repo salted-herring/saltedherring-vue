@@ -74,19 +74,17 @@ import Navigation from '~/components/ProjectNavigation'
 export default {
   components: { Carousel, Header, Navigation },
   mixins: [Meta, PageState, Transition],
-  computed: {
-    metaData() {
-      // return this.$store.state.meta.pages[
-      //   this.$store.getters.getCurrentProject.URLSegment
-      // ]
-      return this.$store.state.meta.pages.people
-    },
-    headerImages() {
-      return this.$store.state.peoplepage.peoplepage.HeroImages
-    }
-  },
+  computed: {},
   asyncData({ store, params, error }) {
     let slug = params.slug
+
+    if (
+      slug in store.state.peoplepage.people &&
+      'FullRecord' in store.state.peoplepage.people[slug]
+    ) {
+      return false
+    }
+
     return store.app
       .$axios({
         url: '/graphql/',
@@ -105,16 +103,12 @@ export default {
       })
       .then(result => {
         let returnVal = result.data.data.readPerson
-        // //
+
         if (returnVal.length === 1) {
-          let record = {
+          store.commit('peoplepage/updatePerson', {
             slug: slug,
-            data: returnVal
-          }
-          // let data = returnVal[0]
-          // store.commit('peoplepage/updatePeoplePageState', data)
-          // store.commit('meta/setupMeta', { slug: 'people', data: data })
-          // store.commit('peoplepage/updatePerson', record)
+            data: returnVal[0]
+          })
         } else {
           error({ statusCode: 404, message: 'Person not found' })
         }

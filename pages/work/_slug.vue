@@ -59,14 +59,14 @@
               v-if="currentProject.Services"
               class="project-tags">
               <div
-                class="cms-content"
+                class="cms-content cms-content--small"
                 v-html="currentProject.Services"/>
             </div>
             <div
               v-if="currentProject.Recognition"
               class="project-tags">
               <div
-                class="cms-content"
+                class="cms-content cms-content--small"
                 v-html="currentProject.Recognition"/>
             </div>
           </aside>
@@ -364,9 +364,7 @@ export default {
 
   .project-tags
     font-size: rem(18)
-
-    &:first-child
-      margin-bottom: rem(90)
+    margin-bottom: rem(40)
 
     +widescreen
       font-size: rem(16)
@@ -383,6 +381,10 @@ export default {
 
       &:hover
         text-decoration: none
+
+    p
+      &:last-child
+        margin-bottom: 0
 
   .project-header
     .page-header__main-container
