@@ -301,53 +301,6 @@ export default {
   @import '~assets/sass/imports/bulma-overrides'
   @import '~bulma/sass/utilities/mixins'
 
-  .hero-section
-    position: fixed
-    top: 0
-    left: 0
-    width: 100vw
-    height: 100vh
-    z-index: -1
-
-  .hero-video
-    position: absolute
-    left: 0
-    top: 0
-    // width: 100%
-    height: 100%
-    width: auto
-    min-width: 100%
-    object-fit: cover
-    z-index: 1
-    opacity: 0
-    transition: opacity 0.5s ease
-
-    +touch
-      display: none !important
-
-    &.active
-      opacity: 1
-
-  .hero-images
-    position: absolute
-    left: 0
-    top: 0
-    width: 100%
-    height: 100%
-
-    &__image
-      display: none
-      width: 100%
-      height: 100%
-      background-size: cover
-      background-position: left top
-
-      &:first-child
-        display: block
-
-
-    @import '~assets/sass/plugins/owl-carousel'
-
   .project-introduction
     padding-top: rem(150)
     padding-bottom: rem(0)

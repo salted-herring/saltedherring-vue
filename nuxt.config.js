@@ -57,7 +57,7 @@ module.exports = {
   ],
 
   router: {
-    middleware: ['footer', 'menu', 'scroll'],
+    middleware: ['footer', 'menu', 'scroll', 'redirection'],
     scrollBehavior: function(to, from, savedPosition) {
       if (to.hash) {
         return {

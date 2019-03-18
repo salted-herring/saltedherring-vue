@@ -1,5 +1,5 @@
 <template>
-  <div id="home-page">
+  <div class="home-page">
     <Header
       :titleBg="$store.state.homePageData.TitleColour.Colour"
       :title="backgroundTitle"
@@ -17,60 +17,9 @@
       />
     </Header>
 
-    <section
-      class="section has-background-white">
-      <div class="container">
-        <header class="section-heading">
-          <h2
-            class="title"
-            v-html="$store.state.homePageData.LatestSectionTitle" />
-        </header>
-
-        <div class="latest-content columns">
-          <template
-            v-for="item in $store.getters.getLatest"
-          >
-            <a
-              v-if="item.Link.LinkURL !== null"
-              :href="item.Link.LinkURL"
-              :target="item.OpenInNewWindow ? '_blank' : '_self'"
-              :rel="item.OpenInNewWindow ? 'noopener' : ''"
-              :key="item.ID"
-              class="column latest-item">
-              <LazyImage
-                v-if="item.Image"
-                :lazy-src="item.Image"
-                :width="item.ImageWidth"
-                :height="item.ImageHeight"
-                :background-color="'#ffffff'"
-              />
-              <h3>{{ item.Title }}</h3>
-              <div
-                class="summary-text"
-                v-html="item.SummaryText" />
-              <b class="link-label">Learn more</b>
-            </a>
-            <div
-              v-else
-              :key="item.ID"
-              class="column latest-item">
-              <LazyImage
-                v-if="item.Image"
-                :lazy-src="item.Image"
-                :width="item.ImageWidth"
-                :height="item.ImageHeight"
-                :background-color="'#ffffff'"
-              />
-              <h3>{{ item.Title }}</h3>
-              <div
-                class="summary-text"
-                v-html="item.SummaryText" />
-            </div>
-          </template>
-
-        </div>
-      </div>
-    </section>
+    <LatestSection
+      :title="$store.state.homePageData.LatestSectionTitle"
+      :latest-items="$store.getters.getLatest"/>
   </div>
 </template>
 
@@ -78,7 +27,7 @@
 import getHomePage from '~/apollo/queries/homepage'
 
 import Header from '~/components/Header'
-import LazyImage from '~/components/LazyLoadImage'
+import LatestSection from '~/components/LatestSection'
 
 import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
@@ -91,7 +40,7 @@ import Simulation from '~/mixins/boids/Simulation'
 export default {
   components: {
     Header,
-    LazyImage
+    LatestSection
   },
   mixins: [CanvasInit, Meta, PageState, Transition],
   computed: {
@@ -198,88 +147,14 @@ export default {
     top: 0
     left: 0
 
-  .latest-content.columns
-    padding-bottom: rem(300)
-    flex-wrap: wrap
-
-    +until($desktop)
-      flex-direction: column
-      align-items: center
-      padding-left: rem(60)
-      padding-right: rem(60)
-      margin-left: 0
-      margin-rigth: 0
-
-    +mobile
-      padding-left: rem(30)
-      padding-right: rem(30)
-      max-width: rem(568)
-      margin-left: auto
-      margin-right: auto
-
-  .latest-item
-    color: $black
-    min-width: rem(300)
-    width: 100%
-
-    +until($desktop)
-      width: 100%
-      max-width: rem(650)
-      padding-left: 0
-      padding-right: 0
-
-    &:nth-child(odd)
-      padding-right: rem(40)
-
-      +until($desktop)
-        padding-right: 0
-
-    &:nth-child(even)
-      padding-left: rem(40)
-
-      +until($desktop)
-        padding-left: 0
-
-    &:hover
-      b
-        text-decoration: none
-
-    img
-      margin-bottom: rem(70)
-
-    h3
-      font-size: rem(30)
-      line-height: em(36, 30)
-      font-weight: $weight-bold
-      margin-bottom: rem(14)
-
-    h3,
-    p
-      width: 100%
-      max-width: rem(460)
-
-    b,
-    p
-      font-size: rem(20)
-      line-height: em(24, 20)
-      font-weight: $weight-medium
-
-      +mobile
-        font-size: rem(16)
-        line-height: em(20, 16)
-
-    .summary-text
-      margin-bottom: rem(50)
-
-    a,
-    b
-      text-decoration: underline
-      color: $black
-
-      &:hover
-        text-decoration: none
-
-  #home-page
+  .home-page
     .section:last-child
       padding-top: rem(80)
+
+    .latest-content.columns
+      padding-bottom: rem(300)
+
+    .latest-item
+      min-width: rem(300)
+      width: 100%
 </style>
