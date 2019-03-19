@@ -4,46 +4,48 @@
     :header-bg="headerBg"
     :title="title"
     :is-centered="isCentered"
-    :page-class="pageClass">
+    :page-class="pageClass"
+    :introduction-class="introductionClass"
+    :introduction="introduction"
+    :introduction-bg="introductionBg"
+    :introduction-variation="'generic-header'">
     <div
-      v-if="introduction !== ''"
+      v-if="introductionContent !== ''"
       slot="introductionContent"
-      v-html="introduction"
-    />
+      v-html="introductionContent" />
+    <div
+      v-if="outsideContainer !== ''"
+      slot="outsideContainer"
+      :class="outsideContainerClass"
+      class="outside-container"
+      v-html="outsideContainer" />
     <div
       slot="background"
       :style="heroStyle"
       :class="heroClass"
       class="hero-section">
-      <video
-        v-if="headerVideo.video !== null"
-        ref="headerVideo"
-        :data-src="headerVideo.video"
-        :data-poster="headerVideo.poster"
-        :class="heroClass"
-        data-toggle-class="active"
-        muted
-        autoplay
-        loop
-        width="100%"
-        class="hero-video" />
-      <div
+
+      <header-video
+        v-if="headerVideo.video != null"
+        :header-video="headerVideo" />
+
+      <header-images
         v-else-if="headerImages.length != 0"
-        class="hero-images">
-        <div
-          v-for="(image, index) in headerImages"
-          :key="index"
-          :style="{ 'background-image': 'url(' + image.FitFullScreen + ')', 'background-color': '#' + headerBg }"
-          class="hero-images__image" />
-      </div>
+        :header-images="headerImages"
+        :header-bg="headerBg" />
     </div>
   </Header>
 </template>
 <script>
 import Header from '~/components/Header'
+import HeaderImages from '~/components/HeaderImages'
+import HeaderVideo from '~/components/HeaderVideo'
+
 export default {
   components: {
-    Header
+    Header,
+    HeaderImages,
+    HeaderVideo
   },
   props: {
     title: {
@@ -90,6 +92,26 @@ export default {
       default: ''
     },
     introduction: {
+      type: String,
+      default: ''
+    },
+    outsideContainer: {
+      type: String,
+      default: ''
+    },
+    outsideContainerClass: {
+      type: String,
+      default: ''
+    },
+    introductionClass: {
+      type: String,
+      default: ''
+    },
+    introductionContent: {
+      type: String,
+      default: ''
+    },
+    introductionBg: {
       type: String,
       default: ''
     }

@@ -30,36 +30,27 @@ export default {
         return []
       }
     }
-  },
-  asyncData({ store, params }) {
-    // let people = store.state.peoplepage.people
-    //
-    // if ('sorted' in people) {
-    //   return false
-    // }
-
-    return store.app
-      .$axios({
-        url: '/graphql/',
-        method: 'post',
-        withCredentials: true,
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        data: {
-          query: getPeoplePage
-        }
-      })
-      .then(result => {
-        let returnVal = result.data.data.readPeoplePage
-        //
-        if (returnVal.length === 1) {
-          let data = returnVal[0]
-          store.commit('peoplepage/updatePeoplePageState', data)
-          store.commit('meta/setupMeta', { slug: 'people', data: data })
-        }
-      })
   }
 }
 </script>
+<style lang="sass">
+  @import '~assets/sass/config/bulma-variables'
+  @import '~assets/sass/config/colours'
+  @import '~assets/sass/config/fonts'
+  @import '~assets/sass/config/typography'
+  @import '~assets/sass/imports/mixins'
+  @import '~assets/sass/imports/bulma-overrides'
+  @import '~bulma/sass/utilities/mixins'
+
+  .people-navigation
+    padding-top: rem(100)
+    padding-bottom: rem(100)
+
+    .nuxt-link-active
+      color: $white
+      pointer-events: none
+
+      span
+        &:after
+          display: none
+</style>

@@ -38,6 +38,11 @@ export default `query {
             ShowQuote
             Quote
             Source
+            SourceLink {
+              Title
+              OpenInNewWindow
+              LinkURL
+            }
           }
           Blocks {
             edges {
@@ -49,6 +54,11 @@ export default `query {
                 ShowQuote
                 Quote
                 Source
+                SourceLink {
+                  Title
+                  OpenInNewWindow
+                  LinkURL
+                }
               }
             }
           }

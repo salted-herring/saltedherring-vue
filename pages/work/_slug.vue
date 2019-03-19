@@ -2,55 +2,14 @@
   <div
     v-if="currentProject !== null"
     class="project-page">
-    <Header
-      :titleBg="currentProject.TitleColour.Colour"
-      :introductionBg="currentProject.TitleColour.Colour"
+    <generic-header
+      :title-bg="currentProject.TitleColour.Colour"
+      :introduction-bg="currentProject.TitleColour.Colour"
       :title="currentProject.Title"
       :introduction="currentProject.Introduction"
-      :introductionClass="''"
-      :introductionVariation="'page-thing'"
-      :isCentered="true"
-      :pageClass="'project-header'">
-      <div
-        slot="background"
-        :style="heroStyle"
-        :class="heroClass"
-        class="hero-section">
-        <video
-          v-if="headerVideo.video !== null"
-          ref="headerVideo"
-          :data-src="headerVideo.video"
-          :data-poster="headerVideo.poster"
-          :class="heroClass"
-          data-toggle-class="active"
-          muted
-          autoplay
-          loop
-          width="100%"
-          class="hero-video" />
-        <Carousel
-          v-else-if="headerImages.length > 1"
-          :nav="false"
-          :autoplay="true"
-          :items="1"
-          :loop="true"
-          :autoplay-timeout="5000"
-          :dots="false"
-          class="hero-images">
-          <div
-            v-for="(image, index) in headerImages"
-            :key="index"
-            :style="{ 'background-image': 'url(' + image.FitFullScreen + ')' }"
-            class="hero-images__image" />
-        </Carousel>
-        <div
-          v-for="(image, index) in headerImages"
-          v-else
-          :key="index"
-          :style="{ 'background-image': 'url(' + image.FitFullScreen + ')' }"
-          class="hero-images__image" />
-      </div>
-    </Header>
+      :page-class="'project-header'"
+      :header-images="headerImages"
+      :header-video="headerVideo" />
     <section class="section project-introduction has-background-light">
       <div class="container content-container">
         <div class="columns">
@@ -109,6 +68,7 @@ import getProject from '~/apollo/queries/projectpage'
 import readBlocks from '~/apollo/queries/readBlocks'
 
 import Carousel from '~/components/Carousel'
+import GenericHeader from '~/components/GenericHeader'
 import Header from '~/components/Header'
 import ImageBlock from '~/components/ImageBlock'
 import LazyImage from '~/components/LazyLoadImage'
@@ -123,6 +83,7 @@ import Transition from '~/mixins/TransitionMixin'
 export default {
   components: {
     Carousel,
+    GenericHeader,
     Header,
     ImageBlock,
     LazyImage,
@@ -364,7 +325,7 @@ export default {
 
   .project-tags
     font-size: rem(18)
-    margin-bottom: rem(40)
+    margin-bottom: rem(30)
 
     +widescreen
       font-size: rem(16)
@@ -396,12 +357,12 @@ export default {
         +mobile
           font-size: rem(24)
 
-        +desktop-only
-          top: rem(250)
+        // +desktop-only
+        //   top: rem(250)
 
         +widescreen
           font-size: rem(36)
-          top: rem(220)
+          top: rem(120)
 
         +fullhd
           font-size: rem(48)

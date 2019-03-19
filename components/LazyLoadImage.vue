@@ -1,7 +1,7 @@
 <template>
   <div
     :style="style"
-    :class="{ 'is-loaded': isLoaded, additionalCss }"
+    :class="cssClasses"
     class="lazyLoad-image">
     <img
       ref="lazy-img"
@@ -92,6 +92,15 @@ export default {
       }
 
       return style
+    },
+    cssClasses() {
+      let styles = this.additionalCss
+
+      if (this.isLoaded) {
+        styles += ' is-loaded'
+      }
+
+      return styles
     }
   },
   mounted() {
@@ -121,6 +130,11 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
+  @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/config/colours"
+  @import "~assets/sass/imports/mixins"
+  @import "~bulma/sass/utilities/mixins"
+
   .lazyLoad-image
     transition: height 0.25s, width 0.25s
     display: block
@@ -130,6 +144,10 @@ export default {
     &.is-loaded
       img
         opacity: 1
+
+    &.has-padding
+      padding-top: rem(80)
+      padding-bottom: rem(80)
 
     img
       opacity: 0

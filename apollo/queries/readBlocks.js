@@ -18,6 +18,7 @@ export default `query readBlocks($urlSegment: String) {
           ID
           Title
           SortOrder
+          Padding
           Images {
             edges {
               node {

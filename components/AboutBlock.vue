@@ -30,7 +30,8 @@
       :show-quote="showQuote"
       :quote="quote"
       :text-colour="'#fced85'"
-      :quote-source="quoteSource"/>
+      :quote-source="quoteSource"
+      :source-link="quoteSourceLink"/>
   </div>
 </template>
 <script>
@@ -69,6 +70,10 @@ export default {
     quoteSource: {
       type: String,
       default: null
+    },
+    quoteSourceLink: {
+      type: Object,
+      default: null
     }
   },
   data() {
@@ -101,7 +106,7 @@ export default {
   .about-block
     background: $white
     padding: rem(40)
-    width: rem(680)
+    width: rem(500)
     min-width: rem(320)
     max-width: 100%
     position: relative
@@ -150,14 +155,6 @@ export default {
       +desktop
         font-size: rem(48)
         line-height: em(56, 48)
-
-      +widescreen
-        font-size: rem(70)
-        line-height: em(78, 70)
-
-      +fullhd
-        font-size: rem(60)
-        line-height: em(68, 60)
 
     &__content
       font-size: rem(18)
@@ -225,7 +222,6 @@ export default {
         width: 100%
 
       .blockquote__quote
-        +until($widescreen)
-          font-size: rem(18)
-          line-height: em(24, 18)
+        font-size: rem(24) !important
+        line-height: em(32, 24) !important
 </style>

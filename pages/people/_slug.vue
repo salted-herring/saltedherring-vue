@@ -4,16 +4,17 @@
       :title="person.Title"
       :title-bg="person.TitleColour.Colour"
       :header-bg="person.BackgroundColour.Colour"
-      :page-class="'people-header'"
+      :page-class="'person-header'"
       :header-images="headerImages"
-      :introduction="person.Introduction" />
+      :outside-container-class="'cms-content'"
+      :outside-container="person.Introduction" />
     <div
       :style="{ 'background-color': '#' + person.BackgroundColour.Colour }"
-      class="people-content">
+      class="person-content">
       <div class="container">
         <div class="columns is-centered">
           <div
-            class="column people-content__content is-8 cms-content"
+            class="column person-content__content is-8 cms-content"
             v-html="person.Content"/>
         </div>
       </div>
@@ -109,20 +110,28 @@ export default {
           error({ statusCode: 404, message: 'Person not found' })
         }
 
-        return store.app.$axios({
-          url: '/graphql/',
-          method: 'post',
-          withCredentials: true,
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          data: {
-            query: getPeoplePage
-          }
-        })
+        let peoplepage = store.state.peoplepage.peoplepage
+
+        if (Object.keys(peoplepage).length === 0) {
+          return store.app.$axios({
+            url: '/graphql/',
+            method: 'post',
+            withCredentials: true,
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            data: {
+              query: getPeoplePage
+            }
+          })
+        }
       })
       .then(result => {
+        if (typeof result === 'undefined') {
+          return false
+        }
+
         let returnVal = result.data.data.readPeoplePage
         //
         if (returnVal.length === 1) {
@@ -142,47 +151,89 @@ export default {
   @import '~assets/sass/imports/mixins'
   @import '~assets/sass/imports/bulma-overrides'
   @import '~bulma/sass/utilities/mixins'
-  .people-header
+  .person-header
+    position: unset
+    &.is-hovered
+      .background-text
+        opacity: 0.1
+
+    .container
+      position: unset
+      z-index: 10
+
+    .introduction
+      display: flex
+      align-items: flex-end
+      justify-content: flex-end
+
+      p
+        font-size: inherit
+        font-weight: inherit
+        line-height: inherit
+        font-style: inherit
+
     .background-text
-      z-index: 200
+      z-index: 1
+      margin-top: rem(100)
 
-  .hero-images__image
-    background-blend-mode: multiply
+    .hero-images
+      z-index: 0
 
-  .people-page
-    .latest-section
+      +touch
+        &:before
+          content: ''
+          position: absolute
+          bottom: 0
+          left: 0
+          width: 100%
+          height: rem(200)
+          background: linear-gradient(to bottom, rgba($black, 0) 0%, rgba($black, 0.5) 70%, rgba($black, 1) 100%)
+          opacity: 0.5
+          display: block
+          z-index: 1
 
-      .section-heading
-        margin-bottom: rem(100)
+      &__image
+        background-blend-mode: unset
 
-      .latest-content
-        justify-content: center
+    .outside-container
+      position: fixed
+      top: 50%
+      right: rem(60)
+      transform: translateY(-50%)
+      padding: 0
+      z-index: 12
+      max-width: rem(300)
 
-        +until($widescreen)
-          max-width: rem(540)
-          margin-left: auto
-          margin-right: auto
+      +touch
+        position: relative
+        top: 0
+        right: 0
+        max-width: 100%
+        transform: none
+        text-align: center
+        margin-top: rem(-60) !important
+        padding: 0 rem(60)
 
-      .latest-item
-        +until($desktop)
-          padding-left: rem(30)
-          padding-right: rem(30)
-        h3
-          +until($widescreen)
-            font-size: rem(24)
+        h1,
+        h2,
+        p,
+        strong
+          color: $white
 
+    .hero-section
+      z-index: 0
 
-
-  .people-content
+  .person-content
     position: relative
     z-index: 2
 
+    .columns
+      margin: 0
+
+    .container
+      + .people-navigation
+        margin-top: rem(-70)
+
     .background-text
-      color: $white
-
-    .project-navigation
-      padding: rem(80) 0 rem(200)
-
-      &:after
-        background: none
+      color: rgba($white, 0.5)
 </style>

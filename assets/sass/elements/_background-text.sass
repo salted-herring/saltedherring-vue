@@ -2,8 +2,7 @@
 /// Background text element
 ////
 .background-text
-    font-size: rem(360)
-    // font-size: 9vw
+    font-size: rem(200)
     font-weight: $weight-extrabold
     line-height: 1.2em
     letter-spacing: normal
@@ -22,14 +21,14 @@
     &--is-not-opaque
       opacity: 0
 
-    +until($widescreen)
-      font-size: rem(300)
+    // +until($widescreen)
+    //   font-size: rem(300)
 
     +until($desktop)
-      font-size: rem(240)
-
-    +touch
       font-size: rem(180)
 
+    +touch
+      font-size: rem(160)
+
     +mobile
-      font-size: rem(140)
+      font-size: rem(120)

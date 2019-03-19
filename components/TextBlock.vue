@@ -13,6 +13,7 @@
           :quote="details.Quote"
           :quote-source="details.Source"
           :text-colour="quoteTextColour"
+          :source-link="details.SourceLink"
           :style="{ 'transform': 'translate3d(0,' + quoteBlockMarginTop +',0)' }"/>
         <div
           ref="textblock"
@@ -122,6 +123,9 @@ export default {
       window.removeEventListener('scroll', this.onScroll)
     }
   },
+  mounted() {
+    this.onScroll()
+  },
   methods: {
     onScroll(e) {
       this.textBlockMarginTop =
@@ -178,16 +182,17 @@ export default {
           position: relative
           order: 1
           width: 75%
-          padding: rem(60) rem(100)
+          max-width: rem(480)
+          padding: rem(40)
           margin: rem(40) 0 !important
+          transform: translate3d(0,0,0) !important
 
         +mobile
           margin-left: auto !important
           margin-right: auto !important
-          max-width: rem(568)
+          max-width: rem(300)
           width: 100%
           padding: rem(40)
-          transform: translate3d(0,0,0) !important
 
       .align-left
         .blockquote + .text-block__details

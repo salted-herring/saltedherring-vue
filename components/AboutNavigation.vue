@@ -41,11 +41,10 @@ export default {
   @import "~bulma/sass/utilities/mixins"
 
   .about-navigation
-    position: fixed
+    position: absolute
     top: rem(90)
     left: 0
     width: 100%
-    z-index: 100
     display: flex
     align-items: center
     justify-content: center

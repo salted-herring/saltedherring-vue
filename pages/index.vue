@@ -9,7 +9,7 @@
       :introductionVariation="'page-introduction--left'"
       :isCentered="false"
       :pageClass="'homepage-header'">
-      http://www.emergentmind.com/boids
+      <!-- http://www.emergentmind.com/boids -->
       <canvas
         id="boids"
         slot="background"
@@ -125,12 +125,26 @@ export default {
         position: relative
 
     .introduction
+      +until($tablet)
+        padding-left: rem(30) !important
+        padding-right: rem(30) !important
+
+      +desktop
+        padding-left: rem(60) !important
+        padding-right: rem(60) !important
+
+      h1
+        +mobile
+          text-align: center
+
       p
         font-size: rem(36)
         font-weight: $weight-normal
 
-        +mobile
+        +until(widescreen)
           font-size: rem(24)
+
+        +mobile
           text-align: center
 
     .page-header__main-container
@@ -141,6 +155,10 @@ export default {
         transform: none
         left: auto
         padding-bottom: rem(400)
+
+        +until($tablet)
+          padding-left: 0 !important
+          padding-right: 0 !important
 
   .boids-canvas
     position: fixed

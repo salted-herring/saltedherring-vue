@@ -31,16 +31,34 @@
   top: 0
   width: 100%
   height: 100%
+  opacity: 0
+  transition: all 0.25s ease
+
+  &.is-loaded
+    opacity: 1
+
+    // .hero-images__image
+    //   opacity: 1
 
   &__image
-    // display: none
+    transition: all 0.15s 0.25s ease
+    opacity: 0
     width: 100%
     height: 100%
     background-size: cover
-    background-position: left top
+    background-position: center
+    // z-index: 0
+    display: block
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
 
-    &:first-child
-      display: block
+    &.is-active
+      // z-index: 1
+      transition: all 0.25s ease
+      opacity: 1
 
 
   @import 'plugins/owl-carousel'

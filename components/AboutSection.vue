@@ -46,7 +46,8 @@
           :details="block.Details"
           :show-quote="block.ShowQuote"
           :quote="block.Quote"
-          :quote-source="block.Source"/>
+          :quote-source="block.Source"
+          :quote-source-link="block.SourceLink"/>
       </Carousel>
     </div>
   </section>
@@ -131,8 +132,8 @@ export default {
         top: 50%
         transform: translateY(-50%)
         z-index: 2
-        font-size: rem(40)
-        line-height: em(48, 40)
+        font-size: rem(48)
+        line-height: em(54, 48)
         margin: 0
         padding-left: rem(60)
         padding-right: rem(60)
@@ -143,7 +144,7 @@ export default {
           padding-left: rem(30)
           padding-right: rem(30)
 
-        +fullhd
+        +widescreen
           font-size: rem(64)
           line-height: em(70, 64)
 

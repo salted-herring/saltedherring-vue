@@ -1,16 +1,15 @@
 <template>
   <div class="people-page">
     <generic-header
-      :title="peoplepage.Title"
       :title-bg="peoplepage.TitleColour.Colour"
       :header-bg="peoplepage.BackgroundColour.Colour"
       :page-class="'people-header'"
       :header-images="headerImages"/>
 
     <div
-      :style="{ 'background-color': '#' + peoplepage.BackgroundColour.Colour + 'B3' }"
+      :style="{ 'background-color': '#' + peoplepage.BackgroundColour.Colour + 'E6' }"
       class="people-content">
-      <span
+      <h1
         class="background-text"
         v-text="peoplepage.Title" />
       <div class="container">
@@ -62,11 +61,11 @@ export default {
     }
   },
   asyncData({ store, params }) {
-    // let peoplepage = store.state.peoplepage.peoplepage
-    //
-    // if (Object.keys(peoplepage).length !== 0) {
-    //   return false
-    // }
+    let peoplepage = store.state.peoplepage.peoplepage
+
+    if (Object.keys(peoplepage).length !== 0) {
+      return false
+    }
 
     return store.app
       .$axios({
@@ -102,8 +101,10 @@ export default {
   @import '~assets/sass/imports/bulma-overrides'
   @import '~bulma/sass/utilities/mixins'
   .people-header
-    .background-text
-      z-index: 200
+    &.is-hovered
+      + .people-content
+        .background-text
+          opacity: 0.1
 
   .hero-images__image
     background-blend-mode: multiply

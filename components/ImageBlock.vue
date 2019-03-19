@@ -19,7 +19,7 @@
         :width="image.FitFullScreenWidth"
         :height="image.FitFullScreenHeight"
         :trigger="true"
-        :additional-css="'image-block__image has-background-black'"
+        :additional-css="'image-block__image has-background-black' + (details.Padding ? 'has-padding' : '')"
       />
     </Carousel>
     <LazyImage
@@ -30,6 +30,7 @@
       :lazy-src="image.FitFullScreen"
       :width="image.FitFullScreenWidth"
       :height="image.FitFullScreenHeight"
+      :additional-css="details.Padding ? 'has-padding' : ''"
     />
   </div>
 </template>

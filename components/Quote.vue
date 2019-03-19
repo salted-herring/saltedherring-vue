@@ -12,6 +12,12 @@
       class="blockquote__footer">
       <cite
         v-html="quoteSource" />
+      <nuxt-link
+        v-if="sourceLink.LinkURL !== null"
+        :to="sourceLink.LinkURL"
+        :target="sourceLink.OpenInNewWindow ? '_blank' : '_self'"
+        :style="styles"
+        v-text="sourceLink.Title" />
     </footer>
   </blockquote>
 </template>
@@ -34,6 +40,16 @@ export default {
     textColour: {
       type: String,
       default: null
+    },
+    sourceLink: {
+      type: Object,
+      default: function() {
+        return {
+          LinkURL: null,
+          OpenInNewWindow: null,
+          Title: null
+        }
+      }
     }
   },
   computed: {

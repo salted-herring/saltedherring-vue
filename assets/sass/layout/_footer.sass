@@ -1,9 +1,13 @@
 .footer
   .columns
-    @include until($desktop)
+    +until($desktop)
       margin: 0 rem(30)
 
+    +touch
+      flex-direction: column
+
   .footer-detail
-    @include mobile
+    +touch
       flex: 1
       text-align: center
+      width: 100%

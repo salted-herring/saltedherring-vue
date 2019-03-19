@@ -1,9 +1,12 @@
 <template>
   <header
     :style="{ 'background-color': '#' + headerBg }"
-    :class="pageClass"
+    :class="cssClasses"
     class="page-header section">
-    <div class="container page-header__main-container">
+    <div
+      class="container page-header__main-container"
+      @mouseover="mouseover"
+      @mouseout="mouseover">
       <div
         :class="{ 'is-centered': isCentered }"
         class="columns">
@@ -20,12 +23,13 @@
         </div>
       </div>
     </div>
-    <div
-      :style="{ color: '#' + titleBg }"
+    <slot name="outsideContainer"/>
+    <h1
+      v-if="title"
+      :style="styles"
       :class="{ 'background-text--is-not-opaque': isNotOpaque }"
-      class="background-text">
-      {{ title }}
-    </div>
+      class="background-text"
+      v-text="title" />
     <slot name="background"/>
   </header>
 </template>
@@ -70,6 +74,11 @@ export default {
       default: ''
     }
   },
+  data() {
+    return {
+      isHovered: false
+    }
+  },
   computed: {
     isNotOpaque() {
       return !this.$store.state.pagestate.backgroundTextOpaque
@@ -82,6 +91,27 @@ export default {
       }
 
       return css.join(' ')
+    },
+    cssClasses() {
+      let classes = [this.pageClass]
+
+      if (this.isHovered) {
+        classes.push('is-hovered')
+      }
+
+      return classes.join(' ')
+    },
+    styles() {
+      let styles = {
+        color: '#' + this.titleBg
+      }
+
+      return styles
+    }
+  },
+  methods: {
+    mouseover() {
+      this.isHovered = !this.isHovered
     }
   }
 }
@@ -92,6 +122,10 @@ export default {
   @import "~assets/sass/imports/mixins"
 
   .page-header
+    &.is-hovered
+      .background-text
+        opacity: 0.1
+
     &__main-container
       min-height: 100vh
       height: 100%
