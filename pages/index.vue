@@ -138,11 +138,8 @@ export default {
           text-align: center
 
       p
-        font-size: rem(36)
+        font-size: rem(24)
         font-weight: $weight-normal
-
-        +until(widescreen)
-          font-size: rem(24)
 
         +mobile
           text-align: center
