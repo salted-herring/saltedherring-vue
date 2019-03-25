@@ -237,84 +237,91 @@ export default {
   },
   mounted: function() {
     if (process.browser) {
-      if (typeof $(this.$refs.owlCarousel).owlCarousel === 'undefined') {
-        require('owl.carousel')
-      }
+      let self = this
+      setTimeout(function() {
+        if (typeof $(self.$refs.owlCarousel).owlCarousel === 'undefined') {
+          require('owl.carousel')
+        }
 
-      let options = {
-        items: this.items,
-        margin: this.margin,
-        loop: this.loop,
-        center: this.center,
-        mouseDrag: this.mouseDrag,
-        touchDrag: this.touchDrag,
-        pullDrag: this.pullDrag,
-        freeDrag: this.freeDrag,
-        stagePadding: this.stagePadding,
-        merge: this.merge,
-        mergeFit: this.mergeFit,
-        autoWidth: this.autoWidth,
-        autoHeight: this.autoHeight,
-        startPosition: this.startPosition,
-        uRLhashListener: this.uRLhashListener,
-        nav: this.nav,
-        rewind: this.rewind,
-        navText: this.navText,
-        navElement: this.navElement,
-        slideBy: this.slideBy,
-        slideTransition: this.slideTransition,
-        dots: this.dots,
-        dotsEach: this.dotsEach,
-        dotsData: this.dotsData,
-        lazyLoad: this.lazyLoad,
-        lazyLoadEager: this.lazyLoadEager,
-        autoplay: this.autoplay,
-        autoplaySpeed: this.autoplaySpeed,
-        autoplayTimeout: this.autoplayTimeout,
-        autoplayHoverPause: this.autoplayHoverPause,
-        smartSpeed: this.smartSpeed,
-        fluidSpeed: this.fluidSpeed,
-        navSpeed: this.navSpeed,
-        dragEndSpeed: this.dragEndSpeed,
-        callbacks: this.callbacks,
-        responsive: this.responsive,
-        responsiveRefreshRate: this.responsiveRefreshRate,
-        responsiveBaseElement: this.responsiveBaseElement,
-        video: this.video,
-        videoHeight: this.videoHeight,
-        videoWidth: this.videoWidth,
-        animateOut: this.animateOut,
-        animateIn: this.animateIn,
-        fallbackEasing: this.fallbackEasing,
-        info: this.info,
-        itemElement: this.itemElement,
-        stageElement: this.stageElement,
-        navContainer: this.navContainer,
-        dotsContainer: this.dotsContainer,
-        checkVisible: this.checkVisible
-      }
+        let options = {
+          items: self.items,
+          margin: self.margin,
+          loop: self.loop,
+          center: self.center,
+          mouseDrag: self.mouseDrag,
+          touchDrag: self.touchDrag,
+          pullDrag: self.pullDrag,
+          freeDrag: self.freeDrag,
+          stagePadding: self.stagePadding,
+          merge: self.merge,
+          mergeFit: self.mergeFit,
+          autoWidth: self.autoWidth,
+          autoHeight: self.autoHeight,
+          startPosition: self.startPosition,
+          uRLhashListener: self.uRLhashListener,
+          nav: self.nav,
+          rewind: self.rewind,
+          navText: self.navText,
+          navElement: self.navElement,
+          slideBy: self.slideBy,
+          slideTransition: self.slideTransition,
+          dots: self.dots,
+          dotsEach: self.dotsEach,
+          dotsData: self.dotsData,
+          lazyLoad: self.lazyLoad,
+          lazyLoadEager: self.lazyLoadEager,
+          autoplay: self.autoplay,
+          autoplaySpeed: self.autoplaySpeed,
+          autoplayTimeout: self.autoplayTimeout,
+          autoplayHoverPause: self.autoplayHoverPause,
+          smartSpeed: self.smartSpeed,
+          fluidSpeed: self.fluidSpeed,
+          navSpeed: self.navSpeed,
+          dragEndSpeed: self.dragEndSpeed,
+          callbacks: self.callbacks,
+          responsive: self.responsive,
+          responsiveRefreshRate: self.responsiveRefreshRate,
+          responsiveBaseElement: self.responsiveBaseElement,
+          video: self.video,
+          videoHeight: self.videoHeight,
+          videoWidth: self.videoWidth,
+          animateOut: self.animateOut,
+          animateIn: self.animateIn,
+          fallbackEasing: self.fallbackEasing,
+          info: self.info,
+          itemElement: self.itemElement,
+          stageElement: self.stageElement,
+          navContainer: self.navContainer,
+          dotsContainer: self.dotsContainer,
+          checkVisible: self.checkVisible
+        }
 
-      const owl = $(this.$refs.owlCarousel).owlCarousel(options)
+        const owl = $(self.$refs.owlCarousel).owlCarousel(options)
 
-      $(this.$refs.prev).click(function() {
-        owl.trigger('prev.owl.carousel')
-      })
-
-      $(this.$refs.next).click(function() {
-        owl.trigger('next.owl.carousel')
-      })
-
-      events.forEach(eventName => {
-        owl.on(`${eventName}.owl.carousel`, event => {
-          this.$emit(eventName, event)
+        $(self.$refs.prev).click(function() {
+          owl.trigger('prev.owl.carousel')
         })
-      })
 
-      autoplayEvents.forEach(eventName => {
-        owl.on(`${eventName}`, event => {
-          this.$emit(eventName, event)
+        $(self.$refs.next).click(function() {
+          owl.trigger('next.owl.carousel')
         })
-      })
+
+        events.forEach(eventName => {
+          owl.on(`${eventName}.owl.carousel`, event => {
+            self.$emit(eventName, event)
+          })
+        })
+
+        autoplayEvents.forEach(eventName => {
+          owl.on(`${eventName}`, event => {
+            self.$emit(eventName, event)
+          })
+        })
+
+        setTimeout(function() {
+          owl.trigger('refresh.owl.carousel')
+        }, 5000)
+      }, 100)
     }
   }
 }

@@ -1,11 +1,12 @@
 import Vector from './BoidVectors'
 
-const MAX_SPEED = 4
-const MAX_FORCE = 0.01
-const DESIRED_SEPARATION = 20
-const NEIGHBOR_DISTANCE = 60
+const MAX_SPEED = 5
+const MAX_FORCE = 0.025
+const DESIRED_SEPARATION = 17
+const NEIGHBOR_DISTANCE = 57
 const BORDER_OFFSET = 3
 const BOID_COLOR = '#63EEEA'
+const MAX_RADIUS = 43
 
 function Boid(x, y, simulation) {
   let randomAngle = Math.random() * 2 * Math.PI
@@ -13,31 +14,38 @@ function Boid(x, y, simulation) {
   this.position = new Vector(x, y)
   this.acceleration = new Vector(0, 0)
   this.simulation = simulation
+  this.opacity = 1
 }
 
 Boid.prototype = {
-  render: function() {
-    let directionVector = this.velocity.normalize().multiplyBy(15)
-    let inverseVector1 = new Vector(-directionVector.y, directionVector.x)
-    let inverseVector2 = new Vector(directionVector.y, -directionVector.x)
+  render: function(boids) {
+    // console.log(window.mouseX, window.mouseY)
+    let directionVector = this.velocity.normalize().multiplyBy(19)
+    directionVector.iAdd(this.getAvoidDir(boids))
+
+    let inverseVector1 = new Vector(directionVector.y, -directionVector.x)
+    let inverseVector2 = new Vector(-directionVector.y, directionVector.x)
     inverseVector1 = inverseVector1.divideBy(3)
     inverseVector2 = inverseVector2.divideBy(3)
 
+    let pos = this.position.add(this.getAvoid())
+
     this.simulation.ctx.beginPath()
-    this.simulation.ctx.moveTo(this.position.x, this.position.y)
+    this.simulation.ctx.moveTo(pos.x, pos.y)
     this.simulation.ctx.lineTo(
-      this.position.x + inverseVector1.x,
-      this.position.y + inverseVector1.y
+      pos.x + inverseVector1.x,
+      pos.y + inverseVector1.y
     )
     this.simulation.ctx.lineTo(
-      this.position.x + directionVector.x,
-      this.position.y + directionVector.y
+      pos.x + directionVector.x,
+      pos.y + directionVector.y
     )
     this.simulation.ctx.lineTo(
-      this.position.x + inverseVector2.x,
-      this.position.y + inverseVector2.y
+      pos.x + inverseVector2.x,
+      pos.y + inverseVector2.y
     )
-    this.simulation.ctx.lineTo(this.position.x, this.position.y)
+    this.simulation.ctx.lineTo(pos.x, pos.y)
+    this.simulation.ctx.globalAlpha = this.opacity
     this.simulation.ctx.strokeStyle = BOID_COLOR
     this.simulation.ctx.stroke()
     this.simulation.ctx.fillStyle = BOID_COLOR
@@ -157,11 +165,55 @@ Boid.prototype = {
     let separationVector = this.getSeparationVector(boids)
     let alignmentVector = this.getAlignmentVector(boids)
 
-    separationVector.iMultiplyBy(2)
+    separationVector.iMultiplyBy(7)
 
     this.acceleration.iAdd(cohesionVector)
     this.acceleration.iAdd(separationVector)
     this.acceleration.iAdd(alignmentVector)
+  },
+
+  getAvoid: function() {
+    let mouse = new Vector(window.mouseX, window.mouseY)
+    let d = this.position.getDistance(mouse)
+    let steer = new Vector(0, 0)
+
+    if (d > 10 && d < MAX_RADIUS) {
+      let diff = this.position.subtract(mouse)
+      diff.iNormalize()
+      mouse.iDivideBy(d)
+      mouse.iAdd(diff)
+
+      if (this.opacity === 1.0) {
+        this.opacity = Math.random()
+      }
+
+      return mouse
+    }
+
+    return steer
+  },
+
+  getAvoidDir: function(boids) {
+    let mouse = new Vector(-window.mouseX, -window.mouseY)
+    let steer = new Vector(0, 0)
+
+    for (let i in boids) {
+      let boid = boids[i]
+      if (boid.position.x === mouse.x && boid.position.y === mouse.y) {
+        continue
+      }
+
+      let d = mouse.getDistance(boid)
+
+      if (d > 10 && d < MAX_RADIUS) {
+        let diff = mouse.subtract(boid)
+        diff.iNormalize()
+        diff.iDivideBy(d)
+        steer.iAdd(diff)
+      }
+    }
+
+    return steer
   },
 
   bound: function() {
@@ -189,6 +241,8 @@ Boid.prototype = {
     this.velocity.iLimit(MAX_SPEED)
 
     this.position.iAdd(this.velocity)
+    this.position.iAdd(this.getAvoid())
+    //
     this.bound()
 
     // Reset accelertion to 0 each cycle
@@ -198,7 +252,7 @@ Boid.prototype = {
   run: function(boids) {
     this.flock(boids)
     this.update()
-    this.render()
+    this.render(boids)
   }
 }
 

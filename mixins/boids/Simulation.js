@@ -2,6 +2,7 @@ import $ from 'jquery'
 import Boid from './Boid'
 
 const NUM_BOIDS = 128
+const CURSOR_SIZE = 43
 
 function Simulation() {
   let canvas = document.getElementById('boids')
@@ -18,6 +19,19 @@ Simulation.prototype = {
     if (!dim) {
       return false
     }
+
+    window.mouseX = 0
+    window.mouseY = 0
+    window.addEventListener('mousemove', function(e) {
+      window.mouseX = e.clientX
+      window.mouseY = e.clientY
+
+      let c = CURSOR_SIZE / 2
+
+      let el = document.getElementById('boidscursor')
+      el.style.left = window.mouseX - c + 'px'
+      el.style.top = window.mouseY - c + 'px'
+    })
 
     this.boids = []
     for (let i = 0; i < NUM_BOIDS; i++) {
@@ -58,17 +72,6 @@ Simulation.prototype = {
   run: function() {
     let self = this
     self.tick()
-
-    $('canvas#boids').click(function(e) {
-      // No need to show the notice once the user has already added a boid
-      var clickNotice$ = $('div#click_notice')
-      clickNotice$.fadeOut('fast')
-      var canvasX = e.pageX
-      var canvasY = e.pageY - $('div#header_wrapper').height()
-      boid = new Boid(canvasX, canvasY, simulation)
-      simulation.addBoid(boid)
-      return false
-    })
 
     if (!window.requestAnimationFrame) {
       window.requestAnimationFrame = (function() {

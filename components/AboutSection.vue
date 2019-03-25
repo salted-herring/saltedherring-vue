@@ -27,7 +27,8 @@
         :autoplay="false"
         :items="3"
         :dots="true"
-        :center="true"
+        :center="false"
+        :loop="false"
         :margin="100"
         :animate-in="'slideIn'"
         :animate-out="'slideOut'"
@@ -36,6 +37,7 @@
         :slide-transition="'cubic-bezier(0.23, 1, 0.32, 1)'"
         :responsive="responsiveData"
         :auto-width="true"
+        :auto-height="false"
         class="about-section__blocks">
         <Block
           v-for="(block, index) in section.Blocks"
@@ -156,12 +158,23 @@ export default {
       margin: rem(100) 0
 
       .owl-carousel
+        max-width: calc(100% - 200px)
+
+        +touch
+          max-width: calc(100% - 120px)
+
+        +mobile
+          max-width: 450px
+
+        margin-left: auto
+        margin-right: auto
+        // max-width: 1200px
+        // overflow: hidden
+
         .owl-stage-outer
           overflow: visible
 
           +touch
-            overflow: hidden
-
             .blockquote
               display: none
 
@@ -178,10 +191,5 @@ export default {
           .blockquote
             &:hover
               transform: translate3d(rem(-10), rem(-10), 0)
-
-          &.center
-            .blockquote
-              &:hover
-                transform: translate3d(rem(-10), rem(-50), 0)
-                z-index: 1
+              z-index: 1
 </style>

@@ -10,11 +10,16 @@
       :isCentered="false"
       :pageClass="'homepage-header'">
       <!-- http://www.emergentmind.com/boids -->
-      <canvas
-        id="boids"
-        slot="background"
-        class="boids-canvas"
-      />
+      <div
+        slot="background">
+        <canvas
+          id="boids"
+          class="boids-canvas"
+        />
+        <div
+          id="boidscursor"
+          class="boids-cursor" />
+      </div>
     </Header>
 
     <LatestSection
@@ -161,6 +166,18 @@ export default {
     position: fixed
     top: 0
     left: 0
+
+  .boids-cursor
+    width: rem(43)
+    height: rem(43)
+    z-index: 100
+    display: block
+    background: rgba($robins-egg, 0.2)
+    position: fixed
+    border-radius: 50%
+    top: rem(-100)
+    left: rem(-100)
+    cursor: none
 
   .home-page
     .section:last-child
