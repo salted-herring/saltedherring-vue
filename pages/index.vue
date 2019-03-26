@@ -12,10 +12,11 @@
       <!-- http://www.emergentmind.com/boids -->
       <div
         slot="background">
-        <canvas
+        <Boids />
+        <!-- <canvas
           id="boids"
           class="boids-canvas"
-        />
+        /> -->
         <div
           id="boidscursor"
           class="boids-cursor" />
@@ -31,6 +32,7 @@
 <script>
 import getHomePage from '~/apollo/queries/homepage'
 
+import Boids from '~/components/Boids'
 import Header from '~/components/Header'
 import LatestSection from '~/components/LatestSection'
 
@@ -44,6 +46,7 @@ import Simulation from '~/mixins/boids/Simulation'
 
 export default {
   components: {
+    Boids,
     Header,
     LatestSection
   },
@@ -62,19 +65,18 @@ export default {
   mounted() {
     this.$store.commit('menu/setMenu', true)
     this.$store.commit('menu/setHamburger', false)
-
-    this.resizeCanvas()
-
-    let simulation = new Simulation()
-    simulation.initialize()
-    simulation.run()
+    // this.resizeCanvas()
+    //
+    // let simulation = new Simulation()
+    // simulation.initialize()
+    // simulation.run()
   },
-  beforeMount() {
-    window.addEventListener('resize', this.resizeCanvas)
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.resizeCanvas)
-  },
+  // beforeMount() {
+  //   window.addEventListener('resize', this.resizeCanvas)
+  // },
+  // beforeDestroy() {
+  //   window.removeEventListener('resize', this.resizeCanvas)
+  // },
   asyncData({ store, params }) {
     let self = this
 
@@ -161,23 +163,6 @@ export default {
         +until($tablet)
           padding-left: 0 !important
           padding-right: 0 !important
-
-  .boids-canvas
-    position: fixed
-    top: 0
-    left: 0
-
-  .boids-cursor
-    width: rem(43)
-    height: rem(43)
-    z-index: 100
-    display: block
-    background: rgba($robins-egg, 0.2)
-    position: fixed
-    border-radius: 50%
-    top: rem(-100)
-    left: rem(-100)
-    cursor: none
 
   .home-page
     .section:last-child

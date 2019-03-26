@@ -1,0 +1,3 @@
+[submodule "components/boids"]
+	path = components/boids
+	url = https://github.com/adamheins/predator-prey-sim.git
