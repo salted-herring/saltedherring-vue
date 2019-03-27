@@ -3,19 +3,61 @@
 ////
 
 .navbar-item
-    &.navbar-logo
-        padding: 0
+  &.navbar-logo
+    padding: 0
 
-        +tablet
-          padding: rem(30)
+    a
+      position: relative
+
+      &:after
+        position: absolute
+        left: 0
+        content: ''
+        top: rem(57)
+        display: block
+        width: rem(3)
+        height: rem(3)
+        background: $black
+        z-index: 2
+        transform: rotate(-5deg) skew(-5deg)
+        transition: all 0.5s
+
+        +widescreen
+          top: rem(72)
+          width: rem(4)
+          height: rem(4)
+
+      &:hover
+        &:after
+          transform: translateY(-3px) rotate(-5deg) skew(-5deg)
+          width: 100%
 
         img
-            max-height: 100%
-            max-width: rem(80)
-            height: auto
+          transition: all 0.25s
+          transform: translate3d(0, -10px, 0)
 
-            +widescreen
-              max-width: rem(100)
+          +widescreen
+            transform: translate3d(0, -20px, 0)
 
-            +fullhd
-              max-width: rem(120)
+    +tablet
+      padding: rem(30)
+
+    img
+      max-height: 100%
+      max-width: rem(80)
+      height: auto
+      transition: all 0.25s 0.2s
+
+      +widescreen
+        max-width: rem(100)
+
+      +fullhd
+        max-width: rem(120)
+
+/// White variation
+.navbar--is-white
+  .navbar-item
+    &.navbar-logo
+      a
+        &:after
+          background: $white

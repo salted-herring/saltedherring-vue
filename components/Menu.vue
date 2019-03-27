@@ -5,21 +5,21 @@
     class="navbar is-flex is-transparent is-fixed-top">
     <div
       class="navbar-brand">
-      <nuxt-link
-        class="navbar-item navbar-logo"
-        to="/">
-        <img
-          v-if="isBlack"
-          src="~/static/img/logo.svg"
-          alt="Salted Herring logo"
-          width="120">
-        <img
-          v-else-if="isWhite"
-          src="~/static/img/logo-white.svg"
-          alt="Salted Herring logo"
-          width="120">
-      </nuxt-link>
-
+      <div class="navbar-item navbar-logo">
+        <nuxt-link
+          to="/">
+          <img
+            v-if="isBlack"
+            src="~/static/img/logo.svg"
+            alt="Salted Herring logo"
+            width="120">
+          <img
+            v-else-if="isWhite"
+            src="~/static/img/logo-white.svg"
+            alt="Salted Herring logo"
+            width="120">
+        </nuxt-link>
+      </div>
     </div>
     <button
       :class="{ 'close-item--is-black': isBlack, 'close-item--is-white': isWhite, 'is-visible' : isChildPage }"

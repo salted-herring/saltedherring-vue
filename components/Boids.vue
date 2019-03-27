@@ -1,6 +1,7 @@
 <template>
   <canvas
     id="boids"
+    ref="canvas"
     :class="{ 'show' : show }"
     class="boids-canvas"
     width="500"
@@ -15,6 +16,7 @@ import Predator from '~/components/boids/js/predator'
 export default {
   data: () => ({
     show: false,
+    creatureColour: '#63EEEA',
     prey: [],
     predators: [],
     mousePosition: new Vector(0, 0),
@@ -23,34 +25,34 @@ export default {
         separation: { min: 0, max: 10 },
         alignment: { min: 0, max: 10 },
         cohesion: { min: 0, max: 10 },
-        flee: { min: 0, max: 10 }
+        flee: { min: 0, max: 500 }
       },
       prey: {
         speed: { min: 0.0, max: 10.0 }
       },
       predator: {
-        speed: { min: 0.0, max: 10.0 }
+        speed: { min: 0.0, max: 1000.0 }
       }
     },
     config: {
       weights: {
-        separation: 0.5,
-        alignment: 3.0,
-        cohesion: 0.5,
-        flee: 5.0
+        separation: 1.5,
+        alignment: 3.5,
+        cohesion: 1.3,
+        flee: 37
       },
       prey: {
-        speed: 11.0,
+        speed: 7,
         number: 128,
-        maxTurnAngle: 0.1,
-        minSeparation: 25.0,
-        predatorSightDist: 400,
+        maxTurnAngle: 0.02,
+        minSeparation: 40.0,
+        predatorSightDist: 300,
         minFlockDist: 100
       },
       predator: {
-        speed: 2.5,
+        speed: 75,
         number: 1,
-        killDist: 30.0,
+        killDist: 5,
         maxTurnAngle: 0.02
       },
       env: {
@@ -60,7 +62,6 @@ export default {
   }),
   mounted() {
     this.resizeCanvas()
-    this.show = true
 
     this.run()
   },
@@ -92,32 +93,48 @@ export default {
       }
     },
     run() {
-      let canvas = document.getElementById('boids')
-      let ctx = canvas.getContext('2d')
-
-      this.config.env.screenWidth = canvas.width
-      this.config.env.screenHeight = canvas.height
-      this.config.env.ctx = ctx
-      this.config.env.screen = new Vector(canvas.width, canvas.height)
+      this.updateCanvas()
 
       // Initialize the prey and predators.
       let creatures = this.init()
       this.config.preyList = creatures.prey
       this.config.predatorList = creatures.predators
 
-      this.render(ctx, this.config.preyList, creatures.predators)
+      this.render(
+        this.config.env.ctx,
+        this.config.preyList,
+        creatures.predators
+      )
       this.play()
     },
     play() {
       let self = this
-      let count = 0
-      let interval = setInterval(function() {
+
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = (function() {
+          return (
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function(callback, element) {
+              window.setTimeout(callback, 1000 / 60)
+            }
+          )
+        })()
+      }
+
+      function animate() {
+        self.show = true
         self.loop(
           self.config.env.ctx,
           self.config.preyList,
           self.config.predatorList
         )
-      }, self.config.env.delay)
+        requestAnimationFrame(animate)
+      }
+
+      requestAnimationFrame(animate)
     },
     loop(ctx, preyList, predatorList) {
       this.render(ctx, preyList, predatorList)
@@ -128,12 +145,17 @@ export default {
       this.movePrey(preyList, predatorList)
     },
     render(ctx, preyList, predatorList) {
+      let self = this
+      let predatorColour = Utils.hexToRgbA(this.creatureColour, 0.5)
+
       ctx.clearRect(0, 0, this.config.env.screen.x, this.config.env.screen.y)
+
       preyList.forEach(function(prey) {
-        prey.draw(ctx, '#63EEEA')
+        prey.draw(ctx, self.creatureColour)
       })
+
       predatorList.forEach(function(predator) {
-        predator.draw(ctx, 'red')
+        predator.draw(ctx, predatorColour)
       })
     },
     movePrey(preyList, predatorList) {
@@ -176,12 +198,27 @@ export default {
       })
     },
     resizeCanvas() {
-      let canvas = $('canvas')
-      let height = $(window).height()
-      let width = $(window).width()
+      this.updateCanvas()
+    },
+    updateCanvas() {
+      let canvas = document.getElementById('boids')
+      let ctx = canvas.getContext('2d')
+      ctx.strokeStyle = 'none'
 
-      canvas.attr('height', height)
-      canvas.attr('width', width)
+      let w = window,
+        d = document,
+        e = d.documentElement,
+        g = d.getElementsByTagName('body')[0],
+        width = w.innerWidth || e.clientWidth || g.clientWidth,
+        height = w.innerHeight || e.clientHeight || g.clientHeight
+
+      canvas.height = height
+      canvas.width = width
+
+      this.config.env.screenWidth = canvas.width
+      this.config.env.screenHeight = canvas.height
+      this.config.env.ctx = ctx
+      this.config.env.screen = new Vector(canvas.width, canvas.height)
     },
     mouseMove(e) {
       this.mousePosition = new Vector(e.clientX, e.clientY)
@@ -197,11 +234,13 @@ export default {
 
   .boids-canvas
     position: fixed
+    cursor: none
     top: 0
     left: 0
     display: block
     opacity: 0
-    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1)
+    z-index: 0
+    transition: opacity 3s cubic-bezier(0.23, 1, 0.32, 1)
 
     &.show
       opacity: 1.0

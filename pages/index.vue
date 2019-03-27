@@ -9,14 +9,9 @@
       :introductionVariation="'page-introduction--left'"
       :isCentered="false"
       :pageClass="'homepage-header'">
-      <!-- http://www.emergentmind.com/boids -->
       <div
         slot="background">
         <Boids />
-        <!-- <canvas
-          id="boids"
-          class="boids-canvas"
-        /> -->
         <div
           id="boidscursor"
           class="boids-cursor" />
@@ -40,17 +35,13 @@ import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
 import Transition from '~/mixins/TransitionMixin'
 
-/// Boids:
-import CanvasInit from '~/mixins/boids/CanvasInit'
-import Simulation from '~/mixins/boids/Simulation'
-
 export default {
   components: {
     Boids,
     Header,
     LatestSection
   },
-  mixins: [CanvasInit, Meta, PageState, Transition],
+  mixins: [Meta, PageState, Transition],
   computed: {
     metaData() {
       return this.$store.state.meta.pages.home
@@ -65,18 +56,7 @@ export default {
   mounted() {
     this.$store.commit('menu/setMenu', true)
     this.$store.commit('menu/setHamburger', false)
-    // this.resizeCanvas()
-    //
-    // let simulation = new Simulation()
-    // simulation.initialize()
-    // simulation.run()
   },
-  // beforeMount() {
-  //   window.addEventListener('resize', this.resizeCanvas)
-  // },
-  // beforeDestroy() {
-  //   window.removeEventListener('resize', this.resizeCanvas)
-  // },
   asyncData({ store, params }) {
     let self = this
 
@@ -127,6 +107,7 @@ export default {
   @import "~bulma/sass/utilities/mixins"
 
   .homepage-header
+    cursor: none
     .columns
       .column
         position: relative
@@ -152,6 +133,7 @@ export default {
           text-align: center
 
     .page-header__main-container
+
       .page-introduction
         position: relative
         top: auto
@@ -159,6 +141,17 @@ export default {
         transform: none
         left: auto
         padding-bottom: rem(400)
+
+        p,
+        h1,
+        h2,
+        span,
+        strong,
+        em,
+        i,
+        b
+          position: relative
+          z-index: 200
 
         +until($tablet)
           padding-left: 0 !important
