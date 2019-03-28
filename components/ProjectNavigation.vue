@@ -18,11 +18,11 @@
           :label="link.MenuTitle" />
       </nav>
 
-      <div
+      <BackgroundText
         v-if="backgroundText !== ''"
+        :title="backgroundText"
         :class="{ 'background-text--is-not-opaque': isNotOpaque }"
-        class="background-text"
-        v-html="backgroundText" />
+        class="background-text" />
     </section>
 
     <div
@@ -37,11 +37,13 @@
   </div>
 </template>
 <script>
+import BackgroundText from '~/components/BackgroundText'
 import ProjectLink from '~/components/ProjectLink'
 import PreviewOverlay from '~/components/PreviewOverlay'
 
 export default {
   components: {
+    BackgroundText,
     ProjectLink,
     PreviewOverlay
   },

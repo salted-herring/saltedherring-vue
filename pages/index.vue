@@ -12,9 +12,6 @@
       <div
         slot="background">
         <Boids />
-        <div
-          id="boidscursor"
-          class="boids-cursor" />
       </div>
     </Header>
 
@@ -107,7 +104,6 @@ export default {
   @import "~bulma/sass/utilities/mixins"
 
   .homepage-header
-    cursor: none
     .columns
       .column
         position: relative

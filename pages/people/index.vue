@@ -9,9 +9,10 @@
     <div
       :style="{ 'background-color': '#' + peoplepage.BackgroundColour.Colour + 'E6' }"
       class="people-content">
-      <h1
-        class="background-text"
-        v-text="peoplepage.Title" />
+      <BackgroundText
+        :tag="'h1'"
+        :title="peoplepage.Title"
+        class="background-text" />
       <div class="container">
         <div class="columns is-centered">
           <div
@@ -36,12 +37,13 @@ import Meta from '~/mixins/MetaMixin'
 import PageState from '~/mixins/PageState'
 import Transition from '~/mixins/TransitionMixin'
 
+import BackgroundText from '~/components/BackgroundText'
 import GenericHeader from '~/components/GenericHeader'
 import LatestSection from '~/components/LatestSection'
 import Navigation from '~/components/PeopleNavigation'
 
 export default {
-  components: { GenericHeader, LatestSection, Navigation },
+  components: { BackgroundText, GenericHeader, LatestSection, Navigation },
   mixins: [Meta, PageState, Transition],
   computed: {
     metaData() {

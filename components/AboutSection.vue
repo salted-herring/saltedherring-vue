@@ -9,9 +9,9 @@
       <span
         class="page-introduction"
         v-html="section.HeroIntroduction"/>
-      <span
-        class="background-text"
-        v-text="section.HeroTitle" />
+      <BackgroundText
+        :title="section.HeroTitle"
+        class="background-text" />
     </header>
     <div class="about-section__content">
       <TextBlock
@@ -56,12 +56,14 @@
 </template>
 <script>
 import Block from '~/components/AboutBlock'
+import BackgroundText from '~/components/BackgroundText'
 import Header from '~/components/Header'
 import TextBlock from '~/components/TextBlock'
 import Carousel from '~/components/Carousel'
 
 export default {
   components: {
+    BackgroundText,
     Block,
     Header,
     TextBlock,

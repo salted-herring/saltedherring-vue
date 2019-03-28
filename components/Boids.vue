@@ -47,7 +47,7 @@ export default {
         maxTurnAngle: 0.02,
         minSeparation: 40.0,
         predatorSightDist: 300,
-        minFlockDist: 100
+        minFlockDist: 300
       },
       predator: {
         speed: 75,
@@ -100,11 +100,6 @@ export default {
       this.config.preyList = creatures.prey
       this.config.predatorList = creatures.predators
 
-      this.render(
-        this.config.env.ctx,
-        this.config.preyList,
-        creatures.predators
-      )
       this.play()
     },
     play() {
@@ -146,7 +141,7 @@ export default {
     },
     render(ctx, preyList, predatorList) {
       let self = this
-      let predatorColour = Utils.hexToRgbA(this.creatureColour, 0.5)
+      let predatorColour = Utils.hexToRgbA(this.creatureColour, 0)
 
       ctx.clearRect(0, 0, this.config.env.screen.x, this.config.env.screen.y)
 
@@ -234,7 +229,6 @@ export default {
 
   .boids-canvas
     position: fixed
-    cursor: none
     top: 0
     left: 0
     display: block
@@ -244,16 +238,4 @@ export default {
 
     &.show
       opacity: 1.0
-
-  .boids-cursor
-    width: rem(43)
-    height: rem(43)
-    z-index: 100
-    display: block
-    background: rgba($robins-egg, 0.2)
-    position: fixed
-    border-radius: 50%
-    top: rem(-100)
-    left: rem(-100)
-    cursor: none
 </style>
