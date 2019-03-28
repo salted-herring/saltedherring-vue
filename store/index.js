@@ -242,5 +242,8 @@ export const mutations = {
     project.ContentBlocks = blocks
 
     state.projects[updateOptions.projectId] = project
+  },
+  updateCurrentProject(state, urlSegment) {
+    state.currentProject = urlSegment
   }
 }

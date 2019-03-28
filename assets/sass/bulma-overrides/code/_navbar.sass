@@ -5,6 +5,17 @@
     padding: rem(30)
     pointer-events: none
 
+    &--is-active
+      +mobile
+        background: $white
+        height: 100%
+
+        &.navbar--is-white
+            background: $black
+
+        .navbar-logo
+          align-items: flex-start
+
     &--is-white
       color: $white
 

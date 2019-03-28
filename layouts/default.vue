@@ -45,6 +45,7 @@ export default {
         window.innerWidth ||
         document.documentElement.clientWidth ||
         document.body.clientWidth
+      let colour = this.$store.state.menu.color
 
       if (screenWidth <= 1024) {
         this.$store.commit('menu/setmenuScrolledIntoView', true)
@@ -52,13 +53,14 @@ export default {
       }
 
       if (sectionTop <= 0) {
-        this.$store.commit('menu/setMenuColour', 'black')
+        this.$store.commit('menu/setMenuCurrentColour', 'black')
         this.$store.commit('menu/setmenuScrolledIntoView', true)
+      } else {
+        this.$store.commit('menu/setMenuCurrentColour', colour)
       }
 
       if (scrollTop === 0) {
-        let colour = this.$store.state.menu.currentColor
-        this.$store.commit('menu/setMenuColour', colour)
+        this.$store.commit('menu/setMenuCurrentColour', colour)
         this.$store.commit('menu/setmenuScrolledIntoView', false)
         this.$store.commit('menu/setMenuClicked', false)
       }

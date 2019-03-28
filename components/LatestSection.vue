@@ -95,29 +95,17 @@ export default {
 
       +until($desktop)
         margin: rem(0) rem(60 - 12)
-      //   flex-direction: column
-      //   align-items: center
-      //   padding-left: rem(60)
-      //   padding-right: rem(60)
-      //   margin-left: 0
-      //   margin-rigth: 0
       //
-      // +mobile
-      //   padding-left: rem(30)
-      //   padding-right: rem(30)
-      //   max-width: rem(568)
-      //   margin-left: auto
-      //   margin-right: auto
+      +mobile
+        margin: rem(0) rem(30)
 
     .latest-item
       color: $black
       min-width: rem(270)
 
-      // +until($desktop)
-      //   width: 100%
-      //   max-width: rem(650)
-      //   padding-left: 0
-      //   padding-right: 0
+      +mobile
+        padding-left: 0
+        padding-right: 0
 
       &:hover
         b

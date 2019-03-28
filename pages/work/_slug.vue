@@ -196,6 +196,21 @@ export default {
     let currentProject = null
     let self = this
 
+    let projects = store.state.projects
+
+    // If we've already loaded this project,
+    // no need to call the api again.
+    if (projects !== null) {
+      let proj = projects[slug]
+
+      if (typeof proj.fullyLoaded !== 'undefined') {
+        store.commit('updateCurrentProject', slug)
+        store.commit('menu/setMenuColour', proj.HeroMenuColour)
+        store.commit('menu/setMenuCurrentColour', proj.HeroMenuColour)
+        return false
+      }
+    }
+
     return store.app
       .$axios({
         url: '/graphql/',
@@ -217,8 +232,14 @@ export default {
 
         if (projects.length === 1) {
           currentProject = projects[0]
+          currentProject.fullyLoaded = true
+          // console.log(currentProject)
           store.commit('updateProject', currentProject)
           store.commit('menu/setMenuColour', currentProject.HeroMenuColour)
+          store.commit(
+            'menu/setMenuCurrentColour',
+            currentProject.HeroMenuColour
+          )
           store.commit('meta/setupMeta', { slug: slug, data: currentProject })
         } else {
           error({ statusCode: 404, message: 'Project not found' })
@@ -306,7 +327,7 @@ export default {
 
         aside
           order: 2
-          margin-top: rem(40)
+          margin-top: 0
           display: block
 
           .project-tags
@@ -327,9 +348,24 @@ export default {
     font-size: rem(18)
     margin-bottom: rem(30)
 
+    +mobile
+      margin-bottom: 0 !important
+      padding-bottom: 0 !important
+
+      &:first-child,
+      + .project-tags
+        .cms-content
+          padding-top: 0 !important
+      .cms-content
+        padding-left: 0 !important
+        padding-right: 0 !important
+
+
+
     +widescreen
       font-size: rem(16)
       line-height: em(22, 16)
+
     +fullhd
       font-size: rem(18)
 

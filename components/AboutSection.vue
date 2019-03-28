@@ -166,12 +166,10 @@ export default {
           max-width: calc(100% - 120px)
 
         +mobile
-          max-width: 450px
+          max-width: 100%
 
         margin-left: auto
         margin-right: auto
-        // max-width: 1200px
-        // overflow: hidden
 
         .owl-stage-outer
           overflow: visible
@@ -179,6 +177,10 @@ export default {
           +touch
             .blockquote
               display: none
+
+          +mobile
+            margin-left: rem(30)
+            margin-right: rem(30)
 
       .owl-item
         transition: all 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955)

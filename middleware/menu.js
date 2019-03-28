@@ -1,6 +1,12 @@
 import getMainMenu from '~/apollo/queries/menu.js'
 
 export default function({ store, route, redirect }) {
+  // menu is alwasy closed when route is loaded.
+  store.commit('menu/setMenu', false)
+  store.commit('menu/setMenuClicked', false)
+  store.commit('menu/setMenuColour', 'black')
+  store.commit('menu/setMenuCurrentColour', 'black')
+
   // only execute if the menu is not present.
   if (store.state.menu.menuItems.length !== 0) {
     return

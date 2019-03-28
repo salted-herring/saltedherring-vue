@@ -122,3 +122,47 @@ export default {
   }
 }
 </script>
+<style lang="sass">
+  /// Config
+  @import "~assets/sass/config/colours"
+  @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/imports/mixins"
+  @import "~bulma/sass/utilities/mixins"
+
+  ////
+  /// Background text element
+  ////
+  .background-text
+      font-size: rem(200)
+      font-weight: $weight-extrabold
+      line-height: 1.2em
+      letter-spacing: normal
+      text-align: center
+      display: inline
+      position: fixed
+      width: 100%
+      white-space: nowrap
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg)
+      z-index: 0
+      pointer-events: none
+      transition: opacity 0.25s ease, perspective 0.25s ease, transform 0.2s
+
+      &--is-not-opaque
+        opacity: 0
+
+      +fullhd
+        font-size: rem(300)
+
+      +until($desktop)
+        font-size: rem(180)
+
+      +touch
+        font-size: rem(160)
+
+      +mobile
+        font-size: rem(120)
+        transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg) !important
+
+</style>

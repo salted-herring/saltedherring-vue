@@ -1,7 +1,7 @@
 <template>
   <nav
     id="main-menu"
-    :class="{ 'navbar--is-black': isBlack, 'navbar--is-white': isWhite }"
+    :class="{ 'navbar--is-black': isBlack, 'navbar--is-white': isWhite, 'navbar--is-active': isClicked }"
     class="navbar is-flex is-transparent is-fixed-top">
     <div
       class="navbar-brand">
@@ -81,13 +81,13 @@ export default {
       return false
     },
     menuColour() {
-      return this.$store.state.menu.color
+      return this.$store.state.menu.currentColor
     },
     isBlack() {
-      return this.$store.state.menu.color === 'black'
+      return this.$store.state.menu.currentColor === 'black'
     },
     isWhite() {
-      return this.$store.state.menu.color === 'white'
+      return this.$store.state.menu.currentColor === 'white'
     },
     isChildPage() {
       let parts = this.$route.path.replace(/^\/+|\/+$/g, '').split('/')
@@ -96,10 +96,6 @@ export default {
     isClicked() {
       return this.$store.state.menu.menuClicked
     }
-  },
-  mounted() {
-    let colour = this.$store.state.menu.color
-    this.$store.commit('menu/setMenuCurrentColour', colour)
   },
   methods: {
     onMouseOver: function(e) {

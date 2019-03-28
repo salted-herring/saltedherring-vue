@@ -149,77 +149,81 @@ export default {
   }
 }
 </script>
-  <style lang="sass">
-    @import "~assets/sass/config/bulma-variables"
-    @import "~assets/sass/config/colours"
-    @import "~assets/sass/imports/mixins"
-    @import "~bulma/sass/utilities/mixins"
+<style lang="sass">
+  @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/config/colours"
+  @import "~assets/sass/imports/mixins"
+  @import "~bulma/sass/utilities/mixins"
 
-    .text-block
+  .text-block
 
-      .columns
-        margin-top: 0
-        margin-bottom: 0
+    +mobile
+      .cms-content
+        padding: rem(60) rem(30) !important
 
-        +until($desktop)
-          display: flex
-          flex-direction: column
-          align-items: center
-          margin: 0
+    .columns
+      margin-top: 0
+      margin-bottom: 0
 
-        &.is-centered
-          justify-content: center
+      +until($desktop)
+        display: flex
+        flex-direction: column
+        align-items: center
+        margin: 0
 
-          .text-block__details
-            max-width: rem(900)
+      &.is-centered
+        justify-content: center
+
+        .text-block__details
+          max-width: rem(900)
+
+    .blockquote
+      align-self: center
+      z-index: 1
+      position: absolute
+
+      +until($desktop)
+        position: relative
+        order: 1
+        width: 75%
+        max-width: rem(480)
+        padding: rem(40)
+        margin: rem(40) 0 !important
+        transform: translate3d(0,0,0) !important
+
+      +mobile
+        margin-left: auto !important
+        margin-right: auto !important
+        max-width: rem(300)
+        width: 100%
+        padding: rem(40)
+
+    .align-left
+      .blockquote + .text-block__details
+        align-self: flex-end
+        margin-left: auto
+        padding-left: rem(240)
+
+        +until($widescreen)
+          padding-left: rem(120)
+
+        +until($tablet)
+          padding-left: rem(100)
+
+
+    .align-right
 
       .blockquote
-        align-self: center
-        z-index: 1
-        position: absolute
+        order: 2
+        right: 0
 
-        +until($desktop)
-          position: relative
-          order: 1
-          width: 75%
-          max-width: rem(480)
-          padding: rem(40)
-          margin: rem(40) 0 !important
-          transform: translate3d(0,0,0) !important
-
-        +mobile
-          margin-left: auto !important
-          margin-right: auto !important
-          max-width: rem(300)
-          width: 100%
-          padding: rem(40)
-
-      .align-left
-        .blockquote + .text-block__details
-          align-self: flex-end
-          margin-left: auto
-          padding-left: rem(240)
+        + .text-block__details
+          padding-right: rem(240)
 
           +until($widescreen)
-            padding-left: rem(120)
+            padding-right: rem(120)
 
           +until($tablet)
-            padding-left: rem(100)
+            padding-right: rem(100)
 
-
-      .align-right
-
-        .blockquote
-          order: 2
-          right: 0
-
-          + .text-block__details
-            padding-right: rem(240)
-
-            +until($widescreen)
-              padding-right: rem(120)
-
-            +until($tablet)
-              padding-right: rem(100)
-
-  </style>
+</style>
