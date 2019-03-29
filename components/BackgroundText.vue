@@ -35,8 +35,9 @@ export default {
           y: -5
         }
       },
-      perspective: 800,
-      maxRotation: 16,
+      perspective: 1000,
+      maxRotation: 10,
+      maxRotationX: 20,
       mounted: false,
       mouseX: 0,
       mouseY: 0
@@ -59,15 +60,15 @@ export default {
         perspective = '100%'
       }
 
-      let rotateX = this.rotation.initial.x - this.rotation.x * maxRotation
-      let rotateY = this.rotation.initial.y - this.rotation.y * maxRotation
+      let rotateX = this.rotation.x
+      let rotateY = this.rotation.y
 
       let rotate =
         'perspective(' +
         perspective +
-        'px) rotateX(' +
+        'px) rotateY(' +
         rotateX +
-        'deg) rotateY(' +
+        'deg) rotateZ(' +
         rotateY +
         'deg)'
 
@@ -78,6 +79,12 @@ export default {
   },
   beforeMount() {
     window.addEventListener('mousemove', this.mouseMove)
+  },
+  mounted() {
+    let self = this
+    setTimeout(function() {
+      self.mounted = true
+    }, 4000)
   },
   beforeDestroy() {
     window.removeEventListener('mousemove', this.mouseMove)
@@ -97,18 +104,35 @@ export default {
       }
     },
     mouseMove(event) {
-      this.mounted = true
+      if (!this.mounted) {
+        return false
+      }
 
-      let win = this.getWindowDim(),
-        mousePos = {
-          x: event.clientX,
-          y: event.clientY
-        }
+      let win = this.getWindowDim()
+      let mousePos = {
+        x: event.clientX,
+        y: event.clientY
+      }
+      let yPercentage = mousePos.y / (win.height / 2)
+      let xPercentage = mousePos.x / (win.width / 2)
+      let rotationY = this.rotation.initial.y
+      let rotationX = this.rotation.initial.x
+      let offset = 80
 
-      this.rotation.x = this.calculateRotationPercentage(mousePos.y, win.height)
+      if (mousePos.y < win.height / 2 - offset) {
+        rotationY -= (1 - yPercentage) * this.maxRotation
+      }
 
-      this.rotation.y =
-        this.calculateRotationPercentage(mousePos.x, win.width) * -1
+      if (mousePos.x > win.width / 2 - offset) {
+        rotationX -= (1 - xPercentage) * this.maxRotationX
+      } else if (mousePos.x > win.height / 2 + offset) {
+        rotationX += xPercentage * this.maxRotationX
+      }
+
+      this.rotation.y = rotationY
+
+      this.rotation.x = rotationX
+      //this.calculateRotationPercentage(mousePos.x, win.width)
     },
     calculateRotationPercentage: function(offset, dimension) {
       return (-2 / dimension) * offset + 1

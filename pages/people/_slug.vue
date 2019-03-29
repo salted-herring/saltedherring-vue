@@ -198,7 +198,7 @@ export default {
     .outside-container
       position: fixed
       top: 50%
-      right: rem(60)
+      right: rem(100)
       transform: translateY(-50%)
       padding: 0
       z-index: 12

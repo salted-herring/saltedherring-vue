@@ -31,26 +31,41 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.loading-page
-  position: fixed
-  top: 30px
-  left: 30px
-  width: 0
-  height: calc(100% - 60px)
-  background: #fff
-  text-align: center
-  z-index: 1000
-  transition: all 0.25s ease
-  transform: translate3d(0, 0, 0)
-  overflow: hidden
+  /// Config
+  @import "~assets/sass/config/colours"
+  @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/imports/mixins"
+  @import "~bulma/sass/utilities/mixins"
+  .loading-page
+    position: fixed
+    top: rem(30)
+    left: rem(30)
+    width: 0
+    height: calc(100% - 60px)
+    background: $white
+    text-align: center
+    z-index: 1000
+    transition: all 0.25s ease
+    transform: translate3d(0, 0, 0)
+    overflow: hidden
 
-.isloading
-  width: calc(100% - 60px)
+    +mobile
+      top: 0
+      left: 0
+      height: 100%
 
-.image-loader
-  display: block
-  position: absolute
-  top: 50%
-  left: 50%
-  transform: translate(-50%, -50%) scale(0.75)
+
+
+  .isloading
+    width: calc(100% - 60px)
+
+    +mobile
+      width: 100%
+
+  .image-loader
+    display: block
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%) scale(0.75)
 </style>

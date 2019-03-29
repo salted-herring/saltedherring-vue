@@ -127,9 +127,9 @@ export default {
 
       b,
       p
-        font-size: rem(20)
-        line-height: em(24, 20)
-        font-weight: $weight-medium
+        font-size: rem(18)
+        line-height: em(24, 18)
+        font-weight: $weight-normal
 
         +mobile
           font-size: rem(16)

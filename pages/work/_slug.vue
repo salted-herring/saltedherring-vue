@@ -302,6 +302,10 @@ export default {
           padding-left: 0
           padding-right: 0
 
+        .project-summary
+          padding-left: rem(60)
+          padding-right: rem(60)
+
         aside
           order: 1
           margin-top: rem(40)
@@ -323,7 +327,12 @@ export default {
         aside,
         .project-summary
           width: 100%
-          max-width: rem(900)
+          max-width: rem(568)
+          padding-left: 0
+          padding-right: 0
+
+        .project-summary
+          padding-bottom: 1em
 
         aside
           order: 2
@@ -332,7 +341,6 @@ export default {
 
           .project-tags
             width: 100%
-            margin-bottom: rem(20)
 
   .project-summary
     font-weight: $weight-bold
@@ -345,8 +353,12 @@ export default {
       line-height: em(36, 28)
 
   .project-tags
-    font-size: rem(18)
-    margin-bottom: rem(30)
+    font-size: rem(16)
+    margin-bottom: 1em
+
+    p
+      font-size: rem(16)
+      margin-bottom: em(20, 16)
 
     +mobile
       margin-bottom: 0 !important
@@ -356,9 +368,11 @@ export default {
       + .project-tags
         .cms-content
           padding-top: 0 !important
+
       .cms-content
         padding-left: 0 !important
         padding-right: 0 !important
+        padding-bottom: 1em !important
 
 
 

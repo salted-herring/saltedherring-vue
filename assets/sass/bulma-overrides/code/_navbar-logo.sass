@@ -13,7 +13,7 @@
         position: absolute
         left: 0
         content: ''
-        top: rem(57)
+        top: rem(72)
         display: block
         width: rem(3)
         height: rem(3)
@@ -22,13 +22,11 @@
         transform: rotate(-5deg) skew(-5deg)
         transition: all 0.25s
 
-        +widescreen
-          top: rem(72)
-          width: rem(4)
-          height: rem(4)
+        // +fullhd
+        //   top: rem(90)
 
-        +fullhd
-          top: rem(90)
+        // +mobile
+        //   top: rem(40)
 
       &:hover
         &:after
@@ -40,7 +38,7 @@
           transform: translate3d(0, -10px, 0)
 
           +widescreen
-            transform: translate3d(0, -20px, 0)
+            transform: translate3d(0, -10px, 0)
 
     +tablet
       padding: rem(30)

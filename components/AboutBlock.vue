@@ -104,8 +104,6 @@ export default {
   @import "~bulma/sass/utilities/mixins"
 
   .about-block
-    background: $white
-    padding: rem(40)
     width: rem(500)
     min-width: rem(320)
     max-width: 100%
@@ -114,18 +112,32 @@ export default {
 
     +until($widescreen)
       width: rem(480)
-      padding: rem(40)
+      // padding: rem(40)
 
     +until($tablet)
       max-width: rem(500)
-      width: 90%
+      width: 100%
 
     +until(480px)
       max-width: rem(320)
-      width: 100%
+      width: calc(100% - 60px)
+      padding-left: 0
+      padding-right: 0
 
     +fullhd
       padding: rem(60)
+
+    &__information
+      background: $white
+      padding: rem(40)
+
+      &.has-quote
+        padding-bottom: rem(140)
+
+        + .blockquote
+          margin-top: rem(-80)
+          margin-left: rem(60)
+          width: 100%
 
     &__index
       font-size: rem(64)
@@ -141,16 +153,19 @@ export default {
 
     &__title
       font-weight: $weight-extrabold
-      font-size: rem(48)
-      line-height: em(56, 48)
+      font-size: rem(32)
+      line-height: em(42, 32)
       display: block
       transform: rotate(-5deg) skew(-5deg)
       margin-bottom: rem(40)
       overflow: hidden
 
       +until(480px)
-        font-size: rem(30)
-        line-height: em(36, 30)
+        font-size: rem(24) !important
+
+      +until($tablet)
+        font-size: rem(36)
+        // line-height: em(36, 30)
 
       +desktop
         font-size: rem(48)
@@ -210,18 +225,4 @@ export default {
 
         &:hover
           transform: rotate(45deg) scale(1.2)
-
-    .blockquote
-      position: absolute
-      top: rem(-60)
-      left: rem(-60)
-      width: calc(90% - 40px)
-      z-index: -1
-
-      +until($widescreen)
-        width: 100%
-
-      .blockquote__quote
-        font-size: rem(24) !important
-        line-height: em(32, 24) !important
 </style>

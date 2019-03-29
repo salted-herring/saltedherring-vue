@@ -1,6 +1,6 @@
 .cms-content
-  font-size: rem(20)
-  line-height: em(28, 20)
+  font-size: rem(18)
+  line-height: em(24, 18)
   padding: rem(100) rem(100) rem(70)
   transform: translate3d(0,0,0)
 
@@ -28,6 +28,8 @@
 
   +mobile
     transform: translate3d(0,0,0) !important
+    font-size: 1rem
+    line-height: em(20, 16)
 
   a
     color: $black
@@ -39,8 +41,12 @@
   p,
   li
     font-weight: $weight-normal
-    font-size: rem(20)
-    line-height: em(28, 20)
+    font-size: rem(18)
+    line-height: em(24, 18)
+
+    +mobile
+      font-size: 1rem
+      line-height: em(20, 16)
 
   ul,
   ol,
@@ -55,9 +61,9 @@
 
   h2
     font-weight: $weight-bold
-    line-height: 1em
     margin-bottom: 1em
     font-size: rem(48)
+    line-height: em(54, 48)
 
   h3
     font-weight: $weight-normal

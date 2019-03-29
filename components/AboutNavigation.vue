@@ -61,10 +61,10 @@ export default {
     a
       color: $black
       font-weight: $weight-bold
-      font-size: rem(24)
+      font-size: rem(18)
       line-height: 1em
       padding: rem(4) rem(4) rem(4) rem(8)
-      background: $picasso
+      // background: $picasso
       text-decoration: none
       position: relative
 
@@ -74,18 +74,15 @@ export default {
         left: 8px
         width: 0
         background: $black
-        height: 3px
+        height: 2px
         display: block
         content: ''
         margin-right: rem(14)
         transition: width 0.25s
 
       +until($tablet)
-        font-size: rem(14)
+        font-size: rem(16)
         background: none
-
-        &:before
-          height: 2px
 
       &:first-child
         padding-left: rem(4)

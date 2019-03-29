@@ -122,7 +122,7 @@ export default {
 
     &__header
       width: 100%
-      min-height: 60vh
+      min-height: 80vh
       position: relative
       max-width: 100%
       overflow: hidden
@@ -143,8 +143,8 @@ export default {
         padding-right: rem(60)
 
         +mobile
-          font-size: rem(24)
-          line-height: em(30, 24)
+          font-size: rem(36)
+          line-height: em(42, 36)
           padding-left: rem(30)
           padding-right: rem(30)
 
@@ -190,10 +190,4 @@ export default {
 
         .blockquote
           transition: all 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955)
-
-        &.active
-          .blockquote
-            &:hover
-              transform: translate3d(rem(-10), rem(-10), 0)
-              z-index: 1
 </style>

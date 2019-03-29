@@ -139,6 +139,11 @@ export default {
     position: relative
     z-index: 2
 
+    &__content
+      h2
+        font-size: rem(36)
+        line-height: em(40, 36)
+
     .background-text
       color: $white
 
