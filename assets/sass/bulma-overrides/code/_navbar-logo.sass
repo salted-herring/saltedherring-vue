@@ -13,7 +13,7 @@
         position: absolute
         left: 0
         content: ''
-        top: rem(72)
+        top: rem(58)
         display: block
         width: rem(3)
         height: rem(3)
@@ -22,11 +22,9 @@
         transform: rotate(-5deg) skew(-5deg)
         transition: all 0.25s
 
-        // +fullhd
-        //   top: rem(90)
-
-        // +mobile
-        //   top: rem(40)
+        +widescreen
+          top: rem(72)
+          
 
       &:hover
         &:after
@@ -36,9 +34,6 @@
         img
           transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1)
           transform: translate3d(0, -10px, 0)
-
-          +widescreen
-            transform: translate3d(0, -10px, 0)
 
     +tablet
       padding: rem(30)
