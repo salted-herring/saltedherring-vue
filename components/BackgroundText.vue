@@ -40,7 +40,10 @@ export default {
       maxRotationX: 20,
       mounted: false,
       mouseX: 0,
-      mouseY: 0
+      mouseY: 0,
+      maxOffset: 5,
+      verticalOffset: 0,
+      horizontalOffset: 0
     }
   },
   computed: {
@@ -61,7 +64,8 @@ export default {
       }
 
       let rotateX = this.rotation.x
-      let rotateY = this.rotation.y
+      let rotateY = -5
+      //this.rotation.y
 
       let rotate =
         'perspective(' +
@@ -73,6 +77,8 @@ export default {
         'deg)'
 
       styles.transform = 'translate3d(-50%, -50%, 0) ' + rotate + ' skew(-5deg)'
+
+      // styles.left = '-' + this.horizontalOffset + '%'
 
       return styles
     }
@@ -133,6 +139,24 @@ export default {
 
       this.rotation.y = rotationY
       this.rotation.x = rotationX
+
+      // Calculate x/y offset.
+      // this.verticalOffset = ...
+      // yPercentage = mousePos.y / win.height
+      xPercentage = mousePos.x - win.width / 2
+      this.horizontalOffset = xPercentage * 100
+
+      console.log(
+        this.horizontalOffset,
+        100 + this.maxOffset,
+        this.horizontalOffset > 100.0 + this.maxOffset
+      )
+
+      if (xPercentage > 0) {
+        this.horizontalOffset = 50 + this.maxOffset
+      } else {
+        this.horizontalOffset = 50 - this.maxOffset
+      }
     }
   },
   render(createElement) {

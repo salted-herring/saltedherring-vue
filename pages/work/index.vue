@@ -117,7 +117,9 @@ export default {
       return this.$store.state.meta.pages.work
     }
   },
-  asyncData({ store, params }) {
+  asyncData({ route, store, params }) {
+    // console.log('route', route)
+    route.alias = ['/projects']
     if (store.state.workPageData !== null) {
       store.commit(
         'menu/setMenuColour',

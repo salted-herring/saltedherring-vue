@@ -42,8 +42,12 @@ export default {
         flee: 37
       },
       prey: {
-        speed: 7,
+        speed: 5,
         number: 128,
+        size: {
+          width: 10,
+          height: 16
+        },
         maxTurnAngle: 0.02,
         minSeparation: 40.0,
         predatorSightDist: 300,
@@ -58,7 +62,11 @@ export default {
       env: {
         delay: 50
       }
-    }
+    },
+    speed: 0,
+    lastMouseX: 0,
+    lastMouseY: 0,
+    timestamp: null
   }),
   mounted() {
     this.resizeCanvas()
@@ -79,7 +87,13 @@ export default {
       let predators = []
 
       for (let i = 0; i < this.config.prey.number; ++i) {
-        prey.push(Prey.create(this.config.prey.speed, this.config.env.screen))
+        prey.push(
+          Prey.create(
+            this.config.prey.speed,
+            this.config.env.screen,
+            this.config.prey.size
+          )
+        )
       }
       for (var i = 0; i < this.config.predator.number; ++i) {
         predators.push(
@@ -183,7 +197,7 @@ export default {
       predatorList.forEach(function(predator) {
         predator.move(
           preyList,
-          self.config.predator.speed,
+          self.speed,
           self.config.predator.maxTurnAngle,
           self.config.predator.killDist,
           self.config.env.ctx,
@@ -217,6 +231,26 @@ export default {
     },
     mouseMove(e) {
       this.mousePosition = new Vector(e.clientX, e.clientY)
+
+      if (this.timestamp === null) {
+        this.timestamp = Date.now()
+        this.lastMouseX = e.clientX
+        this.lastMouseY = e.clientY
+        return
+      }
+
+      let now = Date.now()
+      let dt = now - this.timestamp
+      let dx = e.clientX - this.lastMouseX
+      let dy = e.clientY - this.lastMouseY
+      let speedX = Math.round((dx / dt) * 100)
+      let speedY = Math.round((dy / dt) * 100)
+
+      this.speed = (speedX + speedY) / 2
+
+      this.timestamp = now
+      this.lastMouseX = e.clientX
+      this.lastMouseY = e.clientY
     }
   }
 }
