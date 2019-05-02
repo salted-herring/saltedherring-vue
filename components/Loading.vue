@@ -34,14 +34,15 @@ export default {
   /// Config
   @import "~assets/sass/config/colours"
   @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/config/variables"
   @import "~assets/sass/imports/mixins"
   @import "~bulma/sass/utilities/mixins"
   .loading-page
     position: fixed
-    top: rem(30)
-    left: rem(30)
+    top: rem($body-border)
+    left: rem($body-border)
     width: 0
-    height: calc(100% - 60px)
+    height: calc(100% - #{2*$body-border}px)
     background: $white
     text-align: center
     z-index: 1000
@@ -57,7 +58,7 @@ export default {
 
 
   .isloading
-    width: calc(100% - 60px)
+    width: calc(100% - #{2*$body-border}px)
 
     +mobile
       width: 100%

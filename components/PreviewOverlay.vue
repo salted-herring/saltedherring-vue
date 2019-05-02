@@ -120,7 +120,7 @@ export default {
     width: 100%
     height: 100%
     opacity: 0
-    transition: opacity 0.5s cubic-bezier(0.895, 0.03, 0.685, 0.22)
+    // transition: opacity 0.5s cubic-bezier(0.895, 0.03, 0.685, 0.22)
     background-position: center
 
     &.is-visible

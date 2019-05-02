@@ -5,6 +5,7 @@
 @import 'config/colours'
 @import 'config/fonts'
 @import 'config/typography'
+@import 'config/variables'
 @import 'imports/mixins'
 @import 'imports/bulma-overrides'
 
@@ -61,7 +62,7 @@ body
     left: 0
     width: 100%
     height: 100%
-    border: rem(30) solid $black
+    border: rem($body-border) solid $black
     display: block
     content: ''
     z-index: 100

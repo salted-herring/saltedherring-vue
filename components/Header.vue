@@ -28,6 +28,7 @@
       :tag="'h1'"
       :title="title"
       :colour="titleBg"
+      :hover-enabled="backgroundTextHover"
       class="background-text" />
     <slot name="background"/>
   </header>
@@ -74,6 +75,10 @@ export default {
     introductionVariation: {
       type: String,
       default: ''
+    },
+    backgroundTextHover: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
