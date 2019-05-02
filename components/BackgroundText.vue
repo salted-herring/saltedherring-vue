@@ -152,11 +152,11 @@ export default {
       xPercentage = mousePos.x - win.width / 2
       this.horizontalOffset = xPercentage * 100
 
-      console.log(
-        this.horizontalOffset,
-        100 + this.maxOffset,
-        this.horizontalOffset > 100.0 + this.maxOffset
-      )
+      // console.log(
+      //   this.horizontalOffset,
+      //   100 + this.maxOffset,
+      //   this.horizontalOffset > 100.0 + this.maxOffset
+      // )
 
       if (xPercentage > 0) {
         this.horizontalOffset = 50 + this.maxOffset
