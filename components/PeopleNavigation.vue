@@ -47,10 +47,11 @@ export default {
     padding-bottom: rem(100)
 
     .nuxt-link-active
-      color: $white
-      pointer-events: none
-
-      span
-        &:after
-          display: none
+      display: none
+      // color: $white
+      // pointer-events: none
+      //
+      // span
+      //   &:after
+      //     display: none
 </style>

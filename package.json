@@ -39,6 +39,7 @@
     "sass-loader": "^7.1.0",
     "smoothscroll-anchor-polyfill": "^1.2.0",
     "style-loader": "^0.23.0",
+    "vue": "^2.6.10",
     "vue-carousel": "^0.18.0-alpha",
     "vue-check-view": "^0.2.4",
     "vue-l-carousel": "^1.1.0",

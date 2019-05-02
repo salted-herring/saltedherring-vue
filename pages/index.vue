@@ -8,6 +8,7 @@
       :introductionClass="'is-offset-1'"
       :introductionVariation="'page-introduction--left'"
       :isCentered="false"
+      :background-text-hover="false"
       :pageClass="'homepage-header'">
       <div
         slot="background">
@@ -107,6 +108,10 @@ export default {
     .columns
       .column
         position: relative
+
+    .background-text
+      +fullhd
+        font-size: rem(400)
 
     .introduction
       +until($tablet)

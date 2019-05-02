@@ -23,6 +23,10 @@ export default {
     colour: {
       type: String,
       default: null
+    },
+    hoverEnabled: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -78,20 +82,22 @@ export default {
 
       styles.transform = 'translate3d(-50%, -50%, 0) ' + rotate + ' skew(-5deg)'
 
-      // styles.left = '-' + this.horizontalOffset + '%'
-
       return styles
     }
   },
   beforeMount() {
-    window.addEventListener('mousemove', this.mouseMove)
+    if (this.hoverEnabled) {
+      window.addEventListener('mousemove', this.mouseMove)
+    }
   },
   mounted() {
     let self = this
     self.mounted = true
   },
   beforeDestroy() {
-    window.removeEventListener('mousemove', this.mouseMove)
+    if (this.hoverEnabled) {
+      window.removeEventListener('mousemove', this.mouseMove)
+    }
   },
   methods: {
     getWindowDim() {

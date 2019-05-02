@@ -55,7 +55,7 @@ export default {
 </script>
 <style lang="sass">
   @import "~bulma/sass/utilities/mixins"
-  
+
   .hero-video
     opacity: 1
 
@@ -67,7 +67,7 @@ export default {
       width: 100%
       height: 100%
       opacity: 0
-      transition: opacity 0.5s 0.25s
+      // transition: opacity 0.5s 0.25s
 
     &__poster
       z-index: 1
@@ -86,7 +86,7 @@ export default {
 
       &.active
         z-index: 2
-        transition: opacity 1s 0.5s
+        // transition: opacity 1s 0.5s
 
       &.no-poster
         &.active
