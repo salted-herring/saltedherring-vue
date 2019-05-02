@@ -73,6 +73,9 @@ export default {
       z-index: 1
       background-size: cover
 
+      +mobile
+        background-position: 50% 0
+
       &.active
         opacity: 1
 

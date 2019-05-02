@@ -1,4 +1,4 @@
-import getMainMenu from '~/apollo/queries/menu.js'
+import getMainMenu from '~/apollo/queries/menu'
 
 export default function({ store, route, redirect }) {
   // menu is alwasy closed when route is loaded.
@@ -6,11 +6,6 @@ export default function({ store, route, redirect }) {
   store.commit('menu/setMenuClicked', false)
   store.commit('menu/setMenuColour', 'black')
   store.commit('menu/setMenuCurrentColour', 'black')
-
-  // only execute if the menu is not present.
-  if (store.state.menu.menuItems.length !== 0) {
-    return
-  }
 
   return store
     .$axios({

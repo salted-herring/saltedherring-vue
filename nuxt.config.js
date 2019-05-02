@@ -1,6 +1,8 @@
 const pkg = require('./package')
 require('dotenv').config()
 import webpack from 'webpack'
+import axios from 'axios'
+import readPages from './apollo/queries/pages'
 
 module.exports = {
   mode: 'universal',
@@ -71,6 +73,47 @@ module.exports = {
         }
       }
     }
+    // extendRoutes(routes, resolve) {
+    //   axios({
+    //     baseURL: 'https://api.saltedherring.design',
+    //     url: '/graphql/',
+    //     method: 'post',
+    //     withCredentials: true,
+    //     headers: {
+    //       Accept: 'application/json',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     data: {
+    //       query: readPages
+    //     }
+    //   })
+    //   .then(result => {
+    //     console.log('result', result)
+    //     let returnVal = result.data.data.readPage
+    //     let pages = []
+    //     let classMap = {
+    //       'App\\Web\\Layout\\HomePage': 'pages/index.vue',
+    //       'App\\Web\\Layout\\Project': 'pages/work/_slug.vue',
+    //       'App\\Web\\Layout\\WorkPage': 'pages/work/index.vue',
+    //       'App\\Web\\Layout\\PeoplePage': 'pages/people/index.vue',
+    //       'App\\Web\\Layout\\PersonPage': 'pages/people/_slug.vue',
+    //       'App\\Web\\Layout\\AboutPage': 'about/index.vue'
+    //     }
+    //
+    //     returnVal.map(route => {
+    //       if (route.ClassName in classMap) {
+    //         routes.push({
+    //           name: route.URLSegment,
+    //           path: route.Link,
+    //           component: resolve(__dirname, classMap[route.ClassName])
+    //         })
+    //       }
+    //     })
+    //
+    //     console.log(routes)
+    //     return routes
+    //   })
+    // }
   },
   /*
   ** Axios module configuration
