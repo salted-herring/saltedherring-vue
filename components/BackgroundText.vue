@@ -26,7 +26,7 @@ export default {
     },
     hoverEnabled: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data() {
@@ -181,7 +181,7 @@ export default {
   /// Background text element
   ////
   .background-text
-      font-size: rem(200)
+      font-size: rem(296)
       font-weight: $weight-extrabold
       line-height: 1.2em
       letter-spacing: normal
@@ -192,7 +192,8 @@ export default {
       white-space: nowrap
       left: 50%
       top: 50%
-      transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg)
+      transform: translate3d(-50%, -50%, 0px) perspective(1000px) rotateY(-5deg) rotateZ(-5deg) skew(-5deg)
+      // transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg)
       z-index: 0
       pointer-events: none
       transition: opacity 0.25s ease, perspective 0.25s ease, transform 0.2s
@@ -201,7 +202,7 @@ export default {
         opacity: 0
 
       +fullhd
-        font-size: rem(300)
+        font-size: rem(296)
 
       +until($desktop)
         font-size: rem(180)

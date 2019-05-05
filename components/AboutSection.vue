@@ -110,6 +110,7 @@ export default {
 </script>
 <style lang="sass">
   /// Config
+  @import "~assets/sass/config/variables"
   @import "~assets/sass/config/bulma-variables"
   @import "~assets/sass/imports/mixins"
   @import "~bulma/sass/utilities/mixins"
@@ -139,14 +140,14 @@ export default {
         font-size: rem(48)
         line-height: em(54, 48)
         margin: 0
-        padding-left: rem(60)
-        padding-right: rem(60)
+        padding-left: rem($body-border * 2)
+        padding-right: rem($body-border * 2)
 
         +mobile
           font-size: rem(36)
           line-height: em(42, 36)
-          padding-left: rem(30)
-          padding-right: rem(30)
+          padding-left: rem($body-border)
+          padding-right: rem($body-border)
 
         +widescreen
           font-size: rem(64)

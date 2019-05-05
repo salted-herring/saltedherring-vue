@@ -1,19 +1,20 @@
 <template>
   <div
-    ref="preloaders"
-    :style="getImageStyle"
+    ref="video-image"
     :data-id="id"
+    :data-background-image="getImage"
     :class="{ 'is-visible': isVisible }"
     class="preview-overlay">
     <video
       v-if="getVideo"
+      ref="video"
       :poster="getImage"
       autoplay
       muted
       loop
       width="100%">
       <source
-        :src="getVideo"
+        :data-src="getVideo"
         type="video/mp4">
     </video>
   </div>
@@ -52,21 +53,19 @@ export default {
   },
   computed: {
     getImage() {
-      return this.imageURL
+      return this.image.URL
     },
     getVideo() {
-      return this.videoURL
-    },
-    getImageStyle() {
-      let image = this.imageURL
+      if (this.video !== null && this.video.url !== null) {
+        let path = this.video.url
+        let match = path.match(/(https?:\/\/[^\/]+)(.*)/)
 
-      if (image) {
-        return {
-          backgroundImage: 'url(' + image + ')'
+        if (match !== null) {
+          return match[2]
         }
       }
 
-      return {}
+      return null
     },
     isVisible() {
       return this.$store.state.workpage.hoveredItem === this.id
@@ -74,34 +73,14 @@ export default {
   },
   mounted() {
     let self = this
+    let observer = lozad(this.$refs['video-image'])
+    observer.observe()
+    observer.triggerLoad(this.$refs['video-image'])
 
-    if (this.image !== null && this.image.URL !== null) {
-      let img = document.createElement('img')
-      this.$refs.preloaders.append = img
-
-      img.onload = function() {
-        self.imageURL = self.image.URL
-      }
-      img.src = this.image.URL
-    }
-
-    if (this.video !== null && this.video.url !== null) {
-      let vid = document.createElement('video')
-      let path = this.video.url
-
-      this.$refs.preloaders.append = vid
-
-      let match = path.match(/(https?:\/\/[^\/]+)(.*)/)
-
-      if (match !== null) {
-        path = match[2]
-        vid.onload = function() {
-          self.videoURL = path
-        }
-        vid.src = path
-
-        this.videoURL = path
-      }
+    if (this.getVideo !== null) {
+      observer = lozad(this.$refs['video'])
+      observer.observe()
+      observer.triggerLoad(this.$refs['video'])
     }
   }
 }
@@ -122,6 +101,7 @@ export default {
     opacity: 0
     // transition: opacity 0.5s cubic-bezier(0.895, 0.03, 0.685, 0.22)
     background-position: center
+    background-size: cover
 
     &.is-visible
       opacity: 1

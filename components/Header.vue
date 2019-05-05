@@ -28,7 +28,7 @@
       :tag="'h1'"
       :title="title"
       :colour="titleBg"
-      :hover-enabled="backgroundTextHover"
+      :hover-enabled="false"
       class="background-text" />
     <slot name="background"/>
   </header>
