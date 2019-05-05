@@ -123,7 +123,8 @@ module.exports = {
     proxy: true
   },
   proxy: {
-    '/assets/': process.env.API_ENDPOINT
+    '/assets/': process.env.API_ENDPOINT,
+    '/graphql/': process.env.API_ENDPOINT
   },
   render: {
     bundleRenderer: {
