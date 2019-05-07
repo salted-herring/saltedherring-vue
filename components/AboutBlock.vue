@@ -100,6 +100,7 @@ export default {
   /// Config
   @import "~assets/sass/config/colours"
   @import "~assets/sass/config/bulma-variables"
+  @import "~assets/sass/config/variables"
   @import "~assets/sass/imports/mixins"
   @import "~bulma/sass/utilities/mixins"
 
@@ -112,7 +113,6 @@ export default {
 
     +until($widescreen)
       width: rem(480)
-      // padding: rem(40)
 
     +until($tablet)
       max-width: rem(500)
@@ -120,12 +120,16 @@ export default {
 
     +until(480px)
       max-width: rem(320)
-      width: calc(100% - 60px)
+      min-width: 0
+      width: rem(320 - (2*$body-border))
+      // width: 100%
+      width: rem(320)
+      //calc(100% - #{2 * $body-border}px)
       padding-left: 0
       padding-right: 0
 
-    +fullhd
-      padding: rem(60)
+    // +fullhd
+    //   padding: rem(60)
 
     &__information
       background: $white
