@@ -191,7 +191,7 @@ export default {
     const observer = lozad(this.$refs['headerVideo'])
     observer.observe()
   },
-  asyncData({ store, req, res, params, error }) {
+  asyncData({ store, req, res, params, error, route }) {
     let slug = params.slug
     let currentProject = null
     let self = this
@@ -240,7 +240,11 @@ export default {
             'menu/setMenuCurrentColour',
             currentProject.HeroMenuColour
           )
-          store.commit('meta/setupMeta', { slug: slug, data: currentProject })
+          store.commit('meta/setupMeta', {
+            slug: slug,
+            data: currentProject,
+            url: process.env.baseUrl + route.fullPath
+          })
         } else {
           error({ statusCode: 404, message: 'Project not found' })
         }

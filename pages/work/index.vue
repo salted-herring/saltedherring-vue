@@ -154,7 +154,11 @@ export default {
           let data = returnVal[0]
           store.commit('menu/setMenuColour', data.HeroMenuColour)
           store.commit('updateWorkPageData', data)
-          store.commit('meta/setupMeta', { slug: 'work', data: data })
+          store.commit('meta/setupMeta', {
+            slug: 'work',
+            data: data,
+            url: process.env.baseUrl + route.fullPath
+          })
         }
       })
   },

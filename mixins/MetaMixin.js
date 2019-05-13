@@ -46,6 +46,11 @@ export default {
           hid: 'ogtype',
           property: 'og:type',
           content: this.metaData.ogType
+        },
+        {
+          hid: 'ogurl',
+          property: 'og:url',
+          content: this.metaData.ogURL
         }
       ]
     }

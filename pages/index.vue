@@ -55,7 +55,7 @@ export default {
     this.$store.commit('menu/setMenu', true)
     this.$store.commit('menu/setHamburger', false)
   },
-  asyncData({ store, params }) {
+  asyncData({ store, params, route }) {
     let self = this
 
     return store.app
@@ -91,7 +91,11 @@ export default {
           }
 
           store.commit('updateHomePageData', data)
-          store.commit('meta/setupMeta', { slug: 'home', data: data })
+          store.commit('meta/setupMeta', {
+            slug: 'home',
+            data: data,
+            url: process.env.baseUrl + route.fullPath
+          })
         }
       })
   }

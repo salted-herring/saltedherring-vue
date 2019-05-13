@@ -62,7 +62,7 @@ export default {
       return this.$store.state.peoplepage.peoplepage.HeroImages
     }
   },
-  asyncData({ store, params }) {
+  asyncData({ store, params, route }) {
     let peoplepage = store.state.peoplepage.peoplepage
 
     if (Object.keys(peoplepage).length !== 0) {
@@ -88,7 +88,11 @@ export default {
         if (returnVal.length === 1) {
           let data = returnVal[0]
           store.commit('peoplepage/updatePeoplePageState', data)
-          store.commit('meta/setupMeta', { slug: 'people', data: data })
+          store.commit('meta/setupMeta', {
+            slug: 'people',
+            data: data,
+            url: process.env.baseUrl + route.fullPath
+          })
         }
       })
   }

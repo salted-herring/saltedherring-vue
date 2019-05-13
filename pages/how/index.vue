@@ -44,7 +44,7 @@ export default {
     this.$store.commit('menu/setMenuColour', 'black')
     this.$store.commit('menu/setMenuCurrentColour', 'black')
   },
-  asyncData({ store, params, error }) {
+  asyncData({ store, params, error, route, req, env }) {
     let self = this
 
     return store.app
@@ -72,7 +72,11 @@ export default {
           'aboutpage/updateBackgroundColour',
           page[0].BackgroundColour
         )
-        store.commit('meta/setupMeta', { slug: 'about', data: page[0] })
+        store.commit('meta/setupMeta', {
+          slug: 'about',
+          data: page[0],
+          url: process.env.baseUrl + route.fullPath
+        })
       })
   }
 }
