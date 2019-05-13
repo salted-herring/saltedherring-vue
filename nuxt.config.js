@@ -42,11 +42,11 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/router-extras',
-    ['@nuxtjs/robots', {
-      /* module options */
-      UserAgent: '*',
-      Disallow: '/',
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-8671537-1',
+      dev: false
     }],
+    '@nuxtjs/robots',
   ],
 
   /*
