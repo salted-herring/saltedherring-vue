@@ -68,7 +68,7 @@ export default {
       return this.$store.state.peoplepage.people.sorted
     }
   },
-  asyncData({ store, params, error }) {
+  asyncData({ store, params, error, route }) {
     let slug = params.slug
 
     if (
@@ -104,7 +104,8 @@ export default {
           })
           store.commit('meta/setupMeta', {
             slug: 'people-' + slug,
-            data: returnVal[0]
+            data: returnVal[0],
+            url: process.env.baseUrl + route.fullPath
           })
         } else {
           error({ statusCode: 404, message: 'Person not found' })

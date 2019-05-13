@@ -12,7 +12,8 @@ export const mutations = {
   setupMeta(state, pagemeta) {
     let metaData = {
       slug: pagemeta.slug,
-      data: {}
+      data: {},
+      url: ''
     }
 
     metaData.data.title = pagemeta.data.MetaTitle || pagemeta.data.Title || ''
@@ -20,6 +21,7 @@ export const mutations = {
     metaData.data.keywords = pagemeta.data.MetaKeywords || ''
     metaData.data.robots = pagemeta.data.MetaRobots || ''
 
+    metaData.data.ogURL = pagemeta.url
     metaData.data.ogTitle = pagemeta.data.OGTitle || pagemeta.data.title
     metaData.data.ogDescription =
       pagemeta.data.OGDescription || pagemeta.data.description || ''
