@@ -24,7 +24,7 @@ export const mutations = {
     metaData.data.ogURL = pagemeta.url
     metaData.data.ogTitle = pagemeta.data.OGTitle || pagemeta.data.title
     metaData.data.ogDescription =
-      pagemeta.data.OGDescription || pagemeta.data.description || ''
+      pagemeta.data.OGDescription || pagemeta.data.MetaDescription || ''
     metaData.data.ogType = pagemeta.data.OGType || ''
     metaData.data.ogImage =
       typeof pagemeta.data.OGImage !== 'undefined'
