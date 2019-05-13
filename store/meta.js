@@ -28,7 +28,7 @@ export const mutations = {
     metaData.data.ogType = pagemeta.data.OGType || ''
     metaData.data.ogImage =
       typeof pagemeta.data.OGImage !== 'undefined'
-        ? pagemeta.data.OGImage.Cropped
+        ? process.env.baseUrl + pagemeta.data.OGImage.Cropped
         : ''
 
     state.pages[pagemeta.slug] = metaData.data
