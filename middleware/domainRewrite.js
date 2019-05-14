@@ -2,7 +2,7 @@ export default function(req, res, next) {
   const host = req.headers.host
   const url = req.url
   const env = process.env.NODE_ENV
-  const canonicalDomain = process.env.CANONICAL_DOMAIN
+  const canonicalDomain = process.env.BASE_URL
 
   if (env === 'production' && host !== canonicalDomain) {
     res.writeHead(301, { Location: canonicalDomain + url })
