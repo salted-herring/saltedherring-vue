@@ -165,7 +165,9 @@ export default {
       overflow: hidden
 
       +until(480px)
-        font-size: rem(24) !important
+        font-size: rem(28) !important
+        line-height: em(36, 28)
+        margin-top: rem(16)
 
       +until($tablet)
         font-size: rem(36)
