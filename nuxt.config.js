@@ -66,19 +66,7 @@ module.exports = {
   ],
 
   router: {
-    middleware: ['footer', 'menu', 'scroll', 'redirection'],
-    scrollBehavior: function(to, from, savedPosition) {
-      if (to.hash) {
-        return {
-          selector: to.hash
-        }
-      } else {
-        return {
-          x: 0,
-          y: 0
-        }
-      }
-    }
+    middleware: ['footer', 'menu', 'scroll', 'redirection']
     // extendRoutes(routes, resolve) {
     //   axios({
     //     baseURL: 'https://api.saltedherring.design',

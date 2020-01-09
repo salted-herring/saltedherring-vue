@@ -69,18 +69,10 @@ export default {
 
       let rotateX = this.rotation.x
       let rotateY = -5
-      //this.rotation.y
 
-      let rotate =
-        'perspective(' +
-        perspective +
-        'px) rotateY(' +
-        rotateX +
-        'deg) rotateZ(' +
-        rotateY +
-        'deg)'
+      let rotate = `perspective(${perspective}px) rotate3d(0, 0, 1, ${rotateY}deg)`
 
-      styles.transform = 'translate3d(-50%, -50%, 0) ' + rotate + ' skew(-5deg)'
+      styles.transform = `translate3d(-50%, -50%, 0) ${rotate} skew(-5deg)'`
 
       return styles
     }
@@ -192,7 +184,9 @@ export default {
       white-space: nowrap
       left: 50%
       top: 50%
-      transform: translate3d(-50%, -50%, 0px) perspective(1000px) rotateY(-5deg) rotateZ(-5deg) skew(-5deg)
+      transform: translate3d(-50%, -50%, 0) perspective(1000px) rotate3d(0, 0, 1, -5deg) skew(-5deg)
+      -webkit-backface-visibility: hidden
+      backface-visibility: hidden
       // transform: translate(-50%, -50%) rotate(-5deg) skew(-5deg)
       z-index: 0
       pointer-events: none
