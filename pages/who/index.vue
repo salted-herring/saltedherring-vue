@@ -27,6 +27,7 @@
       v-if="peoplepage.ShowPartners"
       :title="peoplepage.PartnersTitle"
       :latest-items="partners"
+      :section-class="who-section"
       :column-width="'is-3'" />
   </div>
 </template>
@@ -133,9 +134,14 @@ export default {
         +until($desktop)
           padding-left: rem(30)
           padding-right: rem(30)
+
+        margin-bottom: rem(60)
+
         h3
           +until($widescreen)
             font-size: rem(24)
+        img
+          margin-bottom: rem(30)
 
 
 

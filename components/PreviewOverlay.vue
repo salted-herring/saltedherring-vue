@@ -68,6 +68,10 @@ export default {
       return null
     },
     isVisible() {
+      if (this.getVideo !== null) {
+        console.log(this.$refs['video'])
+      }
+      // this.$refs['video'].play()
       return this.$store.state.workpage.hoveredItem === this.id
     }
   },

@@ -1,6 +1,6 @@
 <template>
   <section
-    class="latest-section section has-background-white">
+    :class="getClasses">
     <div class="container">
       <header class="section-heading">
         <h2
@@ -77,6 +77,15 @@ export default {
     columnWidth: {
       type: String,
       default: ''
+    },
+    sectionClass: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    getClasses() {
+      return `${this.sectionClass} latest-section section has-background-white`
     }
   }
 }

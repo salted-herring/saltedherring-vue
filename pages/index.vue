@@ -129,6 +129,7 @@ export default {
       h1
         +mobile
           text-align: center
+          font-size: 10vw
 
       p
         font-size: rem(24)

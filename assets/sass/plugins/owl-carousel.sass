@@ -2,6 +2,13 @@
   .owl-stage-outer,
   .owl-stage
     height: 100%
+  
+  .owl-stage-outer
+    order: 2
+
+  &.owl-loaded
+    display: flex !important
+    flex-direction: column
 
   .owl-item
     height: 100% !important
@@ -10,8 +17,9 @@
 .owl-theme
   .owl-nav.disabled
     + .owl-dots
-      margin-top: rem(100) !important
+      margin-top: rem(40) !important
       margin-bottom: rem(40)
+      order: 1
 
       +until($desktop)
         margin-top: rem(20) !important

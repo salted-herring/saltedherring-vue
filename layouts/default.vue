@@ -47,10 +47,10 @@ export default {
         document.body.clientWidth
       let colour = this.$store.state.menu.color
 
-      if (screenWidth <= 1024) {
-        this.$store.commit('menu/setmenuScrolledIntoView', true)
-        return
-      }
+      // if (screenWidth <= 1024) {
+      //   this.$store.commit('menu/setmenuScrolledIntoView', true)
+      //   return
+      // }
 
       if (sectionTop <= 0) {
         this.$store.commit('menu/setMenuCurrentColour', 'black')
