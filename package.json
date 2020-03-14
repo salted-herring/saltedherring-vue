@@ -22,7 +22,7 @@
     "@nuxtjs/robots": "^2.0.0",
     "@nuxtjs/router-extras": "^0.1.0",
     "@vue/cli-shared-utils": "^3.5.0",
-    "acorn": "^6.1.1",
+    "acorn": "^6.4.1",
     "core-js": "^2.6.5",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
