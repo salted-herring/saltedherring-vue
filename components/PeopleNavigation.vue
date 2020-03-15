@@ -34,24 +34,10 @@ export default {
 }
 </script>
 <style lang="sass">
-  @import '~assets/sass/config/bulma-variables'
-  @import '~assets/sass/config/colours'
-  @import '~assets/sass/config/fonts'
-  @import '~assets/sass/config/typography'
-  @import '~assets/sass/imports/mixins'
-  @import '~assets/sass/imports/bulma-overrides'
-  @import '~bulma/sass/utilities/mixins'
-
   .people-navigation
     padding-top: rem(100)
     padding-bottom: rem(100)
 
     .nuxt-link-active
       display: none
-      // color: $white
-      // pointer-events: none
-      //
-      // span
-      //   &:after
-      //     display: none
 </style>

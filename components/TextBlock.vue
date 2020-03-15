@@ -150,11 +150,6 @@ export default {
 }
 </script>
 <style lang="sass">
-  @import "~assets/sass/config/bulma-variables"
-  @import "~assets/sass/config/colours"
-  @import "~assets/sass/imports/mixins"
-  @import "~bulma/sass/utilities/mixins"
-
   .text-block
 
     +mobile

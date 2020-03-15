@@ -54,7 +54,7 @@ export default {
 }
 </script>
 <style lang="sass">
-  @import "~bulma/sass/utilities/mixins"
+  
 
   .hero-video
     opacity: 1

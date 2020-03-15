@@ -34,12 +34,6 @@ export default {
 }
 </script>
 <style lang="sass">
-  /// Config
-  @import "~assets/sass/config/colours"
-  @import "~assets/sass/config/bulma-variables"
-  @import "~assets/sass/imports/mixins"
-  @import "~bulma/sass/utilities/mixins"
-
   .about-navigation
     position: absolute
     top: rem(90)

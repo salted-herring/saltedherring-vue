@@ -172,18 +172,6 @@ export default {
 </script>
 
 <style lang="sass">
-  @import '~assets/sass/config/bulma-variables'
-  @import '~assets/sass/config/colours'
-  @import '~assets/sass/config/fonts'
-  @import '~assets/sass/config/typography'
-  @import '~assets/sass/imports/mixins'
-  @import '~assets/sass/imports/bulma-overrides'
-
-  @import '~bulma/sass/utilities/initial-variables'
-  @import '~bulma/sass/utilities/functions'
-  @import '~bulma/sass/utilities/derived-variables'
-  @import '~bulma/sass/utilities/mixins'
-
   .work-page
     .section
       position: relative

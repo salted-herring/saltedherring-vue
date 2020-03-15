@@ -36,7 +36,7 @@
         </div>
       </div>
     </section>
-    <section class="section section--no-padding project-blocks">
+    <section class="section section--no-padding project-blocks has-background-light">
       <template
         v-for="(block, index) in currentProject.ContentBlocks">
         <TextBlock
@@ -279,14 +279,6 @@ export default {
 }
 </script>
 <style lang="sass">
-  @import '~assets/sass/config/bulma-variables'
-  @import '~assets/sass/config/colours'
-  @import '~assets/sass/config/fonts'
-  @import '~assets/sass/config/typography'
-  @import '~assets/sass/imports/mixins'
-  @import '~assets/sass/imports/bulma-overrides'
-  @import '~bulma/sass/utilities/mixins'
-
   .project-introduction
     padding-top: rem(150)
     padding-bottom: rem(0)

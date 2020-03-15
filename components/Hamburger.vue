@@ -41,18 +41,6 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-  /// Config
-  @import "~assets/sass/config/bulma-variables"
-  @import "~assets/sass/imports/mixins"
-  @import "~bulma/sass/utilities/mixins"
-
-  $hamburger-layer-border-radius: 0
-  $hamburger-layer-height: 5px
-  $hamburger-padding-x: 0px
-  $hamburger-padding-y: 0px
-
-  @import '~hamburgers/_sass/hamburgers/hamburgers'
-
   .hamburger
     margin-left: auto
     cursor: pointer

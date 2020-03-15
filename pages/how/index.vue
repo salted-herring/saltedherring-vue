@@ -82,14 +82,6 @@ export default {
 }
 </script>
 <style lang="sass">
-  @import '~assets/sass/config/bulma-variables'
-  @import '~assets/sass/config/colours'
-  @import '~assets/sass/config/fonts'
-  @import '~assets/sass/config/typography'
-  @import '~assets/sass/imports/mixins'
-  @import '~assets/sass/imports/bulma-overrides'
-  @import '~bulma/sass/utilities/mixins'
-
   .about-page
     display: block
     width: 100%

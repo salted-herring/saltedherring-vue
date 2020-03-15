@@ -9,9 +9,7 @@ module.exports = {
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000'
   },
-  serverMiddleware:  [
-    '~/middleware/domainRewrite'
-  ],
+  serverMiddleware: ['~/middleware/domainRewrite'],
 
   /*
   ** Headers of the page
@@ -39,20 +37,29 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['@/assets/sass/styles.sass'],
+  css: ['~assets/sass/all.sass', '~assets/sass/styles.sass'],
+
+  styleResources: {
+    sass: ['~assets/sass/styles.sass']
+  },
 
   /*
   ** Nuxt.js modules
   */
   modules: [
     '@nuxtjs/axios',
+    // '@nuxtjs/bulma',
+    '@nuxtjs/style-resources',
     '@nuxtjs/proxy',
     '@nuxtjs/router-extras',
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-8671537-1',
-      dev: false
-    }],
-    '@nuxtjs/robots',
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'UA-8671537-1',
+        dev: false
+      }
+    ],
+    '@nuxtjs/robots'
   ],
 
   /*
@@ -169,7 +176,7 @@ module.exports = {
         test: /\.(graphql|gql)$/,
         exclude: /node_modules/,
         loader: 'graphql-tag/loader'
-      });
+      })
 
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
@@ -178,7 +185,7 @@ module.exports = {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        });
+        })
       }
     }
   }

@@ -97,13 +97,6 @@ export default {
 }
 </script>
 <style lang="sass">
-  /// Config
-  @import "~assets/sass/config/colours"
-  @import "~assets/sass/config/bulma-variables"
-  @import "~assets/sass/config/variables"
-  @import "~assets/sass/imports/mixins"
-  @import "~bulma/sass/utilities/mixins"
-
   .about-block
     width: rem(500)
     min-width: rem(320)

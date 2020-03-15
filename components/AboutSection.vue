@@ -109,15 +109,7 @@ export default {
 }
 </script>
 <style lang="sass">
-  /// Config
-  @import "~assets/sass/config/variables"
-  @import "~assets/sass/config/bulma-variables"
-  @import "~assets/sass/imports/mixins"
-  @import "~bulma/sass/utilities/mixins"
-
   .about-section
-    // max-width: 100%
-
     +mobile
       overflow: hidden
 

@@ -145,13 +145,6 @@ export default {
 }
 </script>
 <style lang="sass">
-  @import '~assets/sass/config/bulma-variables'
-  @import '~assets/sass/config/colours'
-  @import '~assets/sass/config/fonts'
-  @import '~assets/sass/config/typography'
-  @import '~assets/sass/imports/mixins'
-  @import '~assets/sass/imports/bulma-overrides'
-  @import '~bulma/sass/utilities/mixins'
   .person-header
     position: unset
     &.is-hovered
@@ -228,8 +221,8 @@ export default {
     position: relative
     z-index: 2
 
-    .columns
-      margin: 0
+    // .columns
+    //   margin: 0
 
     .container
       + .people-navigation
