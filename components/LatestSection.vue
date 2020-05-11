@@ -99,6 +99,14 @@ export default {
   .latest-section
     padding: rem(100) 0
 
+    .container
+      padding-left: rem(30)
+      padding-right: rem(30)
+
+      +mobile
+        padding-left: 0
+        padding-right: 0
+
     .latest-content.columns
       flex-wrap: wrap
 
