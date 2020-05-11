@@ -288,7 +288,7 @@ export default {
   @import "~assets/sass/mixins/bulma-mixins"
 
   .project-introduction
-    padding: rem(150) rem(60) 0 rem(60)
+    padding: rem(150) rem(83) 0 rem(83)
 
     +until($desktop)
       .columns
