@@ -170,13 +170,13 @@ export default {
     .latest-content.columns
       padding-bottom: rem(300)
 
-    .latest-item
-      min-width: rem(300)
-      width: 50%
-      min-width: 50%
-      flex-grow: 0
+    .latest-section
+      .latest-item
+        width: 50%
+        min-width: 50%
+        flex-grow: 0
 
-      +mobile
-        width: 100%
+        +mobile
+          width: 100%
 
 </style>
