@@ -9,9 +9,7 @@ module.exports = {
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000'
   },
-  serverMiddleware:  [
-    '~/middleware/domainRewrite'
-  ],
+  serverMiddleware: ['~/middleware/domainRewrite'],
 
   /*
   ** Headers of the page
@@ -26,9 +24,7 @@ module.exports = {
     htmlAttrs: {
       class: 'has-navbar-fixed-top'
     },
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   /*
@@ -48,11 +44,14 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/router-extras',
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-8671537-1',
-      dev: false
-    }],
-    '@nuxtjs/robots',
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'UA-8671537-1',
+        dev: false
+      }
+    ],
+    '@nuxtjs/robots'
   ],
 
   /*
@@ -160,6 +159,15 @@ module.exports = {
         'window.jQuery': 'jquery'
       })
     ],
+    filenames: {
+      font: ({ isDev }) =>
+        isDev ? '[path][name].[ext]' : 'fonts/[md5:hash:hex:7].[ext]',
+      css: ({ isDev }) => (isDev ? '[name].css' : '[md5:hash:hex:7].css'),
+      img: ({ isDev }) =>
+        isDev ? '[path][name].[ext]' : 'img/[md5:hash:hex:7].[ext]',
+      video: ({ isDev }) =>
+        isDev ? '[path][name].[ext]' : 'videos/[md5:hash:hex:7].[ext]'
+    },
     /*
     ** You can extend webpack config here
     */
@@ -169,7 +177,7 @@ module.exports = {
         test: /\.(graphql|gql)$/,
         exclude: /node_modules/,
         loader: 'graphql-tag/loader'
-      });
+      })
 
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
@@ -178,7 +186,7 @@ module.exports = {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        });
+        })
       }
     }
   }

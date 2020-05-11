@@ -40,7 +40,7 @@ export default {
   @import '~assets/sass/config/typography'
   @import '~assets/sass/imports/mixins'
   @import '~assets/sass/imports/bulma-overrides'
-  @import '~bulma/sass/utilities/mixins'
+  // @import '~bulma/sass/utilities/mixins'
 
   .people-navigation
     padding-top: rem(100)

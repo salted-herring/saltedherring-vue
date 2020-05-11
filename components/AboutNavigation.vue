@@ -38,7 +38,7 @@ export default {
   @import "~assets/sass/config/colours"
   @import "~assets/sass/config/bulma-variables"
   @import "~assets/sass/imports/mixins"
-  @import "~bulma/sass/utilities/mixins"
+  @import "~assets/sass/mixins/bulma-mixins"
 
   .about-navigation
     position: absolute

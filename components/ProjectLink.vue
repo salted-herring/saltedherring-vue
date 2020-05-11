@@ -77,7 +77,7 @@ export default {
 
   @import '~bulma/sass/utilities/initial-variables'
   @import '~bulma/sass/utilities/derived-variables'
-  @import '~bulma/sass/utilities/mixins'
+  @import "~assets/sass/mixins/bulma-mixins"
 
   a.project-link
     font-weight: $weight-black

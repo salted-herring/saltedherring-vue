@@ -44,7 +44,7 @@ export default {
   /// Config
   @import "~assets/sass/config/bulma-variables"
   @import "~assets/sass/imports/mixins"
-  @import "~bulma/sass/utilities/mixins"
+  @import "~assets/sass/mixins/bulma-mixins"
 
   $hamburger-layer-border-radius: 0
   $hamburger-layer-height: 5px

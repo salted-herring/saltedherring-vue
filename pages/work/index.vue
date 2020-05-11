@@ -182,7 +182,7 @@ export default {
   @import '~bulma/sass/utilities/initial-variables'
   @import '~bulma/sass/utilities/functions'
   @import '~bulma/sass/utilities/derived-variables'
-  @import '~bulma/sass/utilities/mixins'
+  @import "~assets/sass/mixins/bulma-mixins"
 
   .work-page
     .section

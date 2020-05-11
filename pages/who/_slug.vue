@@ -151,7 +151,8 @@ export default {
   @import '~assets/sass/config/typography'
   @import '~assets/sass/imports/mixins'
   @import '~assets/sass/imports/bulma-overrides'
-  @import '~bulma/sass/utilities/mixins'
+  @import "~assets/sass/mixins/bulma-mixins"
+
   .person-header
     position: unset
     &.is-hovered
