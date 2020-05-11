@@ -288,8 +288,7 @@ export default {
   @import "~assets/sass/mixins/bulma-mixins"
 
   .project-introduction
-    padding-top: rem(150)
-    padding-bottom: rem(0)
+    padding: rem(150) rem(60) 0 rem(60)
 
     +until($desktop)
       .columns
@@ -319,7 +318,7 @@ export default {
             width: 50%
 
     +mobile
-      padding-top: rem(40)
+      padding: rem(40) 0 0 0
 
       .columns
         display: flex
@@ -378,8 +377,6 @@ export default {
         padding-right: 0 !important
         padding-bottom: 1em !important
 
-
-
     +widescreen
       font-size: rem(16)
       line-height: em(22, 16)
@@ -410,9 +407,6 @@ export default {
 
         +mobile
           font-size: rem(24)
-
-        // +desktop-only
-        //   top: rem(250)
 
         +widescreen
           font-size: rem(36)
