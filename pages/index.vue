@@ -173,7 +173,8 @@ export default {
     .latest-item
       min-width: rem(300)
       width: 50%
-      flex-grow: 1
+      min-width: 50%
+      flex-grow: 0
 
       +mobile
         width: 100%
