@@ -18,7 +18,7 @@ export const getters = {
     if (latest) {
       let edges = latest.edges
 
-      if (edges && edges.length > 0 && edges.length <= 2) {
+      if (edges && edges.length > 0) {
         let returnVal = []
 
         for (var i in edges) {
