@@ -59,6 +59,6 @@
     "eslint-plugin-vue": "^4.0.0",
     "nodemon": "^1.19.4",
     "prettier": "1.14.3",
-    "tar": "^6.0.2"
+    "tar": "^6.1.2"
   }
 }
